@@ -9,6 +9,11 @@ config.env
 *.sqlite3
 metabase.db.*
 
+# Archivos JAR grandes
+*.jar
+metabase.jar
+plugins/*.jar
+
 # Archivos temporales
 *.tmp
 *.temp
