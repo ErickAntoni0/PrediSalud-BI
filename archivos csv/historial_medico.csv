@@ -1,0 +1,21 @@
+ID_HISTORIAL,ID_PACIENTE,TIPO_REGISTRO,DESCRIPCION,FECHA_REGISTRO,ID_USUARIO,IMPORTANTE
+HIS_001,PAC_002,Medicación,Prescripción de antibióticos,2025-04-05 18:29:34,USER_002,FALSE
+HIS_002,PAC_003,Procedimiento,Extracción de sangre,2025-04-24 18:29:34,USER_003,TRUE
+HIS_003,PAC_004,Medicación,Prescripción de antibióticos,2024-10-20 18:29:34,USER_004,FALSE
+HIS_004,PAC_005,Alergia,Alergia a penicilina documentada,2024-11-20 18:29:34,USER_005,TRUE
+HIS_005,PAC_006,Medicación,Prescripción de antibióticos,2025-02-16 18:29:34,USER_001,FALSE
+HIS_006,PAC_007,Procedimiento,Extracción de sangre,2024-10-05 18:29:34,USER_002,TRUE
+HIS_007,PAC_008,Vacuna,Vacuna contra influenza,2025-01-10 18:29:34,USER_003,FALSE
+HIS_008,PAC_009,Consulta,Consulta de control rutinario,2025-02-09 18:29:34,USER_004,FALSE
+HIS_009,PAC_010,Procedimiento,Extracción de sangre,2024-09-24 18:29:34,USER_005,TRUE
+HIS_010,PAC_001,Vacuna,Vacuna contra influenza,2025-04-09 18:29:34,USER_001,FALSE
+HIS_011,PAC_002,Vacuna,Vacuna contra influenza,2024-12-10 18:29:34,USER_002,FALSE
+HIS_012,PAC_003,Consulta,Consulta de control rutinario,2024-11-26 18:29:34,USER_003,FALSE
+HIS_013,PAC_004,Vacuna,Vacuna contra influenza,2024-11-19 18:29:34,USER_004,FALSE
+HIS_014,PAC_005,Consulta,Consulta de control rutinario,2024-10-25 18:29:34,USER_005,FALSE
+HIS_015,PAC_006,Consulta,Consulta de control rutinario,2024-08-19 18:29:34,USER_001,FALSE
+HIS_016,PAC_007,Medicación,Prescripción de antibióticos,2025-05-19 18:29:34,USER_002,FALSE
+HIS_017,PAC_008,Medicación,Prescripción de antibióticos,2025-02-24 18:29:34,USER_003,FALSE
+HIS_018,PAC_009,Procedimiento,Extracción de sangre,2025-02-06 18:29:34,USER_004,TRUE
+HIS_019,PAC_010,Consulta,Consulta de control rutinario,2024-08-24 18:29:34,USER_005,FALSE
+HIS_020,PAC_001,Vacuna,Vacuna contra influenza,2025-01-04 18:29:34,USER_001,FALSE

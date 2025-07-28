@@ -1,0 +1,11 @@
+ID_SEGUIMIENTO,ID_PACIENTE,ID_CONSULTA,TIPO_SEGUIMIENTO,DESCRIPCION,FECHA_SEGUIMIENTO,ESTADO_SEGUIMIENTO,NOTAS,FECHA_CREACION
+SEG_001,PAC_001,CON_001,Seguimiento,Seguimiento de seguimiento programado,2025-08-20,PENDIENTE,Seguimiento rutinario,2025-07-25 18:29:34
+SEG_002,PAC_002,CON_002,Evaluación,Seguimiento de evaluación programado,2025-08-05,COMPLETADO,Seguimiento rutinario,2025-07-25 18:29:34
+SEG_003,PAC_003,CON_003,Control,Seguimiento de control programado,2025-08-15,CANCELADO,Seguimiento rutinario,2025-07-25 18:29:34
+SEG_004,PAC_004,CON_004,Control,Seguimiento de control programado,2025-08-20,PENDIENTE,Seguimiento rutinario,2025-07-25 18:29:34
+SEG_005,PAC_005,CON_005,Revisión,Seguimiento de revisión programado,2025-08-10,PENDIENTE,Seguimiento rutinario,2025-07-25 18:29:34
+SEG_006,PAC_006,CON_006,Seguimiento,Seguimiento de seguimiento programado,2025-08-06,PENDIENTE,Seguimiento rutinario,2025-07-25 18:29:34
+SEG_007,PAC_007,CON_007,Seguimiento,Seguimiento de seguimiento programado,2025-08-16,PENDIENTE,Seguimiento rutinario,2025-07-25 18:29:34
+SEG_008,PAC_008,CON_008,Revisión,Seguimiento de revisión programado,2025-08-22,CANCELADO,Seguimiento rutinario,2025-07-25 18:29:34
+SEG_009,PAC_009,CON_009,Revisión,Seguimiento de revisión programado,2025-08-01,PENDIENTE,Seguimiento rutinario,2025-07-25 18:29:34
+SEG_010,PAC_010,CON_010,Evaluación,Seguimiento de evaluación programado,2025-08-12,PENDIENTE,Seguimiento rutinario,2025-07-25 18:29:34

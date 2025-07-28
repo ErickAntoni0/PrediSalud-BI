@@ -1,0 +1,21 @@
+ID_SIGNO,ID_PACIENTE,ID_CONSULTA,TIPO_SIGNO,VALOR,UNIDAD,FECHA_MEDICION,NOTAS
+SIG_001,PAC_002,CON_002,Presión Arterial,130,mmHg,2025-06-25 18:29:34,Medición rutinaria
+SIG_002,PAC_003,CON_003,Altura,165,cm,2025-07-24 18:29:34,Medición rutinaria
+SIG_003,PAC_004,CON_004,Temperatura,36.8,°C,2025-07-01 18:29:34,Medición rutinaria
+SIG_004,PAC_005,CON_005,Peso,100,kg,2025-07-10 18:29:34,Medición rutinaria
+SIG_005,PAC_006,CON_006,Peso,73,kg,2025-07-08 18:29:34,Medición rutinaria
+SIG_006,PAC_007,CON_007,Presión Arterial,125,mmHg,2025-07-10 18:29:34,Medición rutinaria
+SIG_007,PAC_008,CON_008,Peso,66,kg,2025-07-03 18:29:34,Medición rutinaria
+SIG_008,PAC_009,CON_009,Presión Arterial,116,mmHg,2025-07-03 18:29:34,Medición rutinaria
+SIG_009,PAC_010,CON_010,Altura,159,cm,2025-07-06 18:29:34,Medición rutinaria
+SIG_010,PAC_001,CON_001,Altura,178,cm,2025-07-21 18:29:34,Medición rutinaria
+SIG_011,PAC_002,CON_002,Altura,150,cm,2025-07-13 18:29:34,Medición rutinaria
+SIG_012,PAC_003,CON_003,Presión Arterial,118,mmHg,2025-07-17 18:29:34,Medición rutinaria
+SIG_013,PAC_004,CON_004,Presión Arterial,129,mmHg,2025-07-12 18:29:34,Medición rutinaria
+SIG_014,PAC_005,CON_005,Frecuencia Cardíaca,85,lpm,2025-07-09 18:29:34,Medición rutinaria
+SIG_015,PAC_006,CON_006,Frecuencia Cardíaca,74,lpm,2025-07-16 18:29:34,Medición rutinaria
+SIG_016,PAC_007,CON_007,Peso,64,kg,2025-06-27 18:29:34,Medición rutinaria
+SIG_017,PAC_008,CON_008,Altura,183,cm,2025-07-18 18:29:34,Medición rutinaria
+SIG_018,PAC_009,CON_009,Temperatura,36.6,°C,2025-07-22 18:29:34,Medición rutinaria
+SIG_019,PAC_010,CON_010,Frecuencia Cardíaca,71,lpm,2025-07-06 18:29:34,Medición rutinaria
+SIG_020,PAC_001,CON_001,Frecuencia Cardíaca,61,lpm,2025-07-12 18:29:34,Medición rutinaria

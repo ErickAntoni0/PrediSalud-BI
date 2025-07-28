@@ -1,0 +1,909 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/static/css/dark-mode.css">
+    <title>Sistema Médico BI - Dashboard</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+        }
+
+        /* Override para modo oscuro */
+        [data-theme="dark"] body {
+            background: linear-gradient(135deg, #1a1a1a 0%, #2d2d2d 100%);
+        }
+
+        .header {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            padding: 1rem 2rem;
+            box-shadow: 0 2px 20px rgba(0, 0, 0, 0.1);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        /* Header para modo oscuro */
+        [data-theme="dark"] .header {
+            background: rgba(45, 45, 45, 0.95);
+            box-shadow: 0 2px 20px rgba(0, 0, 0, 0.3);
+        }
+
+        .header-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: var(--text-primary);
+        }
+
+        .user-info {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .user-avatar {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: linear-gradient(45deg, #667eea, #764ba2);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: bold;
+        }
+
+        .user-details {
+            text-align: right;
+        }
+
+        .user-name {
+            font-weight: bold;
+            color: var(--text-primary);
+        }
+
+        .user-role {
+            font-size: 0.8rem;
+            color: var(--text-secondary);
+        }
+
+        .logout-btn {
+            background: #ff4757;
+            color: white;
+            border: none;
+            padding: 0.5rem 1rem;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background 0.3s;
+        }
+
+        .logout-btn:hover {
+            background: #ff3742;
+        }
+
+        .main-container {
+            max-width: 1400px;
+            margin: 2rem auto;
+            padding: 0 2rem;
+            display: flex;
+            gap: 2rem;
+        }
+
+        .sidebar {
+            width: 250px;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            border-radius: 15px;
+            padding: 1.5rem;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            height: fit-content;
+            position: sticky;
+            top: 120px;
+        }
+
+        .sidebar-title {
+            font-size: 1.2rem;
+            font-weight: bold;
+            color: #333;
+            margin-bottom: 1.5rem;
+            padding-bottom: 0.5rem;
+            border-bottom: 2px solid #f1f2f6;
+        }
+
+        .nav-menu {
+            list-style: none;
+        }
+
+        .nav-item {
+            margin-bottom: 0.5rem;
+        }
+
+        .nav-link {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.75rem 1rem;
+            border-radius: 8px;
+            color: #666;
+            text-decoration: none;
+            transition: all 0.3s;
+            cursor: pointer;
+        }
+
+        .nav-link:hover {
+            background: #f8f9fa;
+            color: #667eea;
+        }
+
+        .nav-link.active {
+            background: #667eea;
+            color: white;
+        }
+
+        .nav-icon {
+            font-size: 1.2rem;
+        }
+
+        .content-area {
+            flex: 1;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            border-radius: 15px;
+            padding: 2rem;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+        }
+
+        .content-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 2rem;
+            padding-bottom: 1rem;
+            border-bottom: 2px solid #f1f2f6;
+        }
+
+        .content-title {
+            font-size: 1.8rem;
+            font-weight: bold;
+            color: #333;
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1.5rem;
+            margin-bottom: 2rem;
+        }
+
+        .stat-card {
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: white;
+            padding: 1.5rem;
+            border-radius: 10px;
+            text-align: center;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s;
+        }
+
+        .stat-card:hover {
+            transform: translateY(-3px);
+        }
+
+        .stat-value {
+            font-size: 2rem;
+            font-weight: bold;
+            margin-bottom: 0.5rem;
+        }
+
+        .stat-label {
+            font-size: 0.9rem;
+            opacity: 0.9;
+        }
+
+        .dashboard-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 2rem;
+        }
+
+        .dashboard-card {
+            background: #f8f9fa;
+            border-radius: 10px;
+            padding: 1.5rem;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        .card-title {
+            font-size: 1.3rem;
+            font-weight: bold;
+            color: #333;
+            margin-bottom: 1rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .card-icon {
+            font-size: 1.5rem;
+        }
+
+        .blockchain-status {
+            position: fixed;
+            top: 100px;
+            right: 20px;
+            background: rgba(255, 255, 255, 0.95);
+            padding: 1rem;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            z-index: 50;
+        }
+
+        .status-indicator {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-size: 0.9rem;
+        }
+
+        .status-online {
+            color: #2ed573;
+        }
+
+        .status-offline {
+            color: #ff4757;
+        }
+
+        .hidden {
+            display: none;
+        }
+
+        .loading {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 200px;
+            font-size: 1.2rem;
+            color: #666;
+        }
+
+        .error {
+            background: #ff6b6b;
+            color: white;
+            padding: 1rem;
+            border-radius: 10px;
+            margin: 1rem 0;
+            text-align: center;
+        }
+
+        @media (max-width: 768px) {
+            .main-container {
+                flex-direction: column;
+            }
+
+            .sidebar {
+                width: 100%;
+                position: static;
+            }
+
+            .blockchain-status {
+                position: static;
+                margin: 1rem 0;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Header -->
+    <div class="header">
+        <div class="header-content">
+            <div class="logo">
+                🏥 Sistema Médico BI
+            </div>
+            <div class="user-info">
+                <div class="user-details">
+                    <div class="user-name" id="userName">Usuario</div>
+                    <div class="user-role" id="userRole">Rol</div>
+                </div>
+                <div class="user-avatar" id="userAvatar">U</div>
+                <button class="logout-btn" onclick="logout()">Cerrar Sesión</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Blockchain Status -->
+    <div class="blockchain-status">
+        <div class="status-indicator" id="blockchainStatus">
+            <span>🔗</span>
+            <span>Blockchain: Verificando...</span>
+        </div>
+    </div>
+
+    <!-- Main Container -->
+    <div class="main-container">
+        <!-- Sidebar -->
+        <div class="sidebar">
+            <div class="sidebar-title">Navegación</div>
+            <ul class="nav-menu">
+                <!-- Menú para todos los usuarios -->
+                <li class="nav-item">
+                    <a class="nav-link active" onclick="showContent('dashboard')">
+                        <span class="nav-icon">📊</span>
+                        Dashboard Principal
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" onclick="showContent('perfil')">
+                        <span class="nav-icon">👤</span>
+                        Mi Perfil
+                    </a>
+                </li>
+
+                <!-- Menú específico para doctores -->
+                <li class="nav-item doctor-only">
+                    <a class="nav-link" onclick="showContent('pacientes')">
+                        <span class="nav-icon">👥</span>
+                        Gestión de Pacientes
+                    </a>
+                </li>
+                <li class="nav-item doctor-only">
+                    <a class="nav-link" onclick="showContent('consultas')">
+                        <span class="nav-icon">🏥</span>
+                        Consultas Médicas
+                    </a>
+                </li>
+                <li class="nav-item doctor-only">
+                    <a class="nav-link" onclick="showContent('diagnosticos')">
+                        <span class="nav-icon">📋</span>
+                        Diagnósticos
+                    </a>
+                </li>
+
+                <!-- Menú específico para personal médico -->
+                <li class="nav-item staff-only">
+                    <a class="nav-link" onclick="showContent('registro')">
+                        <span class="nav-icon">📝</span>
+                        Registro de Pacientes
+                    </a>
+                </li>
+                <li class="nav-item staff-only">
+                    <a class="nav-link" onclick="showContent('citas')">
+                        <span class="nav-icon">📅</span>
+                        Gestión de Citas
+                    </a>
+                </li>
+
+                <!-- Menú para administradores -->
+                <li class="nav-item admin-only">
+                    <a class="nav-link" onclick="showContent('usuarios')">
+                        <span class="nav-icon">👥</span>
+                        Gestión de Usuarios
+                    </a>
+                </li>
+                <li class="nav-item admin-only">
+                    <a class="nav-link" onclick="showContent('reportes')">
+                        <span class="nav-icon">📈</span>
+                        Reportes Avanzados
+                    </a>
+                </li>
+
+                <!-- Menú para análisis -->
+                <li class="nav-item">
+                    <a class="nav-link" onclick="showContent('analisis')">
+                        <span class="nav-icon">🔍</span>
+                        Análisis de Datos
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" onclick="showContent('blockchain')">
+                        <span class="nav-icon">🔗</span>
+                        Blockchain Analytics
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" onclick="showContent('predicciones')">
+                        <span class="nav-icon">🧠</span>
+                        Predicciones ML
+                    </a>
+                </li>
+            </ul>
+        </div>
+
+        <!-- Content Area -->
+        <div class="content-area">
+            <!-- Dashboard Principal -->
+            <div id="dashboard-content" class="content-section">
+                <div class="content-header">
+                    <div class="content-title">Dashboard Principal</div>
+                </div>
+
+                <!-- Stats Grid -->
+                <div class="stats-grid">
+                    <div class="stat-card">
+                        <div class="stat-value" id="patientCount">-</div>
+                        <div class="stat-label">Pacientes Registrados</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-value" id="consultationsToday">-</div>
+                        <div class="stat-label">Consultas Hoy</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-value" id="blockchainRecords">-</div>
+                        <div class="stat-label">Registros en Blockchain</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-value" id="activeUsers">-</div>
+                        <div class="stat-label">Usuarios Activos</div>
+                    </div>
+                </div>
+
+                <!-- Dashboard Grid -->
+                <div class="dashboard-grid">
+                    <div class="dashboard-card">
+                        <div class="card-title">
+                            <span class="card-icon">📊</span>
+                            Resumen General
+                        </div>
+                        <div id="mainDashboard">
+                            <div class="loading">Cargando dashboard principal...</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Perfil de Usuario -->
+            <div id="perfil-content" class="content-section hidden">
+                <div class="content-header">
+                    <div class="content-title">Mi Perfil</div>
+                </div>
+                <div class="dashboard-card">
+                    <div class="card-title">
+                        <span class="card-icon">👤</span>
+                        Información Personal
+                    </div>
+                    <div id="perfilInfo">
+                        <div class="loading">Cargando información del perfil...</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Gestión de Pacientes (Solo Doctores) -->
+            <div id="pacientes-content" class="content-section hidden">
+                <div class="content-header">
+                    <div class="content-title">Gestión de Pacientes</div>
+                </div>
+                <div class="dashboard-card">
+                    <div class="card-title">
+                        <span class="card-icon">👥</span>
+                        Lista de Pacientes
+                    </div>
+                    <div id="pacientesList">
+                        <div class="loading">Cargando lista de pacientes...</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Consultas Médicas (Solo Doctores) -->
+            <div id="consultas-content" class="content-section hidden">
+                <div class="content-header">
+                    <div class="content-title">Consultas Médicas</div>
+                </div>
+                <div class="dashboard-card">
+                    <div class="card-title">
+                        <span class="nav-icon">🏥</span>
+                        Historial de Consultas
+                    </div>
+                    <div id="consultasList">
+                        <div class="loading">Cargando historial de consultas...</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Registro de Pacientes (Solo Personal Médico) -->
+            <div id="registro-content" class="content-section hidden">
+                <div class="content-header">
+                    <div class="content-title">Registro de Pacientes</div>
+                </div>
+                <div class="dashboard-card">
+                    <div class="card-title">
+                        <span class="card-icon">📝</span>
+                        Formulario de Registro
+                    </div>
+                    <div id="registroForm">
+                        <div class="loading">Cargando formulario de registro...</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Análisis de Datos -->
+            <div id="analisis-content" class="content-section hidden">
+                <div class="content-header">
+                    <div class="content-title">Análisis de Datos</div>
+                </div>
+                <div class="dashboard-card">
+                    <div class="card-title">
+                        <span class="card-icon">🔍</span>
+                        Análisis Avanzado
+                    </div>
+                    <div id="analisisData">
+                        <div class="loading">Cargando análisis de datos...</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Blockchain Analytics -->
+            <div id="blockchain-content" class="content-section hidden">
+                <div class="content-header">
+                    <div class="content-title">Blockchain Analytics</div>
+                </div>
+                <div class="dashboard-card">
+                    <div class="card-title">
+                        <span class="card-icon">🔗</span>
+                        Análisis de Blockchain
+                    </div>
+                    <div id="blockchainAnalytics">
+                        <div class="loading">Cargando analytics blockchain...</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Predicciones ML -->
+            <div id="predicciones-content" class="content-section hidden">
+                <div class="content-header">
+                    <div class="content-title">Predicciones ML</div>
+                </div>
+                <div class="dashboard-card">
+                    <div class="card-title">
+                        <span class="card-icon">🧠</span>
+                        Machine Learning
+                    </div>
+                    <div id="mlPredictions">
+                        <div class="loading">Cargando predicciones ML...</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const API_BASE_URL = 'http://localhost:8001';
+        let currentToken = localStorage.getItem('authToken');
+        let currentUser = JSON.parse(localStorage.getItem('userInfo') || '{}');
+
+        // Verificar autenticación
+        function checkAuth() {
+            if (!currentToken) {
+                window.location.href = 'login_integrated.html';
+                return;
+            }
+
+            fetch(`${API_BASE_URL}/api/auth/verify`, {
+                method: 'GET',
+                headers: {
+                    'Authorization': `Bearer ${currentToken}`
+                }
+            })
+                .then(response => {
+                    if (!response.ok) {
+                        throw new Error('Token inválido');
+                    }
+                    return response.json();
+                })
+                .then(data => {
+                    loadUserInfo(data);
+                    loadStats();
+                    loadBlockchainStatus();
+                    setupNavigation();
+                    showContent('dashboard');
+                })
+                .catch(error => {
+                    console.error('Error de autenticación:', error);
+                    localStorage.removeItem('authToken');
+                    window.location.href = 'login_integrated.html';
+                });
+        }
+
+        // Cargar información del usuario
+        function loadUserInfo(userData) {
+            const userInfo = JSON.parse(localStorage.getItem('userInfo') || '{}');
+            const username = userData.username || userInfo.username || 'Usuario';
+            const rol = userData.rol || userInfo.rol || 'Usuario';
+
+            document.getElementById('userName').textContent = username;
+            document.getElementById('userRole').textContent = getRoleDisplayName(rol);
+            document.getElementById('userAvatar').textContent = username[0].toUpperCase();
+
+            currentUser = { username, rol };
+        }
+
+        // Obtener nombre de rol en español
+        function getRoleDisplayName(rol) {
+            const roleNames = {
+                'doctor': 'Doctor',
+                'nurse': 'Enfermero/a',
+                'admin': 'Administrador',
+                'staff': 'Personal Médico',
+                'user': 'Usuario'
+            };
+            return roleNames[rol] || 'Usuario';
+        }
+
+        // Configurar navegación según rol
+        function setupNavigation() {
+            const doctorElements = document.querySelectorAll('.doctor-only');
+            const staffElements = document.querySelectorAll('.staff-only');
+            const adminElements = document.querySelectorAll('.admin-only');
+
+            // Ocultar todos los elementos específicos
+            doctorElements.forEach(el => el.style.display = 'none');
+            staffElements.forEach(el => el.style.display = 'none');
+            adminElements.forEach(el => el.style.display = 'none');
+
+            // Mostrar elementos según rol
+            if (currentUser.rol === 'doctor') {
+                doctorElements.forEach(el => el.style.display = 'block');
+            }
+            if (currentUser.rol === 'nurse' || currentUser.rol === 'staff') {
+                staffElements.forEach(el => el.style.display = 'block');
+            }
+            if (currentUser.rol === 'admin') {
+                adminElements.forEach(el => el.style.display = 'block');
+            }
+        }
+
+        // Mostrar contenido específico
+        function showContent(contentType) {
+            // Ocultar todos los contenidos
+            document.querySelectorAll('.content-section').forEach(el => {
+                el.classList.add('hidden');
+            });
+
+            // Desactivar todos los enlaces
+            document.querySelectorAll('.nav-link').forEach(el => {
+                el.classList.remove('active');
+            });
+
+            // Mostrar contenido seleccionado
+            const contentElement = document.getElementById(`${contentType}-content`);
+            if (contentElement) {
+                contentElement.classList.remove('hidden');
+            }
+
+            // Activar enlace correspondiente
+            const activeLink = document.querySelector(`[onclick="showContent('${contentType}')"]`);
+            if (activeLink) {
+                activeLink.classList.add('active');
+            }
+
+            // Cargar contenido específico
+            loadContent(contentType);
+        }
+
+        // Cargar contenido específico
+        function loadContent(contentType) {
+            switch (contentType) {
+                case 'dashboard':
+                    loadDashboard();
+                    break;
+                case 'perfil':
+                    loadPerfil();
+                    break;
+                case 'pacientes':
+                    loadPacientes();
+                    break;
+                case 'registro':
+                    loadRegistroForm();
+                    break;
+                case 'analisis':
+                    loadAnalisis();
+                    break;
+                case 'blockchain':
+                    loadBlockchainAnalytics();
+                    break;
+                case 'predicciones':
+                    loadPredicciones();
+                    break;
+            }
+        }
+
+        // Cargar dashboard
+        function loadDashboard() {
+            loadStats();
+            loadMainDashboard();
+        }
+
+        // Cargar estadísticas
+        function loadStats() {
+            fetch(`${API_BASE_URL}/api/dashboard/stats`, {
+                headers: {
+                    'Authorization': `Bearer ${currentToken}`
+                }
+            })
+                .then(response => response.json())
+                .then(stats => {
+                    document.getElementById('patientCount').textContent = stats.patient_count || '-';
+                    document.getElementById('consultationsToday').textContent = stats.consultations_today || '-';
+                    document.getElementById('blockchainRecords').textContent = stats.blockchain_records || '-';
+                    document.getElementById('activeUsers').textContent = stats.active_users || '-';
+                })
+                .catch(error => {
+                    console.error('Error cargando estadísticas:', error);
+                });
+        }
+
+        // Cargar dashboard principal
+        function loadMainDashboard() {
+            const container = document.getElementById('mainDashboard');
+            container.innerHTML = `
+                <div style="text-align: center; padding: 2rem;">
+                    <h3>Bienvenido al Sistema Médico BI</h3>
+                    <p>Selecciona una opción del menú para comenzar</p>
+                </div>
+            `;
+        }
+
+        // Cargar perfil
+        function loadPerfil() {
+            const container = document.getElementById('perfilInfo');
+            container.innerHTML = `
+                <div style="padding: 1rem;">
+                    <h4>Información del Usuario</h4>
+                    <p><strong>Usuario:</strong> ${currentUser.username}</p>
+                    <p><strong>Rol:</strong> ${getRoleDisplayName(currentUser.rol)}</p>
+                    <p><strong>Último acceso:</strong> ${new Date().toLocaleString('es-ES')}</p>
+                </div>
+            `;
+        }
+
+        // Cargar pacientes (solo doctores)
+        function loadPacientes() {
+            const container = document.getElementById('pacientesList');
+            container.innerHTML = `
+                <div style="padding: 1rem;">
+                    <h4>Lista de Pacientes</h4>
+                    <p>Funcionalidad en desarrollo para doctores</p>
+                </div>
+            `;
+        }
+
+        // Cargar formulario de registro
+        function loadRegistroForm() {
+            const container = document.getElementById('registroForm');
+            container.innerHTML = `
+                <div style="padding: 1rem;">
+                    <h4>Registro de Pacientes</h4>
+                    <p>Tu formulario original está disponible aquí:</p>
+                    <div style="display: flex; gap: 1rem; margin: 1rem 0;">
+                        <button onclick="window.open('registro.html', '_blank')" style="background: #667eea; color: white; border: none; padding: 0.75rem 1.5rem; border-radius: 8px; cursor: pointer; font-weight: bold;">
+                            📝 Formulario Original Completo
+                        </button>
+                        <button onclick="window.open('registro_pacientes.html', '_blank')" style="background: #28a745; color: white; border: none; padding: 0.75rem 1.5rem; border-radius: 8px; cursor: pointer; font-weight: bold;">
+                            🆕 Formulario Simplificado
+                        </button>
+                    </div>
+                    <div style="background: #f8f9fa; padding: 1rem; border-radius: 8px; margin-top: 1rem;">
+                        <h5>📋 Características del Formulario Original:</h5>
+                        <ul style="margin-left: 1rem; color: #666;">
+                            <li>Datos Generales (ID, Nombre, Edad, Género, etc.)</li>
+                            <li>Historial Médico (Hospitalizaciones, Cirugías, Alergias)</li>
+                            <li>Consulta Actual (Signos Vitales, Diagnóstico, Tratamiento)</li>
+                            <li>Clasificación de Riesgo</li>
+                            <li>Consentimiento Informado</li>
+                        </ul>
+                    </div>
+                </div>
+            `;
+        }
+
+        // Cargar análisis
+        function loadAnalisis() {
+            const container = document.getElementById('analisisData');
+            container.innerHTML = `
+                <div style="text-align: center; padding: 2rem;">
+                    <h3>Análisis de Datos</h3>
+                    <p>Integración con Sigma Computing en desarrollo</p>
+                </div>
+            `;
+        }
+
+        // Cargar blockchain analytics
+        function loadBlockchainAnalytics() {
+            const container = document.getElementById('blockchainAnalytics');
+            container.innerHTML = `
+                <div style="text-align: center; padding: 2rem;">
+                    <h3>Blockchain Analytics</h3>
+                    <p>Análisis de transacciones blockchain</p>
+                </div>
+            `;
+        }
+
+        // Cargar predicciones
+        function loadPredicciones() {
+            const container = document.getElementById('mlPredictions');
+            container.innerHTML = `
+                <div style="text-align: center; padding: 2rem;">
+                    <h3>Predicciones ML</h3>
+                    <p>Modelos de machine learning</p>
+                </div>
+            `;
+        }
+
+        // Cargar estado de blockchain
+        function loadBlockchainStatus() {
+            fetch(`${API_BASE_URL}/api/blockchain/status`)
+                .then(response => response.json())
+                .then(data => {
+                    const statusElement = document.getElementById('blockchainStatus');
+                    if (data.status === 'connected') {
+                        statusElement.innerHTML = '<span>🟢</span><span>Blockchain: Conectado</span>';
+                        statusElement.className = 'status-indicator status-online';
+                    } else {
+                        statusElement.innerHTML = '<span>🔴</span><span>Blockchain: Desconectado</span>';
+                        statusElement.className = 'status-indicator status-offline';
+                    }
+                })
+                .catch(error => {
+                    console.error('Error verificando blockchain:', error);
+                    const statusElement = document.getElementById('blockchainStatus');
+                    statusElement.innerHTML = '<span>🔴</span><span>Blockchain: Error</span>';
+                    statusElement.className = 'status-indicator status-offline';
+                });
+        }
+
+        // Cerrar sesión
+        function logout() {
+            localStorage.removeItem('authToken');
+            localStorage.removeItem('userInfo');
+            window.location.href = 'login_integrated.html';
+        }
+
+        // Inicializar cuando se carga la página
+        document.addEventListener('DOMContentLoaded', function () {
+            console.log('Dashboard mejorado cargado correctamente');
+            checkAuth();
+        });
+    </script>
+
+    <!-- Script del modo oscuro -->
+    <script src="/static/js/dark-mode.js"></script>
+    <script>
+        // Inicializar modo oscuro
+        document.addEventListener('DOMContentLoaded', function () {
+            if (window.DarkModeUtils) {
+                window.DarkModeUtils.init();
+
+                // Agregar toggle al header
+                window.DarkModeUtils.addToHeader();
+
+                // Aplicar tema basado en la hora del día
+                window.DarkModeUtils.applyTimeBasedTheme();
+
+                console.log('Modo oscuro inicializado en dashboard');
+            }
+        });
+    </script>
+</body>
+
+</html>

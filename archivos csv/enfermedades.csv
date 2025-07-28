@@ -1,0 +1,6 @@
+ID_ENFERMEDAD,NOMBRE_ENFERMEDAD,DESCRIPCION,CATEGORIA,SINTOMAS,TRATAMIENTO_RECOMENDADO,ACTIVO
+ENF_001,Hipertensión,Presión arterial alta,Cardiovascular,"Dolor de cabeza, mareos",Medicamentos antihipertensivos,TRUE
+ENF_002,Diabetes Tipo 2,Alteración en el metabolismo de la glucosa,Endocrinología,"Sed excesiva, fatiga",Control de dieta y medicamentos,TRUE
+ENF_003,Asma,Inflamación de las vías respiratorias,Respiratorio,"Dificultad para respirar, tos",Inhaladores broncodilatadores,TRUE
+ENF_004,Artritis,Inflamación de las articulaciones,Reumatología,"Dolor articular, rigidez",Antiinflamatorios y fisioterapia,TRUE
+ENF_005,Depresión,Trastorno del estado de ánimo,Psiquiatría,"Tristeza, pérdida de interés",Terapia y antidepresivos,TRUE

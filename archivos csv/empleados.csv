@@ -1,0 +1,31 @@
+EmpleadoID,Nombre,RolID,SucursalID
+EMP0001,Timothy Riley,4,SUR
+EMP0002,Wanda Mendoza,1,SUR
+EMP0003,Gregory Nelson,3,CENTRO
+EMP0004,Andrew Wheeler,4,SUR
+EMP0005,Christina Brooks,3,SUR
+EMP0006,Troy Cherry,2,SUR
+EMP0007,Gregory Randall,4,CENTRO
+EMP0008,Kelsey Rodriguez,2,SUR
+EMP0009,Julie Gonzalez,4,NORTE
+EMP0010,Jeffrey Thomas,4,CENTRO
+EMP0011,Megan Garner,4,CENTRO
+EMP0012,Mary Thompson,4,NORTE
+EMP0013,Megan Giles,4,CENTRO
+EMP0014,Robert Rodriguez,1,CENTRO
+EMP0015,Dennis Martinez,2,SUR
+EMP0016,Michael Taylor,3,CENTRO
+EMP0017,Daniel Jarvis,4,CENTRO
+EMP0018,Robin Smith,3,CENTRO
+EMP0019,Victoria Rodriguez,4,SUR
+EMP0020,Richard Wilson,2,NORTE
+EMP0021,Jeffrey Mitchell,2,SUR
+EMP0022,Dr. Antonio Jones MD,4,CENTRO
+EMP0023,Joel Watson,1,NORTE
+EMP0024,Andrew Foster,1,CENTRO
+EMP0025,Javier Ayers,3,SUR
+EMP0026,Stacy Meyers,2,CENTRO
+EMP0027,Karen Daniel,4,NORTE
+EMP0028,Jennifer Pineda,1,NORTE
+EMP0029,Robert Smith,2,CENTRO
+EMP0030,Justin Li,4,CENTRO

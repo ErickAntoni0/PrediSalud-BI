@@ -1,0 +1,615 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Registro de Pacientes - Sistema Médico BI</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 2rem;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            border-radius: 15px;
+            padding: 2rem;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+        }
+
+        .header {
+            text-align: center;
+            margin-bottom: 2rem;
+        }
+
+        .header h1 {
+            color: #333;
+            font-size: 2rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .header p {
+            color: #666;
+            font-size: 1rem;
+        }
+
+        .form-section {
+            margin-bottom: 2rem;
+            padding: 1.5rem;
+            background: #f8f9fa;
+            border-radius: 10px;
+        }
+
+        .section-title {
+            font-size: 1.3rem;
+            font-weight: bold;
+            color: #333;
+            margin-bottom: 1rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .form-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1rem;
+        }
+
+        .form-group {
+            margin-bottom: 1rem;
+        }
+
+        .form-label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: bold;
+            color: #333;
+        }
+
+        .form-input {
+            width: 100%;
+            padding: 0.75rem;
+            border: 2px solid #e1e5e9;
+            border-radius: 8px;
+            font-size: 1rem;
+            transition: border-color 0.3s;
+        }
+
+        .form-input:focus {
+            outline: none;
+            border-color: #667eea;
+        }
+
+        .form-select {
+            width: 100%;
+            padding: 0.75rem;
+            border: 2px solid #e1e5e9;
+            border-radius: 8px;
+            font-size: 1rem;
+            background: white;
+            cursor: pointer;
+        }
+
+        .form-textarea {
+            width: 100%;
+            padding: 0.75rem;
+            border: 2px solid #e1e5e9;
+            border-radius: 8px;
+            font-size: 1rem;
+            resize: vertical;
+            min-height: 100px;
+        }
+
+        .form-checkbox {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .form-checkbox input[type="checkbox"] {
+            width: auto;
+        }
+
+        .btn {
+            padding: 0.75rem 1.5rem;
+            border: none;
+            border-radius: 8px;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: all 0.3s;
+            font-weight: bold;
+        }
+
+        .btn-primary {
+            background: #667eea;
+            color: white;
+        }
+
+        .btn-primary:hover {
+            background: #5a6fd8;
+            transform: translateY(-2px);
+        }
+
+        .btn-secondary {
+            background: #6c757d;
+            color: white;
+        }
+
+        .btn-secondary:hover {
+            background: #5a6268;
+        }
+
+        .btn-success {
+            background: #28a745;
+            color: white;
+        }
+
+        .btn-success:hover {
+            background: #218838;
+        }
+
+        .btn-danger {
+            background: #dc3545;
+            color: white;
+        }
+
+        .btn-danger:hover {
+            background: #c82333;
+        }
+
+        .form-actions {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            margin-top: 2rem;
+            padding-top: 1rem;
+            border-top: 2px solid #f1f2f6;
+        }
+
+        .alert {
+            padding: 1rem;
+            border-radius: 8px;
+            margin-bottom: 1rem;
+            font-weight: bold;
+        }
+
+        .alert-success {
+            background: #d4edda;
+            color: #155724;
+            border: 1px solid #c3e6cb;
+        }
+
+        .alert-error {
+            background: #f8d7da;
+            color: #721c24;
+            border: 1px solid #f5c6cb;
+        }
+
+        .alert-info {
+            background: #d1ecf1;
+            color: #0c5460;
+            border: 1px solid #bee5eb;
+        }
+
+        .loading {
+            display: none;
+            text-align: center;
+            padding: 1rem;
+            color: #666;
+        }
+
+        .spinner {
+            border: 3px solid #f3f3f3;
+            border-top: 3px solid #667eea;
+            border-radius: 50%;
+            width: 20px;
+            height: 20px;
+            animation: spin 1s linear infinite;
+            margin: 0 auto 0.5rem;
+        }
+
+        @keyframes spin {
+            0% {
+                transform: rotate(0deg);
+            }
+
+            100% {
+                transform: rotate(360deg);
+            }
+        }
+
+        .back-btn {
+            position: fixed;
+            top: 2rem;
+            left: 2rem;
+            background: rgba(255, 255, 255, 0.9);
+            border: none;
+            padding: 0.5rem 1rem;
+            border-radius: 5px;
+            cursor: pointer;
+            font-weight: bold;
+            color: #333;
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .back-btn:hover {
+            background: rgba(255, 255, 255, 1);
+        }
+
+        @media (max-width: 768px) {
+            .form-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .form-actions {
+                flex-direction: column;
+            }
+
+            .back-btn {
+                position: static;
+                margin-bottom: 1rem;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Botón de regreso -->
+    <a href="dashboard_mejorado.html" class="back-btn">
+        ← Volver al Dashboard
+    </a>
+
+    <div class="container">
+        <!-- Header -->
+        <div class="header">
+            <h1>📝 Registro de Pacientes</h1>
+            <p>Complete la información del paciente para registrarlo en el sistema</p>
+        </div>
+
+        <!-- Alertas -->
+        <div id="alertContainer"></div>
+
+        <!-- Formulario -->
+        <form id="registroForm">
+            <!-- Información Personal -->
+            <div class="form-section">
+                <div class="section-title">
+                    <span>👤</span>
+                    Información Personal
+                </div>
+                <div class="form-grid">
+                    <div class="form-group">
+                        <label class="form-label">Nombre Completo *</label>
+                        <input type="text" class="form-input" name="nombre" required>
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">Apellidos *</label>
+                        <input type="text" class="form-input" name="apellidos" required>
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">Fecha de Nacimiento *</label>
+                        <input type="date" class="form-input" name="fecha_nacimiento" required>
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">Género *</label>
+                        <select class="form-select" name="genero" required>
+                            <option value="">Seleccionar...</option>
+                            <option value="M">Masculino</option>
+                            <option value="F">Femenino</option>
+                            <option value="O">Otro</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">DNI/Pasaporte *</label>
+                        <input type="text" class="form-input" name="dni" required>
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">Teléfono *</label>
+                        <input type="tel" class="form-input" name="telefono" required>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Información de Contacto -->
+            <div class="form-section">
+                <div class="section-title">
+                    <span>📧</span>
+                    Información de Contacto
+                </div>
+                <div class="form-grid">
+                    <div class="form-group">
+                        <label class="form-label">Email</label>
+                        <input type="email" class="form-input" name="email">
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">Dirección</label>
+                        <input type="text" class="form-input" name="direccion">
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">Ciudad</label>
+                        <input type="text" class="form-input" name="ciudad">
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">Código Postal</label>
+                        <input type="text" class="form-input" name="codigo_postal">
+                    </div>
+                </div>
+            </div>
+
+            <!-- Información Médica -->
+            <div class="form-section">
+                <div class="section-title">
+                    <span>🏥</span>
+                    Información Médica
+                </div>
+                <div class="form-grid">
+                    <div class="form-group">
+                        <label class="form-label">Grupo Sanguíneo</label>
+                        <select class="form-select" name="grupo_sanguineo">
+                            <option value="">Seleccionar...</option>
+                            <option value="A+">A+</option>
+                            <option value="A-">A-</option>
+                            <option value="B+">B+</option>
+                            <option value="B-">B-</option>
+                            <option value="AB+">AB+</option>
+                            <option value="AB-">AB-</option>
+                            <option value="O+">O+</option>
+                            <option value="O-">O-</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">Alergias</label>
+                        <textarea class="form-textarea" name="alergias"
+                            placeholder="Liste las alergias conocidas..."></textarea>
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">Medicamentos Actuales</label>
+                        <textarea class="form-textarea" name="medicamentos"
+                            placeholder="Liste los medicamentos que toma actualmente..."></textarea>
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">Antecedentes Médicos</label>
+                        <textarea class="form-textarea" name="antecedentes"
+                            placeholder="Describa antecedentes médicos importantes..."></textarea>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Información de Emergencia -->
+            <div class="form-section">
+                <div class="section-title">
+                    <span>🚨</span>
+                    Contacto de Emergencia
+                </div>
+                <div class="form-grid">
+                    <div class="form-group">
+                        <label class="form-label">Nombre del Contacto</label>
+                        <input type="text" class="form-input" name="contacto_emergencia_nombre">
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">Relación</label>
+                        <select class="form-select" name="contacto_emergencia_relacion">
+                            <option value="">Seleccionar...</option>
+                            <option value="Familiar">Familiar</option>
+                            <option value="Amigo">Amigo</option>
+                            <option value="Vecino">Vecino</option>
+                            <option value="Otro">Otro</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">Teléfono de Emergencia</label>
+                        <input type="tel" class="form-input" name="contacto_emergencia_telefono">
+                    </div>
+                </div>
+            </div>
+
+            <!-- Consentimientos -->
+            <div class="form-section">
+                <div class="section-title">
+                    <span>📋</span>
+                    Consentimientos
+                </div>
+                <div class="form-group">
+                    <div class="form-checkbox">
+                        <input type="checkbox" name="consentimiento_datos" id="consentimiento_datos">
+                        <label for="consentimiento_datos">Consiento el tratamiento de mis datos personales</label>
+                    </div>
+                    <div class="form-checkbox">
+                        <input type="checkbox" name="consentimiento_emergencia" id="consentimiento_emergencia">
+                        <label for="consentimiento_emergencia">Autorizo el acceso a mi información en caso de
+                            emergencia</label>
+                    </div>
+                    <div class="form-checkbox">
+                        <input type="checkbox" name="consentimiento_investigacion" id="consentimiento_investigacion">
+                        <label for="consentimiento_investigacion">Consiento participar en investigaciones médicas
+                            (anónimas)</label>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Loading -->
+            <div id="loading" class="loading">
+                <div class="spinner"></div>
+                <p>Registrando paciente...</p>
+            </div>
+
+            <!-- Acciones -->
+            <div class="form-actions">
+                <button type="button" class="btn btn-secondary" onclick="limpiarFormulario()">
+                    Limpiar Formulario
+                </button>
+                <button type="submit" class="btn btn-primary">
+                    Registrar Paciente
+                </button>
+            </div>
+        </form>
+    </div>
+
+    <script>
+        const API_BASE_URL = 'http://localhost:8001';
+        let currentToken = localStorage.getItem('authToken');
+
+        // Verificar autenticación
+        function checkAuth() {
+            if (!currentToken) {
+                showAlert('Error: No hay sesión activa', 'error');
+                setTimeout(() => {
+                    window.location.href = 'login_integrated.html';
+                }, 2000);
+                return false;
+            }
+            return true;
+        }
+
+        // Mostrar alerta
+        function showAlert(message, type = 'info') {
+            const alertContainer = document.getElementById('alertContainer');
+            const alertDiv = document.createElement('div');
+            alertDiv.className = `alert alert-${type}`;
+            alertDiv.textContent = message;
+
+            alertContainer.innerHTML = '';
+            alertContainer.appendChild(alertDiv);
+
+            // Auto-remover después de 5 segundos
+            setTimeout(() => {
+                alertDiv.remove();
+            }, 5000);
+        }
+
+        // Limpiar formulario
+        function limpiarFormulario() {
+            document.getElementById('registroForm').reset();
+            showAlert('Formulario limpiado', 'info');
+        }
+
+        // Validar formulario
+        function validarFormulario(formData) {
+            const requiredFields = ['nombre', 'apellidos', 'fecha_nacimiento', 'genero', 'dni', 'telefono'];
+
+            for (let field of requiredFields) {
+                if (!formData.get(field)) {
+                    showAlert(`El campo ${field} es obligatorio`, 'error');
+                    return false;
+                }
+            }
+
+            // Validar DNI
+            const dni = formData.get('dni');
+            if (dni.length < 8) {
+                showAlert('El DNI debe tener al menos 8 caracteres', 'error');
+                return false;
+            }
+
+            // Validar teléfono
+            const telefono = formData.get('telefono');
+            if (telefono.length < 9) {
+                showAlert('El teléfono debe tener al menos 9 dígitos', 'error');
+                return false;
+            }
+
+            return true;
+        }
+
+        // Registrar paciente
+        async function registrarPaciente(formData) {
+            if (!checkAuth()) return;
+
+            try {
+                // Mostrar loading
+                document.getElementById('loading').style.display = 'block';
+
+                // Preparar datos
+                const pacienteData = {
+                    nombre: formData.get('nombre'),
+                    apellidos: formData.get('apellidos'),
+                    fecha_nacimiento: formData.get('fecha_nacimiento'),
+                    genero: formData.get('genero'),
+                    dni: formData.get('dni'),
+                    telefono: formData.get('telefono'),
+                    email: formData.get('email'),
+                    direccion: formData.get('direccion'),
+                    ciudad: formData.get('ciudad'),
+                    codigo_postal: formData.get('codigo_postal'),
+                    grupo_sanguineo: formData.get('grupo_sanguineo'),
+                    alergias: formData.get('alergias'),
+                    medicamentos: formData.get('medicamentos'),
+                    antecedentes: formData.get('antecedentes'),
+                    contacto_emergencia_nombre: formData.get('contacto_emergencia_nombre'),
+                    contacto_emergencia_relacion: formData.get('contacto_emergencia_relacion'),
+                    contacto_emergencia_telefono: formData.get('contacto_emergencia_telefono'),
+                    consentimiento_datos: formData.get('consentimiento_datos') === 'on',
+                    consentimiento_emergencia: formData.get('consentimiento_emergencia') === 'on',
+                    consentimiento_investigacion: formData.get('consentimiento_investigacion') === 'on'
+                };
+
+                // Enviar a la API
+                const response = await fetch(`${API_BASE_URL}/api/pacientes/registrar`, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'Authorization': `Bearer ${currentToken}`
+                    },
+                    body: JSON.stringify(pacienteData)
+                });
+
+                if (response.ok) {
+                    const result = await response.json();
+                    showAlert('✅ Paciente registrado exitosamente', 'success');
+                    limpiarFormulario();
+
+                    // Opcional: Redirigir al dashboard
+                    setTimeout(() => {
+                        window.location.href = 'dashboard_mejorado.html';
+                    }, 2000);
+                } else {
+                    const error = await response.json();
+                    showAlert(`❌ Error: ${error.detail || 'Error al registrar paciente'}`, 'error');
+                }
+
+            } catch (error) {
+                console.error('Error:', error);
+                showAlert('❌ Error de conexión. Verifique que la API esté funcionando.', 'error');
+            } finally {
+                // Ocultar loading
+                document.getElementById('loading').style.display = 'none';
+            }
+        }
+
+        // Manejar envío del formulario
+        document.getElementById('registroForm').addEventListener('submit', function (e) {
+            e.preventDefault();
+
+            const formData = new FormData(this);
+
+            if (validarFormulario(formData)) {
+                registrarPaciente(formData);
+            }
+        });
+
+        // Inicializar
+        document.addEventListener('DOMContentLoaded', function () {
+            console.log('Formulario de registro de pacientes cargado');
+            checkAuth();
+        });
+    </script>
+</body>
+
+</html>

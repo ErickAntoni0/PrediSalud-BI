@@ -1,0 +1,499 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard Sigma - Sistema Médico BI</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+        }
+
+        .header {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            padding: 1rem 2rem;
+            box-shadow: 0 2px 20px rgba(0, 0, 0, 0.1);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .header-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: #333;
+        }
+
+        .user-info {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .user-avatar {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: linear-gradient(45deg, #667eea, #764ba2);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: bold;
+        }
+
+        .logout-btn {
+            background: #ff4757;
+            color: white;
+            border: none;
+            padding: 0.5rem 1rem;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background 0.3s;
+        }
+
+        .logout-btn:hover {
+            background: #ff3742;
+        }
+
+        .main-content {
+            max-width: 1200px;
+            margin: 2rem auto;
+            padding: 0 2rem;
+        }
+
+        .dashboard-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+
+        .dashboard-card {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            border-radius: 15px;
+            padding: 2rem;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+
+        .dashboard-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
+        }
+
+        .card-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1.5rem;
+            padding-bottom: 1rem;
+            border-bottom: 2px solid #f1f2f6;
+        }
+
+        .card-title {
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: #333;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .card-icon {
+            font-size: 1.8rem;
+        }
+
+        .dashboard-iframe {
+            width: 100%;
+            height: 600px;
+            border: none;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1.5rem;
+            margin-bottom: 2rem;
+        }
+
+        .stat-card {
+            background: rgba(255, 255, 255, 0.9);
+            padding: 1.5rem;
+            border-radius: 10px;
+            text-align: center;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s;
+        }
+
+        .stat-card:hover {
+            transform: translateY(-3px);
+        }
+
+        .stat-value {
+            font-size: 2rem;
+            font-weight: bold;
+            color: #667eea;
+            margin-bottom: 0.5rem;
+        }
+
+        .stat-label {
+            color: #666;
+            font-size: 0.9rem;
+        }
+
+        .loading {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 200px;
+            font-size: 1.2rem;
+            color: #666;
+        }
+
+        .error {
+            background: #ff6b6b;
+            color: white;
+            padding: 1rem;
+            border-radius: 10px;
+            margin: 1rem 0;
+            text-align: center;
+        }
+
+        .blockchain-status {
+            position: fixed;
+            top: 100px;
+            right: 20px;
+            background: rgba(255, 255, 255, 0.95);
+            padding: 1rem;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            z-index: 50;
+        }
+
+        .status-indicator {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-size: 0.9rem;
+        }
+
+        .status-online {
+            color: #2ed573;
+        }
+
+        .status-offline {
+            color: #ff4757;
+        }
+
+        @media (max-width: 768px) {
+            .header-content {
+                flex-direction: column;
+                gap: 1rem;
+            }
+
+            .dashboard-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .stats-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .blockchain-status {
+                position: static;
+                margin: 1rem 0;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Header -->
+    <div class="header">
+        <div class="header-content">
+            <div class="logo">
+                🏥 Sistema Médico BI
+            </div>
+            <div class="user-info">
+                <div class="user-avatar" id="userAvatar">U</div>
+                <div>
+                    <div id="userName">Usuario</div>
+                    <div id="userRole" style="font-size: 0.8rem; color: #666;">Rol</div>
+                </div>
+                <button class="logout-btn" onclick="logout()">Cerrar Sesión</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Blockchain Status -->
+    <div class="blockchain-status">
+        <div class="status-indicator" id="blockchainStatus">
+            <span>🔗</span>
+            <span>Blockchain: Verificando...</span>
+        </div>
+    </div>
+
+    <!-- Main Content -->
+    <div class="main-content">
+        <!-- Stats Grid -->
+        <div class="stats-grid">
+            <div class="stat-card">
+                <div class="stat-value" id="patientCount">-</div>
+                <div class="stat-label">Pacientes Registrados</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-value" id="consultationsToday">-</div>
+                <div class="stat-label">Consultas Hoy</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-value" id="blockchainRecords">-</div>
+                <div class="stat-label">Registros en Blockchain</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-value" id="activeUsers">-</div>
+                <div class="stat-label">Usuarios Activos</div>
+            </div>
+        </div>
+
+        <!-- Dashboard Grid -->
+        <div class="dashboard-grid">
+            <!-- Dashboard Principal -->
+            <div class="dashboard-card">
+                <div class="card-header">
+                    <div class="card-title">
+                        <span class="card-icon">📊</span>
+                        Dashboard Médico Principal
+                    </div>
+                </div>
+                <div id="mainDashboard">
+                    <div class="loading">Cargando dashboard principal...</div>
+                </div>
+            </div>
+
+            <!-- Análisis de Riesgos -->
+            <div class="dashboard-card">
+                <div class="card-header">
+                    <div class="card-title">
+                        <span class="card-icon">🎯</span>
+                        Análisis de Riesgos
+                    </div>
+                </div>
+                <div id="riskAnalysis">
+                    <div class="loading">Cargando análisis de riesgos...</div>
+                </div>
+            </div>
+
+            <!-- Blockchain Analytics -->
+            <div class="dashboard-card">
+                <div class="card-header">
+                    <div class="card-title">
+                        <span class="card-icon">🔗</span>
+                        Blockchain Analytics
+                    </div>
+                </div>
+                <div id="blockchainAnalytics">
+                    <div class="loading">Cargando analytics blockchain...</div>
+                </div>
+            </div>
+
+            <!-- Predicciones ML -->
+            <div class="dashboard-card">
+                <div class="card-header">
+                    <div class="card-title">
+                        <span class="card-icon">🧠</span>
+                        Predicciones ML
+                    </div>
+                </div>
+                <div id="mlPredictions">
+                    <div class="loading">Cargando predicciones ML...</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const API_BASE_URL = 'http://localhost:8001';
+        let currentToken = localStorage.getItem('authToken');
+
+        // Verificar autenticación
+        function checkAuth() {
+            if (!currentToken) {
+                window.location.href = 'login_integrated.html';
+                return;
+            }
+
+            fetch(`${API_BASE_URL}/api/auth/verify`, {
+                method: 'GET',
+                headers: {
+                    'Authorization': `Bearer ${currentToken}`
+                }
+            })
+                .then(response => {
+                    if (!response.ok) {
+                        throw new Error('Token inválido');
+                    }
+                    return response.json();
+                })
+                .then(data => {
+                    loadUserInfo(data);
+                    loadStats();
+                    loadBlockchainStatus();
+                    loadDashboards();
+                })
+                .catch(error => {
+                    console.error('Error de autenticación:', error);
+                    localStorage.removeItem('authToken');
+                    window.location.href = 'login_integrated.html';
+                });
+        }
+
+        // Cargar información del usuario
+        function loadUserInfo(userData) {
+            const userInfo = JSON.parse(localStorage.getItem('userInfo') || '{}');
+            document.getElementById('userName').textContent = userData.username || userInfo.username || 'Usuario';
+            document.getElementById('userRole').textContent = userData.rol || userInfo.rol || 'Usuario';
+            document.getElementById('userAvatar').textContent = (userData.username || userInfo.username || 'U')[0].toUpperCase();
+        }
+
+        // Cargar estadísticas
+        function loadStats() {
+            fetch(`${API_BASE_URL}/api/dashboard/stats`, {
+                headers: {
+                    'Authorization': `Bearer ${currentToken}`
+                }
+            })
+                .then(response => response.json())
+                .then(stats => {
+                    document.getElementById('patientCount').textContent = stats.patient_count || '-';
+                    document.getElementById('consultationsToday').textContent = stats.consultations_today || '-';
+                    document.getElementById('blockchainRecords').textContent = stats.blockchain_records || '-';
+                    document.getElementById('activeUsers').textContent = stats.active_users || '-';
+                })
+                .catch(error => {
+                    console.error('Error cargando estadísticas:', error);
+                });
+        }
+
+        // Cargar estado de blockchain
+        function loadBlockchainStatus() {
+            fetch(`${API_BASE_URL}/api/blockchain/status`)
+                .then(response => response.json())
+                .then(data => {
+                    const statusElement = document.getElementById('blockchainStatus');
+                    if (data.status === 'connected') {
+                        statusElement.innerHTML = '<span>🟢</span><span>Blockchain: Conectado</span>';
+                        statusElement.className = 'status-indicator status-online';
+                    } else {
+                        statusElement.innerHTML = '<span>🔴</span><span>Blockchain: Desconectado</span>';
+                        statusElement.className = 'status-indicator status-offline';
+                    }
+                })
+                .catch(error => {
+                    console.error('Error verificando blockchain:', error);
+                    const statusElement = document.getElementById('blockchainStatus');
+                    statusElement.innerHTML = '<span>🔴</span><span>Blockchain: Error</span>';
+                    statusElement.className = 'status-indicator status-offline';
+                });
+        }
+
+        // Cargar dashboards de Sigma
+        function loadDashboards() {
+            // URLs de ejemplo - reemplazar con URLs reales de Sigma
+            const sigmaUrls = {
+                main: 'https://app.sigmacomputing.com/embed/workbook/[WORKSPACE_ID]/dashboard-principal',
+                risk: 'https://app.sigmacomputing.com/embed/workbook/[WORKSPACE_ID]/analisis-riesgos',
+                blockchain: 'https://app.sigmacomputing.com/embed/workbook/[WORKSPACE_ID]/blockchain-analytics',
+                ml: 'https://app.sigmacomputing.com/embed/workbook/[WORKSPACE_ID]/predicciones-ml'
+            };
+
+            // Cargar dashboard principal
+            loadSigmaDashboard('mainDashboard', sigmaUrls.main, 'Dashboard Principal');
+
+            // Cargar análisis de riesgos
+            loadSigmaDashboard('riskAnalysis', sigmaUrls.risk, 'Análisis de Riesgos');
+
+            // Cargar blockchain analytics
+            loadSigmaDashboard('blockchainAnalytics', sigmaUrls.blockchain, 'Blockchain Analytics');
+
+            // Cargar predicciones ML
+            loadSigmaDashboard('mlPredictions', sigmaUrls.ml, 'Predicciones ML');
+        }
+
+        // Función para cargar dashboard de Sigma
+        function loadSigmaDashboard(containerId, url, title) {
+            const container = document.getElementById(containerId);
+
+            // Por ahora, mostrar placeholder
+            container.innerHTML = `
+                <div style="text-align: center; padding: 2rem;">
+                    <h3>${title}</h3>
+                    <p>Dashboard de Sigma Computing</p>
+                    <p style="color: #666; font-size: 0.9rem; margin-top: 1rem;">
+                        Para integrar con Sigma Computing:
+                    </p>
+                    <ul style="text-align: left; margin-top: 1rem; color: #666;">
+                        <li>Crear cuenta en Sigma Computing</li>
+                        <li>Conectar Snowflake</li>
+                        <li>Crear workbooks usando las consultas SQL</li>
+                        <li>Reemplazar URLs en el código</li>
+                    </ul>
+                    <div style="margin-top: 2rem; padding: 1rem; background: #f8f9fa; border-radius: 10px;">
+                        <strong>URL de ejemplo:</strong><br>
+                        <code style="font-size: 0.8rem; color: #666;">${url}</code>
+                    </div>
+                </div>
+            `;
+
+            // Cuando tengas las URLs reales, descomenta esto:
+            /*
+            container.innerHTML = `
+                <iframe 
+                    src="${url}"
+                    class="dashboard-iframe"
+                    frameborder="0">
+                </iframe>
+            `;
+            */
+        }
+
+        // Cerrar sesión
+        function logout() {
+            localStorage.removeItem('authToken');
+            localStorage.removeItem('userInfo');
+            window.location.href = 'login_integrated.html';
+        }
+
+        // Inicializar cuando se carga la página
+        document.addEventListener('DOMContentLoaded', function () {
+            console.log('Dashboard Sigma cargado correctamente');
+            checkAuth();
+        });
+    </script>
+</body>
+
+</html>

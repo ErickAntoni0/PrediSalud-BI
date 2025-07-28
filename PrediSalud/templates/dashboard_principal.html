@@ -1,0 +1,99 @@
+
+        <!DOCTYPE html>
+        <html lang="es">
+        <head>
+            <meta charset="UTF-8">
+            <meta name="viewport" content="width=device-width, initial-scale=1.0">
+            <title>Dashboard Principal - PrediSalud BI</title>
+            <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+            <style>
+                body {
+                    margin: 0;
+                    padding: 0;
+                    font-family: 'Inter', sans-serif;
+                    background: linear-gradient(135deg, #223a66 0%, #1b2e52 100%);
+                    min-height: 100vh;
+                }
+                
+                .header {
+                    background: rgba(255, 255, 255, 0.1);
+                    backdrop-filter: blur(10px);
+                    padding: 1rem 2rem;
+                    display: flex;
+                    justify-content: space-between;
+                    align-items: center;
+                    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+                }
+                
+                .logo {
+                    color: white;
+                    font-size: 1.5rem;
+                    font-weight: 700;
+                }
+                
+                .back-btn {
+                    background: rgba(255, 255, 255, 0.1);
+                    border: 1px solid rgba(255, 255, 255, 0.2);
+                    color: white;
+                    padding: 0.5rem 1rem;
+                    border-radius: 5px;
+                    cursor: pointer;
+                    text-decoration: none;
+                }
+                
+                .dashboard-container {
+                    padding: 2rem;
+                    max-width: 1400px;
+                    margin: 0 auto;
+                }
+                
+                .dashboard-title {
+                    color: white;
+                    font-size: 2rem;
+                    margin-bottom: 1rem;
+                }
+                
+                .dashboard-description {
+                    color: rgba(255, 255, 255, 0.8);
+                    margin-bottom: 2rem;
+                }
+                
+                .sigma-embed {
+                    background: white;
+                    border-radius: 10px;
+                    padding: 1rem;
+                    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+                }
+            </style>
+        </head>
+        <body>
+            <div class="header">
+                <div class="logo">
+                    <i class="fas fa-chart-line"></i> PrediSalud BI
+                </div>
+                <a href="dashboard.html" class="back-btn">
+                    <i class="fas fa-arrow-left"></i> Volver al Dashboard
+                </a>
+            </div>
+            
+            <div class="dashboard-container">
+                <h1 class="dashboard-title">Dashboard Principal</h1>
+                <p class="dashboard-description">
+                    Dashboard interactivo creado con Sigma Computing para análisis médico avanzado
+                </p>
+                
+                <div class="sigma-embed">
+                    
+            <iframe 
+                src="https://app.sigmacomputing.com/embed/dashboard-medico-principal"
+                width="100%" 
+                height="600px" 
+                frameborder="0"
+                allowfullscreen>
+            </iframe>
+            
+                </div>
+            </div>
+        </body>
+        </html>
+        

@@ -1,0 +1,9 @@
+fastapi
+uvicorn
+pydantic
+python-dotenv
+snowflake-connector-python   # Solo si se usará Snowflake real
+web3                        # Solo si se usará Web3.py real
+passlib[bcrypt]             # Para hash de contraseñas
+python-jose[cryptography]   # Para JWT
+python-multipart           # Para formularios

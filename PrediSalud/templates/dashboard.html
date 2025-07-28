@@ -1,0 +1,497 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard - Sistema Médico BI con Blockchain</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background: linear-gradient(135deg, #223a66 0%, #1b2e52 100%);
+            min-height: 100vh;
+        }
+
+        .header {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            padding: 1rem 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .logo {
+            color: white;
+            font-size: 1.5rem;
+            font-weight: 700;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .user-info {
+            color: white;
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .logout-btn {
+            background: rgba(255, 255, 255, 0.1);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            color: white;
+            padding: 0.5rem 1rem;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .logout-btn:hover {
+            background: rgba(255, 255, 255, 0.2);
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+
+        .welcome-section {
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 15px;
+            padding: 2rem;
+            margin-bottom: 2rem;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+        }
+
+        .welcome-title {
+            font-size: 2rem;
+            color: #223a66;
+            margin-bottom: 1rem;
+        }
+
+        .welcome-subtitle {
+            color: #666;
+            margin-bottom: 2rem;
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1.5rem;
+            margin-bottom: 2rem;
+        }
+
+        .stat-card {
+            background: white;
+            border-radius: 10px;
+            padding: 1.5rem;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            border-left: 4px solid #223a66;
+        }
+
+        .stat-title {
+            font-size: 0.9rem;
+            color: #666;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            margin-bottom: 0.5rem;
+        }
+
+        .stat-value {
+            font-size: 2rem;
+            font-weight: 700;
+            color: #223a66;
+        }
+
+        .actions-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 1.5rem;
+        }
+
+        .action-card {
+            background: white;
+            border-radius: 15px;
+            padding: 2rem;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease;
+            cursor: pointer;
+            border: 2px solid transparent;
+        }
+
+        .action-card:hover {
+            transform: translateY(-5px);
+            border-color: #223a66;
+        }
+
+        .action-icon {
+            font-size: 3rem;
+            color: #223a66;
+            margin-bottom: 1rem;
+        }
+
+        .action-title {
+            font-size: 1.5rem;
+            font-weight: 600;
+            color: #223a66;
+            margin-bottom: 1rem;
+        }
+
+        .action-description {
+            color: #666;
+            line-height: 1.6;
+            margin-bottom: 1.5rem;
+        }
+
+        .action-btn {
+            background: #223a66;
+            color: white;
+            padding: 0.75rem 1.5rem;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-weight: 500;
+            transition: background 0.3s ease;
+        }
+
+        .action-btn:hover {
+            background: #1b2e52;
+        }
+
+        .blockchain-status {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            background: rgba(255, 255, 255, 0.9);
+            padding: 10px 15px;
+            border-radius: 10px;
+            font-size: 12px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            z-index: 1000;
+        }
+
+        .blockchain-status.connected {
+            border-left: 4px solid #28a745;
+        }
+
+        .blockchain-status.disconnected {
+            border-left: 4px solid #dc3545;
+        }
+
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.5);
+        }
+
+        .modal-content {
+            background-color: white;
+            margin: 15% auto;
+            padding: 2rem;
+            border-radius: 15px;
+            width: 80%;
+            max-width: 600px;
+            position: relative;
+        }
+
+        .close {
+            position: absolute;
+            right: 20px;
+            top: 20px;
+            font-size: 28px;
+            font-weight: bold;
+            cursor: pointer;
+        }
+
+        .sigma-embed {
+            width: 100%;
+            height: 600px;
+            border: none;
+            border-radius: 10px;
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Blockchain Status Indicator -->
+    <div class="blockchain-status" id="blockchainStatus">
+        <i class="fas fa-circle"></i> Blockchain: Conectando...
+    </div>
+
+    <div class="header">
+        <div class="logo">
+            <i class="fas fa-hospital"></i>
+            PrediSalud BI
+        </div>
+        <div class="user-info">
+            <span id="userName">Usuario</span>
+            <span id="userRole">Rol</span>
+            <button class="logout-btn" onclick="logout()">
+                <i class="fas fa-sign-out-alt"></i> Cerrar Sesión
+            </button>
+        </div>
+    </div>
+
+    <div class="container">
+        <div class="welcome-section">
+            <h1 class="welcome-title">Bienvenido al Sistema Médico BI</h1>
+            <p class="welcome-subtitle">
+                Sistema integrado con blockchain para la gestión segura de datos médicos
+            </p>
+
+            <div class="stats-grid">
+                <div class="stat-card">
+                    <div class="stat-title">Pacientes Registrados</div>
+                    <div class="stat-value" id="patientCount">-</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-title">Consultas Hoy</div>
+                    <div class="stat-value" id="consultationsToday">-</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-title">Registros Blockchain</div>
+                    <div class="stat-value" id="blockchainRecords">-</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-title">Usuarios Activos</div>
+                    <div class="stat-value" id="activeUsers">-</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="actions-grid">
+            <div class="action-card" onclick="openSigmaDashboard()">
+                <div class="action-icon">
+                    <i class="fas fa-chart-line"></i>
+                </div>
+                <h3 class="action-title">Dashboard Sigma Computing</h3>
+                <p class="action-description">
+                    Accede a los dashboards avanzados de BI creados con Sigma Computing para análisis detallado de datos
+                    médicos.
+                </p>
+                <button class="action-btn">Abrir Dashboard</button>
+            </div>
+
+            <div class="action-card" onclick="openBlockchainExplorer()">
+                <div class="action-icon">
+                    <i class="fas fa-link"></i>
+                </div>
+                <h3 class="action-title">Explorador Blockchain</h3>
+                <p class="action-description">
+                    Visualiza y gestiona los registros médicos almacenados en la blockchain de forma segura e inmutable.
+                </p>
+                <button class="action-btn">Explorar Blockchain</button>
+            </div>
+
+            <div class="action-card" onclick="openPatientManagement()">
+                <div class="action-icon">
+                    <i class="fas fa-user-injured"></i>
+                </div>
+                <h3 class="action-title">Gestión de Pacientes</h3>
+                <p class="action-description">
+                    Administra información de pacientes, historiales médicos y citas con integración blockchain.
+                </p>
+                <button class="action-btn">Gestionar Pacientes</button>
+            </div>
+
+            <div class="action-card" onclick="openMedicalRecords()">
+                <div class="action-icon">
+                    <i class="fas fa-file-medical"></i>
+                </div>
+                <h3 class="action-title">Registros Médicos</h3>
+                <p class="action-description">
+                    Crea y gestiona registros médicos seguros con verificación blockchain y auditoría completa.
+                </p>
+                <button class="action-btn">Ver Registros</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal para Sigma Computing -->
+    <div id="sigmaModal" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="closeSigmaModal()">&times;</span>
+            <h2>Dashboard Sigma Computing</h2>
+            <p>Aquí puedes integrar tu dashboard de Sigma Computing:</p>
+            <div id="sigmaEmbedContainer">
+                <!-- Aquí se cargará el embed de Sigma Computing -->
+                <iframe class="sigma-embed" id="sigmaEmbed"
+                    src="https://app.sigmacomputing.com/embed/your-dashboard-url-here" allowfullscreen>
+                </iframe>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const API_BASE_URL = 'http://localhost:8001';
+        let currentUser = null;
+
+        // Verificar autenticación al cargar
+        document.addEventListener('DOMContentLoaded', function () {
+            checkAuth();
+            loadUserInfo();
+            checkBlockchainStatus();
+            loadDashboardStats();
+        });
+
+        // Verificar si el usuario está autenticado
+        function checkAuth() {
+            const token = localStorage.getItem('authToken');
+            if (!token) {
+                window.location.href = 'login_integrated.html';
+                return;
+            }
+
+            // Verificar token con el servidor
+            verifyToken(token);
+        }
+
+        // Verificar token con el servidor
+        async function verifyToken(token) {
+            try {
+                const response = await fetch(`${API_BASE_URL}/api/auth/verify`, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'Authorization': `Bearer ${token}`
+                    }
+                });
+
+                if (!response.ok) {
+                    throw new Error('Token inválido');
+                }
+
+                const result = await response.json();
+                currentUser = result;
+            } catch (error) {
+                console.error('Error verificando token:', error);
+                localStorage.removeItem('authToken');
+                localStorage.removeItem('userInfo');
+                window.location.href = 'login_integrated.html';
+            }
+        }
+
+        // Cargar información del usuario
+        function loadUserInfo() {
+            const userInfo = localStorage.getItem('userInfo');
+            if (userInfo) {
+                const user = JSON.parse(userInfo);
+                document.getElementById('userName').textContent = user.username;
+                document.getElementById('userRole').textContent = user.rol;
+            }
+        }
+
+        // Verificar estado de blockchain
+        async function checkBlockchainStatus() {
+            try {
+                const response = await fetch(`${API_BASE_URL}/api/blockchain/status`);
+                const status = await response.json();
+
+                const statusElement = document.getElementById('blockchainStatus');
+                if (status.connected) {
+                    statusElement.innerHTML = '<i class="fas fa-circle" style="color: #28a745;"></i> Blockchain: Conectado';
+                    statusElement.className = 'blockchain-status connected';
+                } else {
+                    statusElement.innerHTML = '<i class="fas fa-circle" style="color: #dc3545;"></i> Blockchain: Desconectado';
+                    statusElement.className = 'blockchain-status disconnected';
+                }
+            } catch (error) {
+                console.error('Error verificando blockchain:', error);
+                document.getElementById('blockchainStatus').innerHTML = '<i class="fas fa-circle" style="color: #dc3545;"></i> Blockchain: Error';
+                document.getElementById('blockchainStatus').className = 'blockchain-status disconnected';
+            }
+        }
+
+        // Cargar estadísticas del dashboard
+        async function loadDashboardStats() {
+            try {
+                const token = localStorage.getItem('authToken');
+                const response = await fetch(`${API_BASE_URL}/api/dashboard/stats`, {
+                    headers: {
+                        'Authorization': `Bearer ${token}`
+                    }
+                });
+
+                if (response.ok) {
+                    const stats = await response.json();
+                    document.getElementById('patientCount').textContent = stats.patient_count || 0;
+                    document.getElementById('consultationsToday').textContent = stats.consultations_today || 0;
+                    document.getElementById('blockchainRecords').textContent = stats.blockchain_records || 0;
+                    document.getElementById('activeUsers').textContent = stats.active_users || 0;
+                }
+            } catch (error) {
+                console.error('Error cargando estadísticas:', error);
+                // Usar valores por defecto si hay error
+                document.getElementById('patientCount').textContent = '0';
+                document.getElementById('consultationsToday').textContent = '0';
+                document.getElementById('blockchainRecords').textContent = '0';
+                document.getElementById('activeUsers').textContent = '0';
+            }
+        }
+
+        // Abrir dashboard de Sigma Computing
+        function openSigmaDashboard() {
+            document.getElementById('sigmaModal').style.display = 'block';
+
+            // Aquí puedes configurar la URL de tu dashboard de Sigma Computing
+            const sigmaUrl = 'https://app.sigmacomputing.com/embed/your-dashboard-url-here';
+            document.getElementById('sigmaEmbed').src = sigmaUrl;
+        }
+
+        // Cerrar modal de Sigma
+        function closeSigmaModal() {
+            document.getElementById('sigmaModal').style.display = 'none';
+        }
+
+        // Abrir explorador blockchain
+        function openBlockchainExplorer() {
+            // Aquí puedes abrir una nueva ventana o modal con el explorador blockchain
+            alert('Explorador Blockchain - Funcionalidad en desarrollo');
+        }
+
+        // Abrir gestión de pacientes
+        function openPatientManagement() {
+            // Aquí puedes abrir la gestión de pacientes
+            alert('Gestión de Pacientes - Funcionalidad en desarrollo');
+        }
+
+        // Abrir registros médicos
+        function openMedicalRecords() {
+            // Aquí puedes abrir los registros médicos
+            alert('Registros Médicos - Funcionalidad en desarrollo');
+        }
+
+        // Cerrar sesión
+        function logout() {
+            localStorage.removeItem('authToken');
+            localStorage.removeItem('userInfo');
+            window.location.href = 'login_integrated.html';
+        }
+
+        // Cerrar modal al hacer clic fuera
+        window.onclick = function (event) {
+            const modal = document.getElementById('sigmaModal');
+            if (event.target === modal) {
+                closeSigmaModal();
+            }
+        }
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,11 @@
+ID_FACTOR,ID_PACIENTE,TIPO_FACTOR,DESCRIPCION,GRAVEDAD,FECHA_DETECCION,ACTIVO
+FAC_001,PAC_001,Familiar,Historial familiar de diabetes,MEDIA,2024-09-01,TRUE
+FAC_002,PAC_002,Medioambiental,Exposición a contaminantes,ALTA,2024-11-21,TRUE
+FAC_003,PAC_003,Biológico,Edad avanzada,BAJA,2024-11-23,TRUE
+FAC_004,PAC_004,Ocupacional,Trabajo con estrés elevado,MEDIA,2024-11-17,TRUE
+FAC_005,PAC_005,Medioambiental,Exposición a contaminantes,ALTA,2025-04-08,TRUE
+FAC_006,PAC_006,Biológico,Edad avanzada,BAJA,2025-06-18,TRUE
+FAC_007,PAC_007,Familiar,Historial familiar de diabetes,MEDIA,2024-09-21,TRUE
+FAC_008,PAC_008,Familiar,Historial familiar de diabetes,MEDIA,2025-03-12,TRUE
+FAC_009,PAC_009,Familiar,Historial familiar de diabetes,MEDIA,2025-06-02,TRUE
+FAC_010,PAC_010,Medioambiental,Exposición a contaminantes,ALTA,2025-02-22,TRUE

@@ -1,0 +1,888 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Registro de Paciente - Sistema Médico BI</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/static/css/dark-mode.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background: linear-gradient(135deg, #223a66 0%, #1b2e52 100%);
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+            position: relative;
+            overflow-x: hidden;
+        }
+
+        body::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('https://images.unsplash.com/photo-1559757148-5c350d0d3c56?ixlib=rb-4.0.3&auto=format&fit=crop&w=2070&q=80') center/cover;
+            opacity: 0.1;
+            z-index: -1;
+        }
+
+        .container {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(20px);
+            border-radius: 20px;
+            box-shadow: 0 25px 50px rgba(0, 0, 0, 0.15);
+            max-width: 800px;
+            width: 100%;
+            overflow: hidden;
+            position: relative;
+            animation: slideIn 0.6s ease-out;
+        }
+
+        @keyframes slideIn {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .header {
+            background: linear-gradient(135deg, #223a66 0%, #1b2e52 100%);
+            color: white;
+            padding: 2rem;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .header::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(255, 255, 255, 0.1) 0%, transparent 70%);
+            animation: rotate 20s linear infinite;
+        }
+
+        @keyframes rotate {
+            from {
+                transform: rotate(0deg);
+            }
+
+            to {
+                transform: rotate(360deg);
+            }
+        }
+
+        .header h1 {
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+            position: relative;
+            z-index: 1;
+        }
+
+        .header p {
+            font-size: 1.1rem;
+            opacity: 0.9;
+            position: relative;
+            z-index: 1;
+        }
+
+        .social-auth {
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+            margin: 2rem 0;
+            flex-wrap: wrap;
+        }
+
+        .social-btn {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.75rem 1.5rem;
+            border: 2px solid #e1e5e9;
+            border-radius: 12px;
+            background: white;
+            color: #333;
+            text-decoration: none;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+
+        .social-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+            border-color: #223a66;
+        }
+
+        .form-container {
+            padding: 2rem;
+            max-height: 70vh;
+            overflow-y: auto;
+        }
+
+        .form-container::-webkit-scrollbar {
+            width: 8px;
+        }
+
+        .form-container::-webkit-scrollbar-track {
+            background: #f1f1f1;
+            border-radius: 10px;
+        }
+
+        .form-container::-webkit-scrollbar-thumb {
+            background: #223a66;
+            border-radius: 10px;
+        }
+
+        .form-section {
+            margin-bottom: 2rem;
+            animation: fadeInUp 0.6s ease-out;
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .section-header {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            margin-bottom: 1.5rem;
+            padding-bottom: 0.75rem;
+            border-bottom: 2px solid #f0f0f0;
+        }
+
+        .section-header h2 {
+            color: #333;
+            font-size: 1.4rem;
+            font-weight: 600;
+        }
+
+        .section-header i {
+            color: #223a66;
+            font-size: 1.2rem;
+        }
+
+        .form-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1rem;
+        }
+
+        .form-group {
+            position: relative;
+        }
+
+        .form-group.full-width {
+            grid-column: 1 / -1;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: 500;
+            color: #333;
+            font-size: 0.9rem;
+        }
+
+        .input-wrapper {
+            position: relative;
+        }
+
+        .input-wrapper i {
+            position: absolute;
+            left: 1rem;
+            top: 50%;
+            transform: translateY(-50%);
+            color: #223a66;
+            z-index: 1;
+        }
+
+        input,
+        select,
+        textarea {
+            width: 100%;
+            padding: 0.875rem 1rem;
+            border: 2px solid #e1e5e9;
+            border-radius: 12px;
+            font-size: 1rem;
+            transition: all 0.3s ease;
+            background: white;
+            font-family: inherit;
+        }
+
+        .input-wrapper input,
+        .input-wrapper select {
+            padding-left: 2.5rem;
+        }
+
+        input:focus,
+        select:focus,
+        textarea:focus {
+            outline: none;
+            border-color: #223a66;
+            box-shadow: 0 0 0 3px rgba(34, 58, 102, 0.1);
+        }
+
+        textarea {
+            resize: vertical;
+            min-height: 100px;
+        }
+
+        .radio-group,
+        .checkbox-group {
+            display: flex;
+            gap: 1.5rem;
+            flex-wrap: wrap;
+        }
+
+        .radio-item,
+        .checkbox-item {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            cursor: pointer;
+        }
+
+        .radio-item input,
+        .checkbox-item input {
+            width: auto;
+            margin: 0;
+        }
+
+        .submit-btn {
+            width: 100%;
+            padding: 1rem;
+            background: linear-gradient(135deg, #223a66 0%, #1b2e52 100%);
+            color: white;
+            border: none;
+            border-radius: 12px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            margin-top: 1rem;
+        }
+
+        .submit-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 15px 30px rgba(34, 58, 102, 0.3);
+        }
+
+        .submit-btn:active {
+            transform: translateY(0);
+        }
+
+        .progress-bar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 0%;
+            height: 4px;
+            background: linear-gradient(135deg, #223a66 0%, #1b2e52 100%);
+            transition: width 0.3s ease;
+            z-index: 1000;
+        }
+
+        .floating-label {
+            position: absolute;
+            top: 50%;
+            left: 2.5rem;
+            transform: translateY(-50%);
+            color: #999;
+            transition: all 0.3s ease;
+            pointer-events: none;
+        }
+
+        input:focus+.floating-label,
+        input:not(:placeholder-shown)+.floating-label {
+            top: 0;
+            left: 1rem;
+            font-size: 0.8rem;
+            color: #223a66;
+            background: white;
+            padding: 0 0.5rem;
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                margin: 10px;
+                border-radius: 15px;
+            }
+
+            .header h1 {
+                font-size: 2rem;
+            }
+
+            .form-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .social-auth {
+                flex-direction: column;
+                align-items: center;
+            }
+
+            .social-btn {
+                width: 100%;
+                max-width: 300px;
+                justify-content: center;
+            }
+        }
+
+        .loading {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.5);
+            z-index: 9999;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .spinner {
+            width: 50px;
+            height: 50px;
+            border: 4px solid #f3f3f3;
+            border-top: 4px solid #223a66;
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+        }
+
+        @keyframes spin {
+            0% {
+                transform: rotate(0deg);
+            }
+
+            100% {
+                transform: rotate(360deg);
+            }
+        }
+
+        .success-message {
+            display: none;
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            background: #10b981;
+            color: white;
+            padding: 1rem 1.5rem;
+            border-radius: 12px;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+            z-index: 1000;
+            animation: slideInRight 0.3s ease;
+        }
+
+        @keyframes slideInRight {
+            from {
+                transform: translateX(100%);
+                opacity: 0;
+            }
+
+            to {
+                transform: translateX(0);
+                opacity: 1;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="progress-bar" id="progressBar"></div>
+
+    <div class="loading" id="loading">
+        <div class="spinner"></div>
+    </div>
+
+    <div class="success-message" id="successMessage">
+        <i class="fas fa-check-circle"></i> Paciente registrado exitosamente
+    </div>
+
+    <div class="container">
+        <div class="header">
+            <h1><i class="fas fa-user-plus"></i> Registro de Paciente</h1>
+            <p>Sistema Médico de Inteligencia de Negocios</p>
+        </div>
+
+        <div class="social-auth">
+            <a href="#" class="social-btn">
+                <i class="fab fa-google"></i>
+                <span>Google</span>
+            </a>
+            <a href="#" class="social-btn">
+                <i class="fab fa-microsoft"></i>
+                <span>Microsoft</span>
+            </a>
+            <a href="#" class="social-btn">
+                <i class="fas fa-envelope"></i>
+                <span>Correo</span>
+            </a>
+            <a href="#" class="social-btn">
+                <i class="fas fa-shield-halved"></i>
+                <span>Institucional</span>
+            </a>
+            <a href="./dashboard2.htm" class="social-btn">
+                <i class="fas fa-arrow-left"></i>
+                <span>Volver</span>
+            </a>
+        </div>
+
+        <div class="form-container">
+            <form id="registro-paciente" action="/submit" method="POST">
+                <!-- Datos Generales -->
+                <div class="form-section">
+                    <div class="section-header">
+                        <i class="fas fa-user"></i>
+                        <h2>Datos Generales</h2>
+                    </div>
+
+                    <div class="form-grid">
+                        <div class="form-group">
+                            <label for="id_paciente">ID Paciente</label>
+                            <div class="input-wrapper">
+                                <i class="fas fa-id-card"></i>
+                                <input type="text" id="id_paciente" name="id_paciente" placeholder="P001" required>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="nombre_completo">Nombre Completo</label>
+                            <div class="input-wrapper">
+                                <i class="fas fa-user"></i>
+                                <input type="text" id="nombre_completo" name="nombre_completo"
+                                    placeholder="Juan Pérez Gómez" required>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="edad">Edad</label>
+                            <div class="input-wrapper">
+                                <i class="fas fa-birthday-cake"></i>
+                                <input type="number" id="edad" name="edad" min="0" max="150" placeholder="45">
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="genero">Género</label>
+                            <div class="input-wrapper">
+                                <i class="fas fa-venus-mars"></i>
+                                <select id="genero" name="genero" required>
+                                    <option value="">Seleccionar</option>
+                                    <option value="M">Masculino</option>
+                                    <option value="F">Femenino</option>
+                                    <option value="O">Otro</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="fecha_nacimiento">Fecha de Nacimiento</label>
+                            <div class="input-wrapper">
+                                <i class="fas fa-calendar"></i>
+                                <input type="date" id="fecha_nacimiento" name="fecha_nacimiento">
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="domicilio_completo">Domicilio Completo</label>
+                            <div class="input-wrapper">
+                                <i class="fas fa-home"></i>
+                                <input type="text" id="domicilio_completo" name="domicilio_completo"
+                                    placeholder="Calle 123, Col. Centro">
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="municipio">Municipio</label>
+                            <div class="input-wrapper">
+                                <i class="fas fa-map-marker-alt"></i>
+                                <input type="text" id="municipio" name="municipio" placeholder="Toluca">
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="codigo_postal">Código Postal</label>
+                            <div class="input-wrapper">
+                                <i class="fas fa-mail-bulk"></i>
+                                <input type="text" id="codigo_postal" name="codigo_postal" placeholder="50000">
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="institucion">Institución</label>
+                            <div class="input-wrapper">
+                                <i class="fas fa-hospital"></i>
+                                <input type="text" id="institucion" name="institucion" placeholder="Hospital ABC">
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="clave_paciente">Clave Paciente</label>
+                            <div class="input-wrapper">
+                                <i class="fas fa-key"></i>
+                                <input type="text" id="clave_paciente" name="clave_paciente" placeholder="001">
+                            </div>
+                        </div>
+
+                        <div class="form-group full-width">
+                            <label>Consentimiento Informado</label>
+                            <div class="radio-group">
+                                <div class="radio-item">
+                                    <input type="radio" id="consentimiento_si" name="consentimiento_informado"
+                                        value="true" required>
+                                    <label for="consentimiento_si">Sí</label>
+                                </div>
+                                <div class="radio-item">
+                                    <input type="radio" id="consentimiento_no" name="consentimiento_informado"
+                                        value="false">
+                                    <label for="consentimiento_no">No</label>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Historial Médico -->
+                <div class="form-section">
+                    <div class="section-header">
+                        <i class="fas fa-notes-medical"></i>
+                        <h2>Historial Médico</h2>
+                    </div>
+
+                    <div class="form-grid">
+                        <div class="form-group full-width">
+                            <label for="historial_hospitalizaciones">Hospitalizaciones Previas</label>
+                            <textarea id="historial_hospitalizaciones" name="historial_hospitalizaciones"
+                                placeholder="Ej. Neumonía 2023"></textarea>
+                        </div>
+
+                        <div class="form-group full-width">
+                            <label for="historial_cirugias">Cirugías Previas</label>
+                            <textarea id="historial_cirugias" name="historial_cirugias"
+                                placeholder="Ej. Apendicectomía 2020"></textarea>
+                        </div>
+
+                        <div class="form-group full-width">
+                            <label for="alergias">Alergias</label>
+                            <textarea id="alergias" name="alergias" placeholder="Ej. Penicilina"></textarea>
+                        </div>
+
+                        <div class="form-group full-width">
+                            <label for="antecedentes_familiares">Antecedentes Familiares</label>
+                            <textarea id="antecedentes_familiares" name="antecedentes_familiares"
+                                placeholder="Ej. Diabetes tipo 2 en madre"></textarea>
+                        </div>
+
+                        <div class="form-group full-width">
+                            <label for="antecedentes_personales">Antecedentes Personales</label>
+                            <textarea id="antecedentes_personales" name="antecedentes_personales"
+                                placeholder="Ej. Hipertensión, tabaquismo"></textarea>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Consulta Actual -->
+                <div class="form-section">
+                    <div class="section-header">
+                        <i class="fas fa-stethoscope"></i>
+                        <h2>Consulta Actual</h2>
+                    </div>
+
+                    <div class="form-grid">
+                        <div class="form-group">
+                            <label for="fecha_consulta">Fecha de Consulta</label>
+                            <div class="input-wrapper">
+                                <i class="fas fa-calendar-check"></i>
+                                <input type="date" id="fecha_consulta" name="fecha_consulta" required>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="hora_consulta">Hora de Consulta</label>
+                            <div class="input-wrapper">
+                                <i class="fas fa-clock"></i>
+                                <input type="time" id="hora_consulta" name="hora_consulta" required>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="signos_vitales_temperatura">Temperatura (°C)</label>
+                            <div class="input-wrapper">
+                                <i class="fas fa-thermometer-half"></i>
+                                <input type="number" id="signos_vitales_temperatura" name="signos_vitales_temperatura"
+                                    step="0.1" placeholder="37.5">
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="signos_vitales_frecuencia_cardiaca">Frecuencia Cardíaca (lpm)</label>
+                            <div class="input-wrapper">
+                                <i class="fas fa-heartbeat"></i>
+                                <input type="number" id="signos_vitales_frecuencia_cardiaca"
+                                    name="signos_vitales_frecuencia_cardiaca" placeholder="80">
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="signos_vitales_glucosa">Glucosa (mg/dL)</label>
+                            <div class="input-wrapper">
+                                <i class="fas fa-tint"></i>
+                                <input type="number" id="signos_vitales_glucosa" name="signos_vitales_glucosa"
+                                    placeholder="90">
+                            </div>
+                        </div>
+
+                        <div class="form-group full-width">
+                            <label for="sintomas">Síntomas</label>
+                            <textarea id="sintomas" name="sintomas" placeholder="Ej. Fiebre, tos" required></textarea>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="tiempo_evolucion_sintomas">Tiempo de Evolución</label>
+                            <div class="input-wrapper">
+                                <i class="fas fa-hourglass-half"></i>
+                                <input type="text" id="tiempo_evolucion_sintomas" name="tiempo_evolucion_sintomas"
+                                    placeholder="Ej. 3 días">
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="diagnostico_cie10">Diagnóstico CIE-10</label>
+                            <div class="input-wrapper">
+                                <i class="fas fa-code"></i>
+                                <input type="text" id="diagnostico_cie10" name="diagnostico_cie10"
+                                    placeholder="Ej. J12.9">
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="diagnostico_base">Diagnóstico Base</label>
+                            <div class="input-wrapper">
+                                <i class="fas fa-notes-medical"></i>
+                                <input type="text" id="diagnostico_base" name="diagnostico_base"
+                                    placeholder="Ej. COVID-19">
+                            </div>
+                        </div>
+
+                        <div class="form-group full-width">
+                            <label for="tratamiento">Tratamiento</label>
+                            <textarea id="tratamiento" name="tratamiento"
+                                placeholder="Ej. Paracetamol 500 mg cada 8 horas"></textarea>
+                        </div>
+
+                        <div class="form-group full-width">
+                            <label for="resultado_laboratorio">Resultados de Laboratorio</label>
+                            <textarea id="resultado_laboratorio" name="resultado_laboratorio"
+                                placeholder="Ej. Negativo para SARS-CoV-2"></textarea>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="pronostico">Pronóstico</label>
+                            <div class="input-wrapper">
+                                <i class="fas fa-chart-line"></i>
+                                <select id="pronostico" name="pronostico">
+                                    <option value="">Seleccionar</option>
+                                    <option value="Bueno">Bueno</option>
+                                    <option value="Malo">Malo</option>
+                                    <option value="Reservado">Reservado</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="clasificacion_riesgo">Clasificación de Riesgo</label>
+                            <div class="input-wrapper">
+                                <i class="fas fa-exclamation-triangle"></i>
+                                <select id="clasificacion_riesgo" name="clasificacion_riesgo" required>
+                                    <option value="">Seleccionar</option>
+                                    <option value="Bajo">Bajo</option>
+                                    <option value="Medio">Medio</option>
+                                    <option value="Alto">Alto</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="form-group full-width">
+                            <label for="notas_evolucion">Notas de Evolución</label>
+                            <textarea id="notas_evolucion" name="notas_evolucion"
+                                placeholder="Ej. Mejoría en síntomas respiratorios"></textarea>
+                        </div>
+                    </div>
+                </div>
+
+                <button type="submit" class="submit-btn">
+                    <i class="fas fa-save"></i> Registrar Paciente
+                </button>
+            </form>
+        </div>
+    </div>
+
+    <script>
+        // Progress bar
+        window.addEventListener('scroll', () => {
+            const scrollTop = window.pageYOffset;
+            const docHeight = document.body.offsetHeight - window.innerHeight;
+            const scrollPercent = (scrollTop / docHeight) * 100;
+            document.getElementById('progressBar').style.width = scrollPercent + '%';
+        });
+
+        // Form validation and submission
+        document.getElementById('registro-paciente').addEventListener('submit', async function (event) {
+            event.preventDefault();
+
+            // Show loading
+            document.getElementById('loading').style.display = 'flex';
+
+            // Validate form
+            const edad = document.getElementById('edad').value;
+            const temperatura = document.getElementById('signos_vitales_temperatura').value;
+
+            if (edad && (edad < 0 || edad > 150)) {
+                alert('La edad debe estar entre 0 y 150 años.');
+                document.getElementById('loading').style.display = 'none';
+                return;
+            }
+
+            if (temperatura && (temperatura < 30 || temperatura > 45)) {
+                alert('La temperatura debe estar entre 30 y 45 °C.');
+                document.getElementById('loading').style.display = 'none';
+                return;
+            }
+
+            // Collect form data
+            const formData = new FormData(this);
+            const data = {};
+
+            for (let [key, value] of formData.entries()) {
+                if (value) {
+                    data[key] = value;
+                }
+            }
+
+            if ('consentimiento_informado' in data) {
+                data['consentimiento_informado'] = (data['consentimiento_informado'] === 'true');
+            }
+
+            try {
+                // Send data to backend
+                const response = await fetch('http://localhost:8001/api/pacientes/registrar-original', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'Authorization': `Bearer ${localStorage.getItem('authToken') || ''}`
+                    },
+                    body: JSON.stringify(data)
+                });
+
+                const result = await response.json();
+
+                document.getElementById('loading').style.display = 'none';
+
+                if (result.success) {
+                    // Show success message
+                    document.getElementById('successMessage').style.display = 'block';
+                    document.getElementById('successMessage').innerHTML = `
+                        <i class="fas fa-check-circle"></i>
+                        <span>${result.message}</span>
+                        <small>ID del paciente: ${result.paciente_id}</small>
+                    `;
+
+                    // Hide success message after 5 seconds
+                    setTimeout(() => {
+                        document.getElementById('successMessage').style.display = 'none';
+                    }, 5000);
+
+                    // Reset form
+                    this.reset();
+                } else {
+                    // Show error message
+                    alert(`Error: ${result.message}`);
+                }
+            } catch (error) {
+                document.getElementById('loading').style.display = 'none';
+                alert(`Error de conexión: ${error.message}`);
+            }
+        });
+
+        // Auto-fill date fields
+        document.addEventListener('DOMContentLoaded', function () {
+            const today = new Date().toISOString().split('T')[0];
+            document.getElementById('fecha_consulta').value = today;
+        });
+
+        // Smooth scrolling for form sections
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                document.querySelector(this.getAttribute('href')).scrollIntoView({
+                    behavior: 'smooth'
+                });
+            });
+        });
+
+        // Add floating labels functionality
+        document.querySelectorAll('input[type="text"], input[type="number"], input[type="email"]').forEach(input => {
+            input.addEventListener('focus', function () {
+                this.parentElement.classList.add('focused');
+            });
+
+            input.addEventListener('blur', function () {
+                if (!this.value) {
+                    this.parentElement.classList.remove('focused');
+                }
+            });
+        });
+    </script>
+
+    <!-- Script del modo oscuro -->
+    <script src="/static/js/dark-mode.js"></script>
+    <script>
+        // Inicializar modo oscuro
+        document.addEventListener('DOMContentLoaded', function () {
+            if (window.DarkModeUtils) {
+                window.DarkModeUtils.init();
+
+                // Aplicar tema basado en la hora del día
+                window.DarkModeUtils.applyTimeBasedTheme();
+
+                console.log('Modo oscuro inicializado en registro');
+            }
+        });
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,7 @@
+{
+  "MedicalRecords": "0xae87934e13576F0be787e5324B8bfD2C85Ec0274",
+  "PatientConsent": "0x3E21C6c824D4bB8a68857b74a373e01D04F0cfBC",
+  "MedicalAudit": "0x3E8d7Ed4496dAb982333740ddFd351Af1C546BF0",
+  "network": "sepolia",
+  "deployedAt": "2025-07-25T20:55:00.000Z"
+} 

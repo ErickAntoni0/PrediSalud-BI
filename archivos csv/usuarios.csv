@@ -1,0 +1,6 @@
+ID_USUARIO,NOMBRE_USUARIO,EMAIL,PASSWORD_HASH,ROL,FECHA_CREACION,ACTIVO
+USER_001,admin,admin@clinica.com,hash_admin123,ADMIN,2024-01-01 00:00:00,TRUE
+USER_002,doctor1,doctor1@clinica.com,hash_doctor123,DOCTOR,2024-01-01 00:00:00,TRUE
+USER_003,doctor2,doctor2@clinica.com,hash_doctor123,DOCTOR,2024-01-01 00:00:00,TRUE
+USER_004,enfermera1,enfermera1@clinica.com,hash_enfermera123,ENFERMERA,2024-01-01 00:00:00,TRUE
+USER_005,recepcionista,recepcion@clinica.com,hash_recepcion123,RECEPCION,2024-01-01 00:00:00,TRUE

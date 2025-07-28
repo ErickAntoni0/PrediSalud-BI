@@ -1,0 +1,6 @@
+ID_MEDICAMENTO,NOMBRE_MEDICAMENTO,PRINCIPIO_ACTIVO,DOSIS_RECOMENDADA,PRESENTACION,FABRICANTE,ACTIVO
+MED_001,Paracetamol,Acetaminofén,500-1000mg cada 4-6 horas,Tabletas 500mg,Genérico,TRUE
+MED_002,Ibuprofeno,Ibuprofeno,400-800mg cada 6-8 horas,Tabletas 400mg,Genérico,TRUE
+MED_003,Amoxicilina,Amoxicilina,500mg cada 8 horas,Cápsulas 500mg,Genérico,TRUE
+MED_004,Omeprazol,Omeprazol,20mg una vez al día,Cápsulas 20mg,Genérico,TRUE
+MED_005,Loratadina,Loratadina,10mg una vez al día,Tabletas 10mg,Genérico,TRUE

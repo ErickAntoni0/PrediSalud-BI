@@ -1,0 +1,11 @@
+ID_CONSULTA,ID_PACIENTE,ID_USUARIO,FECHA_CONSULTA,MOTIVO_CONSULTA,SINTOMAS,ESTADO_CONSULTA,NOTAS,FECHA_CREACION
+CON_001,PAC_001,USER_003,2025-07-26 18:29:34,Fiebre y malestar,Síntomas reportados por el paciente,COMPLETADA,Consulta realizada exitosamente,2025-07-26 18:29:34
+CON_002,PAC_002,USER_002,2025-07-27 18:29:34,Control rutinario,Síntomas reportados por el paciente,COMPLETADA,Consulta realizada exitosamente,2025-07-27 18:29:34
+CON_003,PAC_003,USER_003,2025-07-28 18:29:34,Dolor de cabeza,Síntomas reportados por el paciente,COMPLETADA,Consulta realizada exitosamente,2025-07-28 18:29:34
+CON_004,PAC_004,USER_002,2025-07-29 18:29:34,Revisión de medicamentos,Síntomas reportados por el paciente,COMPLETADA,Consulta realizada exitosamente,2025-07-29 18:29:34
+CON_005,PAC_005,USER_003,2025-07-30 18:29:34,Síntomas respiratorios,Síntomas reportados por el paciente,COMPLETADA,Consulta realizada exitosamente,2025-07-30 18:29:34
+CON_006,PAC_006,USER_002,2025-07-31 18:29:34,Síntomas respiratorios,Síntomas reportados por el paciente,COMPLETADA,Consulta realizada exitosamente,2025-07-31 18:29:34
+CON_007,PAC_007,USER_003,2025-08-01 18:29:34,Control rutinario,Síntomas reportados por el paciente,COMPLETADA,Consulta realizada exitosamente,2025-08-01 18:29:34
+CON_008,PAC_008,USER_002,2025-08-02 18:29:34,Control rutinario,Síntomas reportados por el paciente,COMPLETADA,Consulta realizada exitosamente,2025-08-02 18:29:34
+CON_009,PAC_009,USER_003,2025-08-03 18:29:34,Dolor de cabeza,Síntomas reportados por el paciente,COMPLETADA,Consulta realizada exitosamente,2025-08-03 18:29:34
+CON_010,PAC_010,USER_002,2025-08-04 18:29:34,Síntomas respiratorios,Síntomas reportados por el paciente,COMPLETADA,Consulta realizada exitosamente,2025-08-04 18:29:34

@@ -1,0 +1,65 @@
+{
+  "timestamp": "2025-07-25T20:10:15.347985",
+  "summary": {
+    "total": 9,
+    "passed": 8,
+    "failed": 1,
+    "success_rate": 88.88888888888889
+  },
+  "results": [
+    {
+      "test": "API Health",
+      "status": "PASS",
+      "details": "Status: healthy",
+      "timestamp": "2025-07-25T20:10:13.000222"
+    },
+    {
+      "test": "Blockchain Status",
+      "status": "PASS",
+      "details": "Status: connected",
+      "timestamp": "2025-07-25T20:10:13.005703"
+    },
+    {
+      "test": "Login doctor1",
+      "status": "PASS",
+      "details": "Rol: doctor",
+      "timestamp": "2025-07-25T20:10:13.008240"
+    },
+    {
+      "test": "Token Verification",
+      "status": "PASS",
+      "details": "Username: doctor1",
+      "timestamp": "2025-07-25T20:10:13.009476"
+    },
+    {
+      "test": "Dashboard Stats",
+      "status": "PASS",
+      "details": "Stats: 4 items",
+      "timestamp": "2025-07-25T20:10:13.010772"
+    },
+    {
+      "test": "Patient Registration",
+      "status": "FAIL",
+      "details": "Error: Error registrando paciente: 100072 (22000): DML operation to table PACIENTES failed on column APELLIDO with error: NULL result in a non-nullable column",
+      "timestamp": "2025-07-25T20:10:15.011800"
+    },
+    {
+      "test": "Get Patients",
+      "status": "PASS",
+      "details": "Total: 0 pacientes",
+      "timestamp": "2025-07-25T20:10:15.340748"
+    },
+    {
+      "test": "Medical Record Creation",
+      "status": "PASS",
+      "details": "Hash: 0x000000000000000000...",
+      "timestamp": "2025-07-25T20:10:15.344234"
+    },
+    {
+      "test": "Consent Update",
+      "status": "PASS",
+      "details": "Hash: 0x-00000000000000000...",
+      "timestamp": "2025-07-25T20:10:15.347905"
+    }
+  ]
+}

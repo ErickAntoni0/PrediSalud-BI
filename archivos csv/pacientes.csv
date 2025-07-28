@@ -1,0 +1,11 @@
+ID_PACIENTE,NOMBRE,APELLIDO,FECHA_NACIMIENTO,GENERO,TELEFONO,EMAIL,DIRECCION,FECHA_REGISTRO,ACTIVO
+PAC_001,Juan,Pérez,1985-03-15,M,555-0101,juan.perez@email.com,"Calle 123, Ciudad",2024-01-01 00:00:00,TRUE
+PAC_002,María,García,1990-07-22,F,555-0102,maria.garcia@email.com,"Avenida 456, Ciudad",2024-01-01 00:00:00,TRUE
+PAC_003,Carlos,López,1978-11-08,M,555-0103,carlos.lopez@email.com,"Calle 789, Ciudad",2024-01-01 00:00:00,TRUE
+PAC_004,Ana,Martínez,1992-04-30,F,555-0104,ana.martinez@email.com,"Avenida 321, Ciudad",2024-01-01 00:00:00,TRUE
+PAC_005,Luis,Rodríguez,1988-09-12,M,555-0105,luis.rodriguez@email.com,"Calle 654, Ciudad",2024-01-01 00:00:00,TRUE
+PAC_006,Sofia,Hernández,1995-01-25,F,555-0106,sofia.hernandez@email.com,"Avenida 987, Ciudad",2024-01-01 00:00:00,TRUE
+PAC_007,Miguel,González,1982-06-18,M,555-0107,miguel.gonzalez@email.com,"Calle 147, Ciudad",2024-01-01 00:00:00,TRUE
+PAC_008,Elena,Fernández,1987-12-03,F,555-0108,elena.fernandez@email.com,"Avenida 258, Ciudad",2024-01-01 00:00:00,TRUE
+PAC_009,Roberto,Torres,1993-08-14,M,555-0109,roberto.torres@email.com,"Calle 369, Ciudad",2024-01-01 00:00:00,TRUE
+PAC_010,Carmen,Jiménez,1989-05-20,F,555-0110,carmen.jimenez@email.com,"Avenida 741, Ciudad",2024-01-01 00:00:00,TRUE

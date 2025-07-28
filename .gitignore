@@ -1,0 +1,55 @@
+# Archivos de configuración sensibles
+config.env
+.env
+*.env
+
+# Archivos de base de datos
+*.db
+*.sqlite
+*.sqlite3
+metabase.db.*
+
+# Archivos temporales
+*.tmp
+*.temp
+*.log
+
+# Archivos del sistema
+.DS_Store
+Thumbs.db
+
+# Archivos de Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+env/
+venv/
+ENV/
+env.bak/
+venv.bak/
+
+# Archivos de Node.js
+node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# Archivos de IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# Archivos de backup
+*.bak
+*.backup
+
+# Archivos de logs
+logs/
+*.log
+
+# Archivos de configuración local
+local_config.py
+config_local.py 
