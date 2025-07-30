@@ -1,0 +1,2491 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <link rel="icon" href="favicon.ico">
+    <title>PrediSalud | Grupos de Riesgo</title>
+    <!-- Simple bar CSS -->
+    <link rel="stylesheet" href="css/simplebar.css">
+    <!-- Fonts CSS -->
+    <link
+        href="https://fonts.googleapis.com/css2?family=Overpass:ital,wght@0,100;0,200;0,300;0,400;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,600;1,700;1,800;1,900&display=swap"
+        rel="stylesheet">
+    <!-- Icons CSS -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="css/feather.css">
+    <link rel="stylesheet" href="css/select2.css">
+    <link rel="stylesheet" href="css/dropzone.css">
+    <link rel="stylesheet" href="css/uppy.min.css">
+    <link rel="stylesheet" href="css/jquery.steps.css">
+    <link rel="stylesheet" href="css/jquery.timepicker.css">
+    <link rel="stylesheet" href="css/quill.snow.css">
+    <!-- Date Range Picker CSS -->
+    <link rel="stylesheet" href="css/daterangepicker.css">
+    <!-- App CSS -->
+    <link rel="stylesheet" href="css/app-light.css" id="lightTheme" disabled>
+    <link rel="stylesheet" href="css/app-dark.css" id="darkTheme">
+</head>
+
+<body class="vertical  dark  ">
+    <div class="wrapper">
+        <nav class="topnav navbar navbar-light">
+            <button type="button" class="navbar-toggler text-muted mt-2 p-0 mr-3 collapseSidebar">
+                <i class="fa-solid fa-bars"></i>
+            </button>
+            <form class="form-inline mr-auto searchform text-muted">
+                <input class="form-control mr-sm-2 bg-transparent border-0 pl-4 text-muted" type="search"
+                    placeholder="Buscar..." aria-label="Search">
+            </form>
+            <ul class="nav">
+                <li class="nav-item">
+                    <a class="nav-link text-muted my-2" href="./index.html" title="Inicio">
+                        <i class="fas fa-home fa-lg"></i>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link text-muted my-2" href="#" id="modeSwitcher" data-mode="dark">
+                        <i class="fas fa-sun fa-lg"></i>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link text-muted my-2" href="./#" data-toggle="modal" data-target=".modal-shortcut">
+                        <i class="fas fa-th fa-lg"></i>
+                    </a>
+                </li>
+                <li class="nav-item nav-notif">
+                    <a class="nav-link text-muted my-2" href="./#" data-toggle="modal" data-target=".modal-notif">
+                        <i class="fas fa-bell fa-lg"></i>
+                        <span class="dot dot-md bg-success"></span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link text-muted my-2" href="./calendar.html" title="Agenda">
+                        <i class="fas fa-calendar fa-lg"></i>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link text-muted my-2" href="./#" title="Pacientes">
+                        <i class="fas fa-users fa-lg"></i>
+                        <span class="badge badge-pill badge-danger badge-sm">12</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link text-muted my-2" href="./#" title="Reportes">
+                        <i class="fas fa-file-alt fa-lg"></i>
+                    </a>
+                </li>
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle text-muted pr-0" href="#" id="navbarDropdownMenuLink"
+                        role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        <span class="avatar avatar-sm mt-2">
+                            <img src="https://images.unsplash.com/photo-1642667226859-a2d0f9e74a21?q=80&w=687&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
+                                alt="..." class="avatar-img rounded-circle">
+                        </span>
+                    </a>
+                    <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdownMenuLink">
+                        <a class="dropdown-item" href="#">Perfil</a>
+                        <a class="dropdown-item" href="#">Ajustes | Configuracion </a>
+                        <a class="dropdown-item" href="#">Actividades</a>
+                    </div>
+                </li>
+            </ul>
+        </nav>
+        <!-- Sidebar -->
+        <aside class="sidebar-left border-right bg-white shadow" id="leftSidebar" data-simplebar>
+            <a href="#" class="btn collapseSidebar toggle-btn d-lg-none text-muted ml-2 mt-3" data-toggle="toggle">
+                <i class="fas fa-times"><span class="sr-only"></span></i>
+            </a>
+            <nav class="vertnav navbar navbar-light">
+                <!-- nav bar -->
+                <div class="w-100 mb-4 d-flex">
+                    <a class="navbar-brand mx-auto mt-2 flex-fill text-center" href="./index.html">
+                        <img src="images/emblema.png" alt="PrediSalud Logo" class="navbar-brand-img brand-sm"
+                            style="max-height: 80px; width: auto;">
+                    </a>
+                </div>
+                <ul class="navbar-nav flex-fill w-100 mb-2">
+                    <li class="nav-item dropdown">
+                        <a href="#dashboard" data-toggle="collapse" aria-expanded="false"
+                            class="dropdown-toggle nav-link">
+                            <i class="fas fa-chart-bar fa-lg icon-glow"></i>
+                            <span class="ml-3 item-text">Dashboard Médico</span><span class="sr-only">(current)</span>
+                        </a>
+                        <ul class="collapse list-unstyled pl-4 w-100" id="dashboard">
+                            <li class="nav-item active">
+                                <a class="nav-link pl-3" href="./index.html"><span class="ml-1 item-text">Vista
+                                        General</span></a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link pl-3" href="./dashboard-analytics.html"><span
+                                        class="ml-1 item-text">Analíticas Avanzadas</span></a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link pl-3" href="./dashboard-sales.html"><span
+                                        class="ml-1 item-text">Sistema Médico BI</span></a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link pl-3" href="./dashboard-saas.html"><span
+                                        class="ml-1 item-text">PrediSalud Cloud</span></a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link pl-3" href="./dashboard-system.html"><span
+                                        class="ml-1 item-text">Monitoreo Sistema</span></a>
+                            </li>
+                        </ul>
+                    </li>
+                </ul>
+                <p class="text-muted nav-heading mt-4 mb-1">
+                    <span>Gestión Médica</span>
+                </p>
+                <ul class="navbar-nav flex-fill w-100 mb-2">
+                    <li class="nav-item dropdown">
+                        <a href="#ui-elements" data-toggle="collapse" aria-expanded="false"
+                            class="dropdown-toggle nav-link">
+                            <i class="fas fa-user-injured fa-lg icon-pulse"></i>
+                            <span class="ml-3 item-text">Pacientes</span>
+                        </a>
+                        <ul class="collapse list-unstyled pl-4 w-100" id="ui-elements">
+                            <li class="nav-item">
+                                <a class="nav-link pl-3" href="./registro.html"><span class="ml-1 item-text">Registro
+                                        Pacientes</span>
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link pl-3" href="./ui-typograpy.html"><span
+                                        class="ml-1 item-text">Historial Médico</span></a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link pl-3" href="./ui-icons.html"><span
+                                        class="ml-1 item-text">Consultas</span></a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link pl-3" href="./ui-buttons.html"><span class="ml-1 item-text">Citas
+                                        Médicas</span></a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link pl-3" href="./ui-notification.html"><span
+                                        class="ml-1 item-text">Tratamientos</span></a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link pl-3" href="./ui-modals.html"><span
+                                        class="ml-1 item-text">Medicamentos</span></a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link pl-3" href="./ui-tabs-accordion.html"><span
+                                        class="ml-1 item-text">Diagnósticos</span></a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link pl-3" href="./ui-progress.html"><span
+                                        class="ml-1 item-text">Seguimiento</span></a>
+                            </li>
+                        </ul>
+                    </li>
+                    <li class="nav-item w-100">
+                        <a class="nav-link" href="widgets.html">
+                            <i class="fas fa-heartbeat fa-lg icon-bounce"></i>
+                            <span class="ml-3 item-text">Monitoreo Vital</span>
+                            <span class="badge badge-pill badge-success">Live</span>
+                        </a>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a href="#forms" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle nav-link">
+                            <i class="fas fa-chart-line fa-lg icon-color-shift"></i>
+                            <span class="ml-3 item-text">Reportes</span>
+                        </a>
+                        <ul class="collapse list-unstyled pl-4 w-100" id="forms">
+                            <li class="nav-item">
+                                <a class="nav-link pl-3" href="./form_elements.html"><span
+                                        class="ml-1 item-text">Reportes
+                                        Clínicos</span></a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link pl-3" href="./form_advanced.html"><span
+                                        class="ml-1 item-text">Estadísticas Médicas</span></a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link pl-3" href="./form_validation.html"><span
+                                        class="ml-1 item-text">Análisis de Datos</span></a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link pl-3" href="./form_wizard.html"><span class="ml-1 item-text">Reportes
+                                        Personalizados</span></a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link pl-3" href="./form_layouts.html"><span
+                                        class="ml-1 item-text">Exportar Datos</span></a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link pl-3" href="./form_upload.html"><span class="ml-1 item-text">Cargar
+                                        Documentos</span></a>
+                            </li>
+                        </ul>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a href="#tables" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle nav-link">
+                            <i class="fas fa-database fa-lg icon-rotate"></i>
+                            <span class="ml-3 item-text">Base de Datos</span>
+                        </a>
+                        <ul class="collapse list-unstyled pl-4 w-100" id="tables">
+                            <li class="nav-item">
+                                <a class="nav-link pl-3" href="./table_basic.html"><span
+                                        class="ml-1 item-text">Pacientes
+                                        Registrados</span></a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link pl-3" href="./table_advanced.html"><span
+                                        class="ml-1 item-text">Consultas Médicas</span></a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link pl-3" href="./table_datatables.html"><span
+                                        class="ml-1 item-text">Inventario Médico</span></a>
+                            </li>
+                        </ul>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a href="#charts" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle nav-link">
+                            <i class="fas fa-chart-pie fa-lg icon-scale"></i>
+                            <span class="ml-3 item-text">Analíticas</span>
+                        </a>
+                        <ul class="collapse list-unstyled pl-4 w-100" id="charts">
+                            <li class="nav-item">
+                                <a class="nav-link pl-3" href="./chart-inline.html"><span
+                                        class="ml-1 item-text">Métricas
+                                        en Tiempo Real</span></a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link pl-3" href="./chart-chartjs.html"><span
+                                        class="ml-1 item-text">Gráficos Interactivos</span></a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link pl-3" href="./chart-apexcharts.html"><span
+                                        class="ml-1 item-text">Dashboard Avanzado</span></a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link pl-3" href="./datamaps.html"><span class="ml-1 item-text">Mapas
+                                        Epidemiológicos</span></a>
+                            </li>
+                        </ul>
+                    </li>
+                </ul>
+                <p class="text-muted nav-heading mt-4 mb-1">
+                    <span>Aplicaciones Médicas</span>
+                </p>
+                <ul class="navbar-nav flex-fill w-100 mb-2">
+                    <li class="nav-item w-100">
+                        <a class="nav-link" href="calendar.html">
+                            <i class="fa-solid fa-book-medical"></i>
+                            <span class="ml-3 item-text">Agenda Médica</span>
+                        </a>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a href="#contact" data-toggle="collapse" aria-expanded="false"
+                            class="dropdown-toggle nav-link">
+                            <i class="fa-solid fa-walkie-talkie"></i>
+                            <span class="ml-3 item-text">Comunicación</span>
+                        </a>
+                        <ul class="collapse list-unstyled pl-4 w-100" id="contact">
+                            <a class="nav-link pl-3" href="./contacts-list.html"><span class="ml-1">Lista de
+                                    Contactos</span></a>
+                            <a class="nav-link pl-3" href="./contacts-grid.html"><span class="ml-1">Directorio
+                                    Médico</span></a>
+                            <a class="nav-link pl-3" href="./contacts-new.html"><span class="ml-1">Nuevo
+                                    Contacto</span></a>
+                        </ul>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a href="#profile" data-toggle="collapse" aria-expanded="false"
+                            class="dropdown-toggle nav-link">
+                            <i class="fa-solid fa-user-doctor"></i>
+                            <span class="ml-3 item-text">Personal Médico</span>
+                        </a>
+                        <ul class="collapse list-unstyled pl-4 w-100" id="profile">
+                            <a class="nav-link pl-3" href="./profile.html"><span class="ml-1">Vista General</span></a>
+                            <a class="nav-link pl-3" href="./profile-settings.html"><span
+                                    class="ml-1">Configuración</span></a>
+                            <a class="nav-link pl-3" href="./profile-security.html"><span
+                                    class="ml-1">Seguridad</span></a>
+                            <a class="nav-link pl-3" href="./profile-notification.html"><span
+                                    class="ml-1">Notificaciones</span></a>
+                        </ul>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a href="#fileman" data-toggle="collapse" aria-expanded="false"
+                            class="dropdown-toggle nav-link">
+                            <i class="fa-solid fa-notes-medical"></i>
+                            <span class="ml-3 item-text">Archivos Médicos</span>
+                        </a>
+                        <ul class="collapse list-unstyled pl-4 w-100" id="fileman">
+                            <a class="nav-link pl-3" href="./files-list.html"><span class="ml-1">Lista de
+                                    Archivos</span></a>
+                            <a class="nav-link pl-3" href="./files-grid.html"><span class="ml-1">Expedientes
+                                    Digitales</span></a>
+                        </ul>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a href="#support" data-toggle="collapse" aria-expanded="false"
+                            class="dropdown-toggle nav-link">
+                            <i class="fa-solid fa-circle-info"></i>
+                            <span class="ml-3 item-text">Soporte Técnico</span>
+                        </a>
+                        <ul class="collapse list-unstyled pl-4 w-100" id="support">
+                            <a class="nav-link pl-3" href="./support-center.html"><span class="ml-1">Centro de
+                                    Ayuda</span></a>
+                            <a class="nav-link pl-3" href="./support-tickets.html"><span class="ml-1">Tickets de
+                                    Soporte</span></a>
+                            <a class="nav-link pl-3" href="./support-ticket-detail.html"><span class="ml-1">Detalle de
+                                    Ticket</span></a>
+                            <a class="nav-link pl-3" href="./support-faqs.html"><span class="ml-1">Preguntas
+                                    Frecuentes</span></a>
+                        </ul>
+                    </li>
+                </ul>
+                <p class="text-muted nav-heading mt-4 mb-1">
+                    <span>Herramientas Adicionales</span>
+                </p>
+                <ul class="navbar-nav flex-fill w-100 mb-2">
+                    <li class="nav-item dropdown">
+                        <a href="#pages" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle nav-link">
+                            <i class="fa-solid fa-bug"></i>
+                            <span class="ml-3 item-text">Reportes</span>
+                        </a>
+                        <ul class="collapse list-unstyled pl-4 w-100 w-100" id="pages">
+                            <li class="nav-item">
+                                <a class="nav-link pl-3" href="./page-orders.html">
+                                    <span class="ml-1 item-text">Reportes Clínicos</span>
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link pl-3" href="./page-timeline.html">
+                                    <span class="ml-1 item-text">Cronología Médica</span>
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link pl-3" href="./page-invoice.html">
+                                    <span class="ml-1 item-text">Facturación</span>
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link pl-3" href="./page-404.html">
+                                    <span class="ml-1 item-text">Página No Encontrada</span>
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link pl-3" href="./page-500.html">
+                                    <span class="ml-1 item-text">Error del Servidor</span>
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link pl-3" href="./page-blank.html">
+                                    <span class="ml-1 item-text">Página en Blanco</span>
+                                </a>
+                            </li>
+                        </ul>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a href="#auth" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle nav-link">
+                            <i class="fa-solid fa-check-double"></i>
+                            <span class="ml-3 item-text">Autenticación</span>
+                        </a>
+                        <ul class="collapse list-unstyled pl-4 w-100" id="auth">
+                            <a class="nav-link pl-3" href="./auth-login.html"><span class="ml-1">Iniciar
+                                    Sesión</span></a>
+                            <a class="nav-link pl-3" href="./auth-login-half.html"><span class="ml-1">Acceso
+                                    Médico</span></a>
+                            <a class="nav-link pl-3" href="./auth-register.html"><span class="ml-1">Registro</span></a>
+                            <a class="nav-link pl-3" href="./auth-resetpw.html"><span class="ml-1">Restablecer
+                                    Contraseña</span></a>
+                            <a class="nav-link pl-3" href="./auth-confirm.html"><span class="ml-1">Confirmar
+                                    Contraseña</span></a>
+                        </ul>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a href="#layouts" data-toggle="collapse" aria-expanded="false"
+                            class="dropdown-toggle nav-link">
+                            <i class="fa-solid fa-desktop"></i>
+                            <span class="ml-3 item-text">Interfaz</span>
+                        </a>
+                        <ul class="collapse list-unstyled pl-4 w-100" id="layouts">
+                            <li class="nav-item">
+                                <a class="nav-link pl-3" href="./index.html"><span
+                                        class="ml-1 item-text">Predeterminado</span></a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link pl-3" href="./index-horizontal.html"><span
+                                        class="ml-1 item-text">Navegación
+                                        Superior</span></a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link pl-3" href="./index-boxed.html"><span
+                                        class="ml-1 item-text">Compacto</span></a>
+                            </li>
+                        </ul>
+                    </li>
+                </ul>
+                <p class="text-muted nav-heading mt-4 mb-1">
+                    <span>Documentación</span>
+                </p>
+                <ul class="navbar-nav flex-fill w-100 mb-2">
+                    <li class="nav-item w-100">
+                        <a class="nav-link" href="../docs/index.html">
+                            <i class="fa-solid fa-book-open"></i>
+                            <span class="ml-3 item-text">Manual de Usuario</span>
+                        </a>
+                    </li>
+                </ul>
+                <div class="btn-box w-100 mt-4 mb-1">
+                    <a href="#" class="btn mb-2 btn-success btn-lg btn-block btn-ripple" data-aos="fade-up"
+                        data-aos-delay="100">
+                        <i class="fas fa-user-plus fa-sm mx-2"></i><span class="small">Nuevo Paciente</span>
+                    </a>
+                    <a href="#" class="btn mb-2 btn-primary btn-lg btn-block btn-ripple" data-aos="fade-up"
+                        data-aos-delay="200">
+                        <i class="fas fa-calendar-plus fa-sm mx-2"></i><span class="small">Nueva Cita</span>
+                    </a>
+                    <a href="#" class="btn mb-2 btn-info btn-lg btn-block btn-ripple" data-aos="fade-up"
+                        data-aos-delay="300">
+                        <i class="fas fa-file-medical fa-sm mx-2"></i><span class="small">Nuevo Reporte</span>
+                    </a>
+                </div>
+            </nav>
+        </aside>
+        <main role="main" class="main-content">
+            <div class="container-fluid">
+                <div class="row justify-content-center">
+                    <div class="col-12">
+                        <h2 class="mb-2 page-title">
+                            <i class="fe fe-database mr-2"></i>Base de Datos Médica - PrediSalud
+                        </h2>
+                        <p class="card-text">Sistema integral de gestión médica donde el personal autorizado puede
+                            acceder
+                            a la información completa de pacientes, realizar búsquedas avanzadas por grupo de riesgo,
+                            consultar historiales médicos detallados y revisar resultados de laboratorio.
+                            Toda la información está protegida bajo estándares de privacidad médica.
+                        </p>
+                        <div class="row my-4">
+                            <!-- Small table -->
+                            <div class="col-md-12">
+                                <div class="card shadow">
+                                    <div class="card-body">
+                                        <!-- table -->
+                                        <table class="table datatables" id="dataTable-1">
+                                            <thead>
+                                                <tr>
+                                                    <th></th>
+                                                    <th>#</th>
+                                                    <th>Nombre</th>
+                                                    <th>Telefono</th>
+                                                    <th>Departamento</th>
+                                                    <th>Empresa</th>
+                                                    <th>Direccion</th>
+                                                    <th>Municipio</th>
+                                                    <th>Fecha de Registro</th>
+                                                    <th>Action</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <tr>
+                                                    <td>
+                                                        <div class="custom-control custom-checkbox">
+                                                            <input type="checkbox" class="custom-control-input">
+                                                            <label class="custom-control-label"></label>
+                                                        </div>
+                                                    </td>
+                                                    <td>276</td>
+                                                    <td>Lillith Joseph</td>
+                                                    <td>(406) 343-5430</td>
+                                                    <td>Advertising</td>
+                                                    <td>Macromedia</td>
+                                                    <td>Ap #363-1293 Neque St.</td>
+                                                    <td>Vieuxville</td>
+                                                    <td>Sep 22, 2019</td>
+                                                    <td><button class="btn btn-sm dropdown-toggle more-horizontal"
+                                                            type="button" data-toggle="dropdown" aria-haspopup="true"
+                                                            aria-expanded="false">
+                                                            <span class="text-muted sr-only">Action</span>
+                                                        </button>
+                                                        <div class="dropdown-menu dropdown-menu-right">
+                                                            <a class="dropdown-item" href="#">Edit</a>
+                                                            <a class="dropdown-item" href="#">Remove</a>
+                                                            <a class="dropdown-item" href="#">Assign</a>
+                                                        </div>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td>
+                                                        <div class="custom-control custom-checkbox">
+                                                            <input type="checkbox" class="custom-control-input">
+                                                            <label class="custom-control-label"></label>
+                                                        </div>
+                                                    </td>
+                                                    <td>222</td>
+                                                    <td>Ruth Shaffer</td>
+                                                    <td>(488) 102-5116</td>
+                                                    <td>Human Resources</td>
+                                                    <td>Lycos</td>
+                                                    <td>Ap #117-5518 A, Rd.</td>
+                                                    <td>Buxton</td>
+                                                    <td>Feb 19, 2021</td>
+                                                    <td><button class="btn btn-sm dropdown-toggle more-horizontal"
+                                                            type="button" data-toggle="dropdown" aria-haspopup="true"
+                                                            aria-expanded="false">
+                                                            <span class="text-muted sr-only">Action</span>
+                                                        </button>
+                                                        <div class="dropdown-menu dropdown-menu-right">
+                                                            <a class="dropdown-item" href="#">Edit</a>
+                                                            <a class="dropdown-item" href="#">Remove</a>
+                                                            <a class="dropdown-item" href="#">Assign</a>
+                                                        </div>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td>
+                                                        <div class="custom-control custom-checkbox">
+                                                            <input type="checkbox" class="custom-control-input">
+                                                            <label class="custom-control-label"></label>
+                                                        </div>
+                                                    </td>
+                                                    <td>397</td>
+                                                    <td>Jerry Orr</td>
+                                                    <td>(657) 274-3095</td>
+                                                    <td>Accounting</td>
+                                                    <td>Lycos</td>
+                                                    <td>919-782 Vitae Street</td>
+                                                    <td>La Plata</td>
+                                                    <td>Jul 24, 2019</td>
+                                                    <td><button class="btn btn-sm dropdown-toggle more-horizontal"
+                                                            type="button" data-toggle="dropdown" aria-haspopup="true"
+                                                            aria-expanded="false">
+                                                            <span class="text-muted sr-only">Action</span>
+                                                        </button>
+                                                        <div class="dropdown-menu dropdown-menu-right">
+                                                            <a class="dropdown-item" href="#">Edit</a>
+                                                            <a class="dropdown-item" href="#">Remove</a>
+                                                            <a class="dropdown-item" href="#">Assign</a>
+                                                        </div>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td>
+                                                        <div class="custom-control custom-checkbox">
+                                                            <input type="checkbox" class="custom-control-input">
+                                                            <label class="custom-control-label"></label>
+                                                        </div>
+                                                    </td>
+                                                    <td>218</td>
+                                                    <td>Hayfa Cox</td>
+                                                    <td>(602) 569-0400</td>
+                                                    <td>Asset Management</td>
+                                                    <td>Altavista</td>
+                                                    <td>Ap #189-4628 Curabitur Rd.</td>
+                                                    <td>Dindigul</td>
+                                                    <td>Dec 8, 2019</td>
+                                                    <td><button class="btn btn-sm dropdown-toggle more-horizontal"
+                                                            type="button" data-toggle="dropdown" aria-haspopup="true"
+                                                            aria-expanded="false">
+                                                            <span class="text-muted sr-only">Action</span>
+                                                        </button>
+                                                        <div class="dropdown-menu dropdown-menu-right">
+                                                            <a class="dropdown-item" href="#">Edit</a>
+                                                            <a class="dropdown-item" href="#">Remove</a>
+                                                            <a class="dropdown-item" href="#">Assign</a>
+                                                        </div>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td>
+                                                        <div class="custom-control custom-checkbox">
+                                                            <input type="checkbox" class="custom-control-input">
+                                                            <label class="custom-control-label"></label>
+                                                        </div>
+                                                    </td>
+                                                    <td>361</td>
+                                                    <td>Ishmael Mcleod</td>
+                                                    <td>(148) 643-9938</td>
+                                                    <td>Customer Service</td>
+                                                    <td>Yahoo</td>
+                                                    <td>P.O. Box 253, 2328 Mauris St.</td>
+                                                    <td>San Juan del Río</td>
+                                                    <td>Feb 13, 2020</td>
+                                                    <td><button class="btn btn-sm dropdown-toggle more-horizontal"
+                                                            type="button" data-toggle="dropdown" aria-haspopup="true"
+                                                            aria-expanded="false">
+                                                            <span class="text-muted sr-only">Action</span>
+                                                        </button>
+                                                        <div class="dropdown-menu dropdown-menu-right">
+                                                            <a class="dropdown-item" href="#">Edit</a>
+                                                            <a class="dropdown-item" href="#">Remove</a>
+                                                            <a class="dropdown-item" href="#">Assign</a>
+                                                        </div>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td>
+                                                        <div class="custom-control custom-checkbox">
+                                                            <input type="checkbox" class="custom-control-input">
+                                                            <label class="custom-control-label"></label>
+                                                        </div>
+                                                    </td>
+                                                    <td>281</td>
+                                                    <td>Kevyn Snyder</td>
+                                                    <td>(659) 649-4750</td>
+                                                    <td>Customer Relations</td>
+                                                    <td>Macromedia</td>
+                                                    <td>P.O. Box 731, 7143 Sem Rd.</td>
+                                                    <td>Taber</td>
+                                                    <td>Mar 1, 2021</td>
+                                                    <td><button class="btn btn-sm dropdown-toggle more-horizontal"
+                                                            type="button" data-toggle="dropdown" aria-haspopup="true"
+                                                            aria-expanded="false">
+                                                            <span class="text-muted sr-only">Action</span>
+                                                        </button>
+                                                        <div class="dropdown-menu dropdown-menu-right">
+                                                            <a class="dropdown-item" href="#">Edit</a>
+                                                            <a class="dropdown-item" href="#">Remove</a>
+                                                            <a class="dropdown-item" href="#">Assign</a>
+                                                        </div>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td>
+                                                        <div class="custom-control custom-checkbox">
+                                                            <input type="checkbox" class="custom-control-input">
+                                                            <label class="custom-control-label"></label>
+                                                        </div>
+                                                    </td>
+                                                    <td>236</td>
+                                                    <td>Patience Sanders</td>
+                                                    <td>(287) 279-0868</td>
+                                                    <td>Legal Department</td>
+                                                    <td>Sibelius</td>
+                                                    <td>664-7649 Euismod Rd.</td>
+                                                    <td>Strijtem</td>
+                                                    <td>Mar 26, 2021</td>
+                                                    <td><button class="btn btn-sm dropdown-toggle more-horizontal"
+                                                            type="button" data-toggle="dropdown" aria-haspopup="true"
+                                                            aria-expanded="false">
+                                                            <span class="text-muted sr-only">Action</span>
+                                                        </button>
+                                                        <div class="dropdown-menu dropdown-menu-right">
+                                                            <a class="dropdown-item" href="#">Edit</a>
+                                                            <a class="dropdown-item" href="#">Remove</a>
+                                                            <a class="dropdown-item" href="#">Assign</a>
+                                                        </div>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td>
+                                                        <div class="custom-control custom-checkbox">
+                                                            <input type="checkbox" class="custom-control-input">
+                                                            <label class="custom-control-label"></label>
+                                                        </div>
+                                                    </td>
+                                                    <td>394</td>
+                                                    <td>Tamara Cooke</td>
+                                                    <td>(998) 560-1052</td>
+                                                    <td>Asset Management</td>
+                                                    <td>Macromedia</td>
+                                                    <td>Ap #507-3545 Enim. St.</td>
+                                                    <td>Hattiesburg</td>
+                                                    <td>Jan 25, 2020</td>
+                                                    <td><button class="btn btn-sm dropdown-toggle more-horizontal"
+                                                            type="button" data-toggle="dropdown" aria-haspopup="true"
+                                                            aria-expanded="false">
+                                                            <span class="text-muted sr-only">Action</span>
+                                                        </button>
+                                                        <div class="dropdown-menu dropdown-menu-right">
+                                                            <a class="dropdown-item" href="#">Edit</a>
+                                                            <a class="dropdown-item" href="#">Remove</a>
+                                                            <a class="dropdown-item" href="#">Assign</a>
+                                                        </div>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td>
+                                                        <div class="custom-control custom-checkbox">
+                                                            <input type="checkbox" class="custom-control-input">
+                                                            <label class="custom-control-label"></label>
+                                                        </div>
+                                                    </td>
+                                                    <td>276</td>
+                                                    <td>Abel Raymond</td>
+                                                    <td>(930) 726-7338</td>
+                                                    <td>Quality Assurance</td>
+                                                    <td>Yahoo</td>
+                                                    <td>5370 Vestibulum. Avenue</td>
+                                                    <td>La Cruz</td>
+                                                    <td>Jul 3, 2020</td>
+                                                    <td><button class="btn btn-sm dropdown-toggle more-horizontal"
+                                                            type="button" data-toggle="dropdown" aria-haspopup="true"
+                                                            aria-expanded="false">
+                                                            <span class="text-muted sr-only">Action</span>
+                                                        </button>
+                                                        <div class="dropdown-menu dropdown-menu-right">
+                                                            <a class="dropdown-item" href="#">Edit</a>
+                                                            <a class="dropdown-item" href="#">Remove</a>
+                                                            <a class="dropdown-item" href="#">Assign</a>
+                                                        </div>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td>
+                                                        <div class="custom-control custom-checkbox">
+                                                            <input type="checkbox" class="custom-control-input">
+                                                            <label class="custom-control-label"></label>
+                                                        </div>
+                                                    </td>
+                                                    <td>388</td>
+                                                    <td>Honorato Nichols</td>
+                                                    <td>(561) 758-1908</td>
+                                                    <td>Legal Department</td>
+                                                    <td>Microsoft</td>
+                                                    <td>P.O. Box 925, 286 Ipsum Street</td>
+                                                    <td>St. John's</td>
+                                                    <td>Aug 29, 2020</td>
+                                                    <td><button class="btn btn-sm dropdown-toggle more-horizontal"
+                                                            type="button" data-toggle="dropdown" aria-haspopup="true"
+                                                            aria-expanded="false">
+                                                            <span class="text-muted sr-only">Action</span>
+                                                        </button>
+                                                        <div class="dropdown-menu dropdown-menu-right">
+                                                            <a class="dropdown-item" href="#">Edit</a>
+                                                            <a class="dropdown-item" href="#">Remove</a>
+                                                            <a class="dropdown-item" href="#">Assign</a>
+                                                        </div>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td>
+                                                        <div class="custom-control custom-checkbox">
+                                                            <input type="checkbox" class="custom-control-input">
+                                                            <label class="custom-control-label"></label>
+                                                        </div>
+                                                    </td>
+                                                    <td>498</td>
+                                                    <td>Ishmael Aguirre</td>
+                                                    <td>(594) 850-4912</td>
+                                                    <td>Media Relations</td>
+                                                    <td>Yahoo</td>
+                                                    <td>P.O. Box 398, 8254 Pede, Av.</td>
+                                                    <td>Cannes</td>
+                                                    <td>Jul 5, 2019</td>
+                                                    <td><button class="btn btn-sm dropdown-toggle more-horizontal"
+                                                            type="button" data-toggle="dropdown" aria-haspopup="true"
+                                                            aria-expanded="false">
+                                                            <span class="text-muted sr-only">Action</span>
+                                                        </button>
+                                                        <div class="dropdown-menu dropdown-menu-right">
+                                                            <a class="dropdown-item" href="#">Edit</a>
+                                                            <a class="dropdown-item" href="#">Remove</a>
+                                                            <a class="dropdown-item" href="#">Assign</a>
+                                                        </div>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td>
+                                                        <div class="custom-control custom-checkbox">
+                                                            <input type="checkbox" class="custom-control-input">
+                                                            <label class="custom-control-label"></label>
+                                                        </div>
+                                                    </td>
+                                                    <td>277</td>
+                                                    <td>Christian Nieves</td>
+                                                    <td>(933) 345-5314</td>
+                                                    <td>Human Resources</td>
+                                                    <td>Cakewalk</td>
+                                                    <td>889-9118 Ipsum Rd.</td>
+                                                    <td>Berhampore</td>
+                                                    <td>Jul 8, 2019</td>
+                                                    <td><button class="btn btn-sm dropdown-toggle more-horizontal"
+                                                            type="button" data-toggle="dropdown" aria-haspopup="true"
+                                                            aria-expanded="false">
+                                                            <span class="text-muted sr-only">Action</span>
+                                                        </button>
+                                                        <div class="dropdown-menu dropdown-menu-right">
+                                                            <a class="dropdown-item" href="#">Edit</a>
+                                                            <a class="dropdown-item" href="#">Remove</a>
+                                                            <a class="dropdown-item" href="#">Assign</a>
+                                                        </div>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td>
+                                                        <div class="custom-control custom-checkbox">
+                                                            <input type="checkbox" class="custom-control-input">
+                                                            <label class="custom-control-label"></label>
+                                                        </div>
+                                                    </td>
+                                                    <td>215</td>
+                                                    <td>Nevada Weber</td>
+                                                    <td>(603) 763-9893</td>
+                                                    <td>Human Resources</td>
+                                                    <td>Altavista</td>
+                                                    <td>Ap #439-124 Eros St.</td>
+                                                    <td>Cádiz</td>
+                                                    <td>Nov 2, 2019</td>
+                                                    <td><button class="btn btn-sm dropdown-toggle more-horizontal"
+                                                            type="button" data-toggle="dropdown" aria-haspopup="true"
+                                                            aria-expanded="false">
+                                                            <span class="text-muted sr-only">Action</span>
+                                                        </button>
+                                                        <div class="dropdown-menu dropdown-menu-right">
+                                                            <a class="dropdown-item" href="#">Edit</a>
+                                                            <a class="dropdown-item" href="#">Remove</a>
+                                                            <a class="dropdown-item" href="#">Assign</a>
+                                                        </div>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td>
+                                                        <div class="custom-control custom-checkbox">
+                                                            <input type="checkbox" class="custom-control-input">
+                                                            <label class="custom-control-label"></label>
+                                                        </div>
+                                                    </td>
+                                                    <td>449</td>
+                                                    <td>Addison Tran</td>
+                                                    <td>(200) 967-8241</td>
+                                                    <td>Sales and Marketing</td>
+                                                    <td>Microsoft</td>
+                                                    <td>214-4812 Sed, Rd.</td>
+                                                    <td>Offenbach am Main</td>
+                                                    <td>Nov 30, 2020</td>
+                                                    <td><button class="btn btn-sm dropdown-toggle more-horizontal"
+                                                            type="button" data-toggle="dropdown" aria-haspopup="true"
+                                                            aria-expanded="false">
+                                                            <span class="text-muted sr-only">Action</span>
+                                                        </button>
+                                                        <div class="dropdown-menu dropdown-menu-right">
+                                                            <a class="dropdown-item" href="#">Edit</a>
+                                                            <a class="dropdown-item" href="#">Remove</a>
+                                                            <a class="dropdown-item" href="#">Assign</a>
+                                                        </div>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td>
+                                                        <div class="custom-control custom-checkbox">
+                                                            <input type="checkbox" class="custom-control-input">
+                                                            <label class="custom-control-label"></label>
+                                                        </div>
+                                                    </td>
+                                                    <td>272</td>
+                                                    <td>Brenna Reid</td>
+                                                    <td>(925) 647-2628</td>
+                                                    <td>Finances</td>
+                                                    <td>Microsoft</td>
+                                                    <td>P.O. Box 604, 587 Ac Street</td>
+                                                    <td>Gallicchio</td>
+                                                    <td>Jul 1, 2019</td>
+                                                    <td><button class="btn btn-sm dropdown-toggle more-horizontal"
+                                                            type="button" data-toggle="dropdown" aria-haspopup="true"
+                                                            aria-expanded="false">
+                                                            <span class="text-muted sr-only">Action</span>
+                                                        </button>
+                                                        <div class="dropdown-menu dropdown-menu-right">
+                                                            <a class="dropdown-item" href="#">Edit</a>
+                                                            <a class="dropdown-item" href="#">Remove</a>
+                                                            <a class="dropdown-item" href="#">Assign</a>
+                                                        </div>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td>
+                                                        <div class="custom-control custom-checkbox">
+                                                            <input type="checkbox" class="custom-control-input">
+                                                            <label class="custom-control-label"></label>
+                                                        </div>
+                                                    </td>
+                                                    <td>380</td>
+                                                    <td>Kirby Summers</td>
+                                                    <td>(140) 854-4790</td>
+                                                    <td>Human Resources</td>
+                                                    <td>Lycos</td>
+                                                    <td>Ap #611-2789 Donec Ave</td>
+                                                    <td>s Herenelderen</td>
+                                                    <td>Sep 23, 2020</td>
+                                                    <td><button class="btn btn-sm dropdown-toggle more-horizontal"
+                                                            type="button" data-toggle="dropdown" aria-haspopup="true"
+                                                            aria-expanded="false">
+                                                            <span class="text-muted sr-only">Action</span>
+                                                        </button>
+                                                        <div class="dropdown-menu dropdown-menu-right">
+                                                            <a class="dropdown-item" href="#">Edit</a>
+                                                            <a class="dropdown-item" href="#">Remove</a>
+                                                            <a class="dropdown-item" href="#">Assign</a>
+                                                        </div>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td>
+                                                        <div class="custom-control custom-checkbox">
+                                                            <input type="checkbox" class="custom-control-input">
+                                                            <label class="custom-control-label"></label>
+                                                        </div>
+                                                    </td>
+                                                    <td>316</td>
+                                                    <td>Cairo Villarreal</td>
+                                                    <td>(410) 944-9399</td>
+                                                    <td>Sales and Marketing</td>
+                                                    <td>Borland</td>
+                                                    <td>P.O. Box 631, 8966 Dapibus Street</td>
+                                                    <td>Alingsås</td>
+                                                    <td>Jan 10, 2020</td>
+                                                    <td><button class="btn btn-sm dropdown-toggle more-horizontal"
+                                                            type="button" data-toggle="dropdown" aria-haspopup="true"
+                                                            aria-expanded="false">
+                                                            <span class="text-muted sr-only">Action</span>
+                                                        </button>
+                                                        <div class="dropdown-menu dropdown-menu-right">
+                                                            <a class="dropdown-item" href="#">Edit</a>
+                                                            <a class="dropdown-item" href="#">Remove</a>
+                                                            <a class="dropdown-item" href="#">Assign</a>
+                                                        </div>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td>
+                                                        <div class="custom-control custom-checkbox">
+                                                            <input type="checkbox" class="custom-control-input">
+                                                            <label class="custom-control-label"></label>
+                                                        </div>
+                                                    </td>
+                                                    <td>369</td>
+                                                    <td>Savannah Gallagher</td>
+                                                    <td>(519) 628-8362</td>
+                                                    <td>Media Relations</td>
+                                                    <td>Microsoft</td>
+                                                    <td>6794 Lorem St.</td>
+                                                    <td>Knoxville</td>
+                                                    <td>Jul 27, 2020</td>
+                                                    <td><button class="btn btn-sm dropdown-toggle more-horizontal"
+                                                            type="button" data-toggle="dropdown" aria-haspopup="true"
+                                                            aria-expanded="false">
+                                                            <span class="text-muted sr-only">Action</span>
+                                                        </button>
+                                                        <div class="dropdown-menu dropdown-menu-right">
+                                                            <a class="dropdown-item" href="#">Edit</a>
+                                                            <a class="dropdown-item" href="#">Remove</a>
+                                                            <a class="dropdown-item" href="#">Assign</a>
+                                                        </div>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td>
+                                                        <div class="custom-control custom-checkbox">
+                                                            <input type="checkbox" class="custom-control-input">
+                                                            <label class="custom-control-label"></label>
+                                                        </div>
+                                                    </td>
+                                                    <td>477</td>
+                                                    <td>Cade Hinton</td>
+                                                    <td>(198) 250-0971</td>
+                                                    <td>Payroll</td>
+                                                    <td>Google</td>
+                                                    <td>Ap #621-2106 Amet Rd.</td>
+                                                    <td>Lo Prado</td>
+                                                    <td>Jun 22, 2019</td>
+                                                    <td><button class="btn btn-sm dropdown-toggle more-horizontal"
+                                                            type="button" data-toggle="dropdown" aria-haspopup="true"
+                                                            aria-expanded="false">
+                                                            <span class="text-muted sr-only">Action</span>
+                                                        </button>
+                                                        <div class="dropdown-menu dropdown-menu-right">
+                                                            <a class="dropdown-item" href="#">Edit</a>
+                                                            <a class="dropdown-item" href="#">Remove</a>
+                                                            <a class="dropdown-item" href="#">Assign</a>
+                                                        </div>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td>
+                                                        <div class="custom-control custom-checkbox">
+                                                            <input type="checkbox" class="custom-control-input">
+                                                            <label class="custom-control-label"></label>
+                                                        </div>
+                                                    </td>
+                                                    <td>493</td>
+                                                    <td>Daquan Arnold</td>
+                                                    <td>(659) 185-0446</td>
+                                                    <td>Finances</td>
+                                                    <td>Chami</td>
+                                                    <td>999-6646 Faucibus Rd.</td>
+                                                    <td>Empoli</td>
+                                                    <td>Nov 5, 2020</td>
+                                                    <td><button class="btn btn-sm dropdown-toggle more-horizontal"
+                                                            type="button" data-toggle="dropdown" aria-haspopup="true"
+                                                            aria-expanded="false">
+                                                            <span class="text-muted sr-only">Action</span>
+                                                        </button>
+                                                        <div class="dropdown-menu dropdown-menu-right">
+                                                            <a class="dropdown-item" href="#">Edit</a>
+                                                            <a class="dropdown-item" href="#">Remove</a>
+                                                            <a class="dropdown-item" href="#">Assign</a>
+                                                        </div>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td>
+                                                        <div class="custom-control custom-checkbox">
+                                                            <input type="checkbox" class="custom-control-input">
+                                                            <label class="custom-control-label"></label>
+                                                        </div>
+                                                    </td>
+                                                    <td>350</td>
+                                                    <td>Aquila Kramer</td>
+                                                    <td>(818) 871-1487</td>
+                                                    <td>Media Relations</td>
+                                                    <td>Google</td>
+                                                    <td>5155 Donec Ave</td>
+                                                    <td>Rewa</td>
+                                                    <td>May 5, 2019</td>
+                                                    <td><button class="btn btn-sm dropdown-toggle more-horizontal"
+                                                            type="button" data-toggle="dropdown" aria-haspopup="true"
+                                                            aria-expanded="false">
+                                                            <span class="text-muted sr-only">Action</span>
+                                                        </button>
+                                                        <div class="dropdown-menu dropdown-menu-right">
+                                                            <a class="dropdown-item" href="#">Edit</a>
+                                                            <a class="dropdown-item" href="#">Remove</a>
+                                                            <a class="dropdown-item" href="#">Assign</a>
+                                                        </div>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td>
+                                                        <div class="custom-control custom-checkbox">
+                                                            <input type="checkbox" class="custom-control-input">
+                                                            <label class="custom-control-label"></label>
+                                                        </div>
+                                                    </td>
+                                                    <td>403</td>
+                                                    <td>Rana Mcknight</td>
+                                                    <td>(243) 205-2734</td>
+                                                    <td>Accounting</td>
+                                                    <td>Finale</td>
+                                                    <td>Ap #236-8034 Imperdiet Street</td>
+                                                    <td>Zutendaal</td>
+                                                    <td>Feb 7, 2020</td>
+                                                    <td><button class="btn btn-sm dropdown-toggle more-horizontal"
+                                                            type="button" data-toggle="dropdown" aria-haspopup="true"
+                                                            aria-expanded="false">
+                                                            <span class="text-muted sr-only">Action</span>
+                                                        </button>
+                                                        <div class="dropdown-menu dropdown-menu-right">
+                                                            <a class="dropdown-item" href="#">Edit</a>
+                                                            <a class="dropdown-item" href="#">Remove</a>
+                                                            <a class="dropdown-item" href="#">Assign</a>
+                                                        </div>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td>
+                                                        <div class="custom-control custom-checkbox">
+                                                            <input type="checkbox" class="custom-control-input">
+                                                            <label class="custom-control-label"></label>
+                                                        </div>
+                                                    </td>
+                                                    <td>413</td>
+                                                    <td>Kareem Sweet</td>
+                                                    <td>(260) 159-8343</td>
+                                                    <td>Legal Department</td>
+                                                    <td>Macromedia</td>
+                                                    <td>566-2188 Libero. Road</td>
+                                                    <td>Nankana Sahib</td>
+                                                    <td>Sep 1, 2020</td>
+                                                    <td><button class="btn btn-sm dropdown-toggle more-horizontal"
+                                                            type="button" data-toggle="dropdown" aria-haspopup="true"
+                                                            aria-expanded="false">
+                                                            <span class="text-muted sr-only">Action</span>
+                                                        </button>
+                                                        <div class="dropdown-menu dropdown-menu-right">
+                                                            <a class="dropdown-item" href="#">Edit</a>
+                                                            <a class="dropdown-item" href="#">Remove</a>
+                                                            <a class="dropdown-item" href="#">Assign</a>
+                                                        </div>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td>
+                                                        <div class="custom-control custom-checkbox">
+                                                            <input type="checkbox" class="custom-control-input">
+                                                            <label class="custom-control-label"></label>
+                                                        </div>
+                                                    </td>
+                                                    <td>443</td>
+                                                    <td>Jonah Chavez</td>
+                                                    <td>(671) 419-1034</td>
+                                                    <td>Customer Service</td>
+                                                    <td>Yahoo</td>
+                                                    <td>8579 Sagittis Rd.</td>
+                                                    <td>Sydney</td>
+                                                    <td>Dec 4, 2019</td>
+                                                    <td><button class="btn btn-sm dropdown-toggle more-horizontal"
+                                                            type="button" data-toggle="dropdown" aria-haspopup="true"
+                                                            aria-expanded="false">
+                                                            <span class="text-muted sr-only">Action</span>
+                                                        </button>
+                                                        <div class="dropdown-menu dropdown-menu-right">
+                                                            <a class="dropdown-item" href="#">Edit</a>
+                                                            <a class="dropdown-item" href="#">Remove</a>
+                                                            <a class="dropdown-item" href="#">Assign</a>
+                                                        </div>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td>
+                                                        <div class="custom-control custom-checkbox">
+                                                            <input type="checkbox" class="custom-control-input">
+                                                            <label class="custom-control-label"></label>
+                                                        </div>
+                                                    </td>
+                                                    <td>336</td>
+                                                    <td>Tanek Decker</td>
+                                                    <td>(402) 292-6679</td>
+                                                    <td>Legal Department</td>
+                                                    <td>Sibelius</td>
+                                                    <td>2201 Libero Av.</td>
+                                                    <td>Bida</td>
+                                                    <td>Feb 22, 2020</td>
+                                                    <td><button class="btn btn-sm dropdown-toggle more-horizontal"
+                                                            type="button" data-toggle="dropdown" aria-haspopup="true"
+                                                            aria-expanded="false">
+                                                            <span class="text-muted sr-only">Action</span>
+                                                        </button>
+                                                        <div class="dropdown-menu dropdown-menu-right">
+                                                            <a class="dropdown-item" href="#">Edit</a>
+                                                            <a class="dropdown-item" href="#">Remove</a>
+                                                            <a class="dropdown-item" href="#">Assign</a>
+                                                        </div>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td>
+                                                        <div class="custom-control custom-checkbox">
+                                                            <input type="checkbox" class="custom-control-input">
+                                                            <label class="custom-control-label"></label>
+                                                        </div>
+                                                    </td>
+                                                    <td>314</td>
+                                                    <td>Oleg Mckay</td>
+                                                    <td>(634) 227-2714</td>
+                                                    <td>Research and Development</td>
+                                                    <td>Apple Systems</td>
+                                                    <td>P.O. Box 600, 1974 Arcu. Street</td>
+                                                    <td>Ancarano</td>
+                                                    <td>Feb 28, 2020</td>
+                                                    <td><button class="btn btn-sm dropdown-toggle more-horizontal"
+                                                            type="button" data-toggle="dropdown" aria-haspopup="true"
+                                                            aria-expanded="false">
+                                                            <span class="text-muted sr-only">Action</span>
+                                                        </button>
+                                                        <div class="dropdown-menu dropdown-menu-right">
+                                                            <a class="dropdown-item" href="#">Edit</a>
+                                                            <a class="dropdown-item" href="#">Remove</a>
+                                                            <a class="dropdown-item" href="#">Assign</a>
+                                                        </div>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td>
+                                                        <div class="custom-control custom-checkbox">
+                                                            <input type="checkbox" class="custom-control-input">
+                                                            <label class="custom-control-label"></label>
+                                                        </div>
+                                                    </td>
+                                                    <td>426</td>
+                                                    <td>Driscoll Kelly</td>
+                                                    <td>(948) 436-4534</td>
+                                                    <td>Accounting</td>
+                                                    <td>Sibelius</td>
+                                                    <td>Ap #784-6075 Fusce Avenue</td>
+                                                    <td>Sacramento</td>
+                                                    <td>Sep 9, 2020</td>
+                                                    <td><button class="btn btn-sm dropdown-toggle more-horizontal"
+                                                            type="button" data-toggle="dropdown" aria-haspopup="true"
+                                                            aria-expanded="false">
+                                                            <span class="text-muted sr-only">Action</span>
+                                                        </button>
+                                                        <div class="dropdown-menu dropdown-menu-right">
+                                                            <a class="dropdown-item" href="#">Edit</a>
+                                                            <a class="dropdown-item" href="#">Remove</a>
+                                                            <a class="dropdown-item" href="#">Assign</a>
+                                                        </div>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td>
+                                                        <div class="custom-control custom-checkbox">
+                                                            <input type="checkbox" class="custom-control-input">
+                                                            <label class="custom-control-label"></label>
+                                                        </div>
+                                                    </td>
+                                                    <td>479</td>
+                                                    <td>Kane Tillman</td>
+                                                    <td>(762) 298-8478</td>
+                                                    <td>Payroll</td>
+                                                    <td>Macromedia</td>
+                                                    <td>P.O. Box 119, 519 Sodales St.</td>
+                                                    <td>Hillsboro</td>
+                                                    <td>Apr 16, 2021</td>
+                                                    <td><button class="btn btn-sm dropdown-toggle more-horizontal"
+                                                            type="button" data-toggle="dropdown" aria-haspopup="true"
+                                                            aria-expanded="false">
+                                                            <span class="text-muted sr-only">Action</span>
+                                                        </button>
+                                                        <div class="dropdown-menu dropdown-menu-right">
+                                                            <a class="dropdown-item" href="#">Edit</a>
+                                                            <a class="dropdown-item" href="#">Remove</a>
+                                                            <a class="dropdown-item" href="#">Assign</a>
+                                                        </div>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td>
+                                                        <div class="custom-control custom-checkbox">
+                                                            <input type="checkbox" class="custom-control-input">
+                                                            <label class="custom-control-label"></label>
+                                                        </div>
+                                                    </td>
+                                                    <td>341</td>
+                                                    <td>Zorita Moran</td>
+                                                    <td>(840) 554-9481</td>
+                                                    <td>Accounting</td>
+                                                    <td>Lycos</td>
+                                                    <td>P.O. Box 290, 9398 Quam Rd.</td>
+                                                    <td>Viddalba</td>
+                                                    <td>Jun 16, 2019</td>
+                                                    <td><button class="btn btn-sm dropdown-toggle more-horizontal"
+                                                            type="button" data-toggle="dropdown" aria-haspopup="true"
+                                                            aria-expanded="false">
+                                                            <span class="text-muted sr-only">Action</span>
+                                                        </button>
+                                                        <div class="dropdown-menu dropdown-menu-right">
+                                                            <a class="dropdown-item" href="#">Edit</a>
+                                                            <a class="dropdown-item" href="#">Remove</a>
+                                                            <a class="dropdown-item" href="#">Assign</a>
+                                                        </div>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td>
+                                                        <div class="custom-control custom-checkbox">
+                                                            <input type="checkbox" class="custom-control-input">
+                                                            <label class="custom-control-label"></label>
+                                                        </div>
+                                                    </td>
+                                                    <td>322</td>
+                                                    <td>Alea Winters</td>
+                                                    <td>(449) 757-3194</td>
+                                                    <td>Customer Service</td>
+                                                    <td>Sibelius</td>
+                                                    <td>1999 Mus. Street</td>
+                                                    <td>Eastbourne</td>
+                                                    <td>Apr 5, 2020</td>
+                                                    <td><button class="btn btn-sm dropdown-toggle more-horizontal"
+                                                            type="button" data-toggle="dropdown" aria-haspopup="true"
+                                                            aria-expanded="false">
+                                                            <span class="text-muted sr-only">Action</span>
+                                                        </button>
+                                                        <div class="dropdown-menu dropdown-menu-right">
+                                                            <a class="dropdown-item" href="#">Edit</a>
+                                                            <a class="dropdown-item" href="#">Remove</a>
+                                                            <a class="dropdown-item" href="#">Assign</a>
+                                                        </div>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td>
+                                                        <div class="custom-control custom-checkbox">
+                                                            <input type="checkbox" class="custom-control-input">
+                                                            <label class="custom-control-label"></label>
+                                                        </div>
+                                                    </td>
+                                                    <td>455</td>
+                                                    <td>Mohammad Whitfield</td>
+                                                    <td>(550) 107-4320</td>
+                                                    <td>Accounting</td>
+                                                    <td>Macromedia</td>
+                                                    <td>P.O. Box 790, 9677 Purus Rd.</td>
+                                                    <td>Deline</td>
+                                                    <td>Nov 21, 2020</td>
+                                                    <td><button class="btn btn-sm dropdown-toggle more-horizontal"
+                                                            type="button" data-toggle="dropdown" aria-haspopup="true"
+                                                            aria-expanded="false">
+                                                            <span class="text-muted sr-only">Action</span>
+                                                        </button>
+                                                        <div class="dropdown-menu dropdown-menu-right">
+                                                            <a class="dropdown-item" href="#">Edit</a>
+                                                            <a class="dropdown-item" href="#">Remove</a>
+                                                            <a class="dropdown-item" href="#">Assign</a>
+                                                        </div>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td>
+                                                        <div class="custom-control custom-checkbox">
+                                                            <input type="checkbox" class="custom-control-input">
+                                                            <label class="custom-control-label"></label>
+                                                        </div>
+                                                    </td>
+                                                    <td>294</td>
+                                                    <td>Aquila James</td>
+                                                    <td>(944) 277-4831</td>
+                                                    <td>Quality Assurance</td>
+                                                    <td>Apple Systems</td>
+                                                    <td>P.O. Box 306, 6025 Justo Rd.</td>
+                                                    <td>Offida</td>
+                                                    <td>Jul 18, 2019</td>
+                                                    <td><button class="btn btn-sm dropdown-toggle more-horizontal"
+                                                            type="button" data-toggle="dropdown" aria-haspopup="true"
+                                                            aria-expanded="false">
+                                                            <span class="text-muted sr-only">Action</span>
+                                                        </button>
+                                                        <div class="dropdown-menu dropdown-menu-right">
+                                                            <a class="dropdown-item" href="#">Edit</a>
+                                                            <a class="dropdown-item" href="#">Remove</a>
+                                                            <a class="dropdown-item" href="#">Assign</a>
+                                                        </div>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td>
+                                                        <div class="custom-control custom-checkbox">
+                                                            <input type="checkbox" class="custom-control-input">
+                                                            <label class="custom-control-label"></label>
+                                                        </div>
+                                                    </td>
+                                                    <td>206</td>
+                                                    <td>Mia Madden</td>
+                                                    <td>(554) 422-4590</td>
+                                                    <td>Payroll</td>
+                                                    <td>Macromedia</td>
+                                                    <td>892-7709 Eget St.</td>
+                                                    <td>Aachen</td>
+                                                    <td>Aug 26, 2019</td>
+                                                    <td><button class="btn btn-sm dropdown-toggle more-horizontal"
+                                                            type="button" data-toggle="dropdown" aria-haspopup="true"
+                                                            aria-expanded="false">
+                                                            <span class="text-muted sr-only">Action</span>
+                                                        </button>
+                                                        <div class="dropdown-menu dropdown-menu-right">
+                                                            <a class="dropdown-item" href="#">Edit</a>
+                                                            <a class="dropdown-item" href="#">Remove</a>
+                                                            <a class="dropdown-item" href="#">Assign</a>
+                                                        </div>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td>
+                                                        <div class="custom-control custom-checkbox">
+                                                            <input type="checkbox" class="custom-control-input">
+                                                            <label class="custom-control-label"></label>
+                                                        </div>
+                                                    </td>
+                                                    <td>345</td>
+                                                    <td>Nasim Smith</td>
+                                                    <td>(750) 696-9160</td>
+                                                    <td>Customer Service</td>
+                                                    <td>Chami</td>
+                                                    <td>6755 Ultrices Av.</td>
+                                                    <td>Innisfail</td>
+                                                    <td>Jan 18, 2020</td>
+                                                    <td><button class="btn btn-sm dropdown-toggle more-horizontal"
+                                                            type="button" data-toggle="dropdown" aria-haspopup="true"
+                                                            aria-expanded="false">
+                                                            <span class="text-muted sr-only">Action</span>
+                                                        </button>
+                                                        <div class="dropdown-menu dropdown-menu-right">
+                                                            <a class="dropdown-item" href="#">Edit</a>
+                                                            <a class="dropdown-item" href="#">Remove</a>
+                                                            <a class="dropdown-item" href="#">Assign</a>
+                                                        </div>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td>
+                                                        <div class="custom-control custom-checkbox">
+                                                            <input type="checkbox" class="custom-control-input">
+                                                            <label class="custom-control-label"></label>
+                                                        </div>
+                                                    </td>
+                                                    <td>358</td>
+                                                    <td>Grady Tyson</td>
+                                                    <td>(967) 301-3938</td>
+                                                    <td>Research and Development</td>
+                                                    <td>Sibelius</td>
+                                                    <td>6927 Ante. Avenue</td>
+                                                    <td>Piscinas</td>
+                                                    <td>Feb 13, 2020</td>
+                                                    <td><button class="btn btn-sm dropdown-toggle more-horizontal"
+                                                            type="button" data-toggle="dropdown" aria-haspopup="true"
+                                                            aria-expanded="false">
+                                                            <span class="text-muted sr-only">Action</span>
+                                                        </button>
+                                                        <div class="dropdown-menu dropdown-menu-right">
+                                                            <a class="dropdown-item" href="#">Edit</a>
+                                                            <a class="dropdown-item" href="#">Remove</a>
+                                                            <a class="dropdown-item" href="#">Assign</a>
+                                                        </div>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td>
+                                                        <div class="custom-control custom-checkbox">
+                                                            <input type="checkbox" class="custom-control-input">
+                                                            <label class="custom-control-label"></label>
+                                                        </div>
+                                                    </td>
+                                                    <td>338</td>
+                                                    <td>Allen Swanson</td>
+                                                    <td>(326) 862-2675</td>
+                                                    <td>Legal Department</td>
+                                                    <td>Microsoft</td>
+                                                    <td>810-128 Libero. Rd.</td>
+                                                    <td>Desamparados</td>
+                                                    <td>Feb 2, 2020</td>
+                                                    <td><button class="btn btn-sm dropdown-toggle more-horizontal"
+                                                            type="button" data-toggle="dropdown" aria-haspopup="true"
+                                                            aria-expanded="false">
+                                                            <span class="text-muted sr-only">Action</span>
+                                                        </button>
+                                                        <div class="dropdown-menu dropdown-menu-right">
+                                                            <a class="dropdown-item" href="#">Edit</a>
+                                                            <a class="dropdown-item" href="#">Remove</a>
+                                                            <a class="dropdown-item" href="#">Assign</a>
+                                                        </div>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td>
+                                                        <div class="custom-control custom-checkbox">
+                                                            <input type="checkbox" class="custom-control-input">
+                                                            <label class="custom-control-label"></label>
+                                                        </div>
+                                                    </td>
+                                                    <td>429</td>
+                                                    <td>Cameran Phelps</td>
+                                                    <td>(292) 150-9250</td>
+                                                    <td>Tech Support</td>
+                                                    <td>Finale</td>
+                                                    <td>536 Aenean Rd.</td>
+                                                    <td>Proddatur</td>
+                                                    <td>Nov 5, 2020</td>
+                                                    <td><button class="btn btn-sm dropdown-toggle more-horizontal"
+                                                            type="button" data-toggle="dropdown" aria-haspopup="true"
+                                                            aria-expanded="false">
+                                                            <span class="text-muted sr-only">Action</span>
+                                                        </button>
+                                                        <div class="dropdown-menu dropdown-menu-right">
+                                                            <a class="dropdown-item" href="#">Edit</a>
+                                                            <a class="dropdown-item" href="#">Remove</a>
+                                                            <a class="dropdown-item" href="#">Assign</a>
+                                                        </div>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td>
+                                                        <div class="custom-control custom-checkbox">
+                                                            <input type="checkbox" class="custom-control-input">
+                                                            <label class="custom-control-label"></label>
+                                                        </div>
+                                                    </td>
+                                                    <td>305</td>
+                                                    <td>Palmer Maldonado</td>
+                                                    <td>(687) 671-7597</td>
+                                                    <td>Sales and Marketing</td>
+                                                    <td>Sibelius</td>
+                                                    <td>570 Feugiat. Ave</td>
+                                                    <td>Leominster</td>
+                                                    <td>Jul 28, 2020</td>
+                                                    <td><button class="btn btn-sm dropdown-toggle more-horizontal"
+                                                            type="button" data-toggle="dropdown" aria-haspopup="true"
+                                                            aria-expanded="false">
+                                                            <span class="text-muted sr-only">Action</span>
+                                                        </button>
+                                                        <div class="dropdown-menu dropdown-menu-right">
+                                                            <a class="dropdown-item" href="#">Edit</a>
+                                                            <a class="dropdown-item" href="#">Remove</a>
+                                                            <a class="dropdown-item" href="#">Assign</a>
+                                                        </div>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td>
+                                                        <div class="custom-control custom-checkbox">
+                                                            <input type="checkbox" class="custom-control-input">
+                                                            <label class="custom-control-label"></label>
+                                                        </div>
+                                                    </td>
+                                                    <td>286</td>
+                                                    <td>Russell Simon</td>
+                                                    <td>(499) 664-6600</td>
+                                                    <td>Public Relations</td>
+                                                    <td>Adobe</td>
+                                                    <td>Ap #974-1629 Placerat, Ave</td>
+                                                    <td>Coimbatore</td>
+                                                    <td>Oct 5, 2019</td>
+                                                    <td><button class="btn btn-sm dropdown-toggle more-horizontal"
+                                                            type="button" data-toggle="dropdown" aria-haspopup="true"
+                                                            aria-expanded="false">
+                                                            <span class="text-muted sr-only">Action</span>
+                                                        </button>
+                                                        <div class="dropdown-menu dropdown-menu-right">
+                                                            <a class="dropdown-item" href="#">Edit</a>
+                                                            <a class="dropdown-item" href="#">Remove</a>
+                                                            <a class="dropdown-item" href="#">Assign</a>
+                                                        </div>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td>
+                                                        <div class="custom-control custom-checkbox">
+                                                            <input type="checkbox" class="custom-control-input">
+                                                            <label class="custom-control-label"></label>
+                                                        </div>
+                                                    </td>
+                                                    <td>400</td>
+                                                    <td>Tatum Benton</td>
+                                                    <td>(844) 240-9223</td>
+                                                    <td>Public Relations</td>
+                                                    <td>Borland</td>
+                                                    <td>5639 Inceptos Road</td>
+                                                    <td>Cedar Rapids</td>
+                                                    <td>Jan 5, 2020</td>
+                                                    <td><button class="btn btn-sm dropdown-toggle more-horizontal"
+                                                            type="button" data-toggle="dropdown" aria-haspopup="true"
+                                                            aria-expanded="false">
+                                                            <span class="text-muted sr-only">Action</span>
+                                                        </button>
+                                                        <div class="dropdown-menu dropdown-menu-right">
+                                                            <a class="dropdown-item" href="#">Edit</a>
+                                                            <a class="dropdown-item" href="#">Remove</a>
+                                                            <a class="dropdown-item" href="#">Assign</a>
+                                                        </div>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td>
+                                                        <div class="custom-control custom-checkbox">
+                                                            <input type="checkbox" class="custom-control-input">
+                                                            <label class="custom-control-label"></label>
+                                                        </div>
+                                                    </td>
+                                                    <td>493</td>
+                                                    <td>Arden Harrington</td>
+                                                    <td>(380) 763-0890</td>
+                                                    <td>Quality Assurance</td>
+                                                    <td>Altavista</td>
+                                                    <td>P.O. Box 485, 2533 Tincidunt Road</td>
+                                                    <td>Central Jakarta</td>
+                                                    <td>Feb 29, 2020</td>
+                                                    <td><button class="btn btn-sm dropdown-toggle more-horizontal"
+                                                            type="button" data-toggle="dropdown" aria-haspopup="true"
+                                                            aria-expanded="false">
+                                                            <span class="text-muted sr-only">Action</span>
+                                                        </button>
+                                                        <div class="dropdown-menu dropdown-menu-right">
+                                                            <a class="dropdown-item" href="#">Edit</a>
+                                                            <a class="dropdown-item" href="#">Remove</a>
+                                                            <a class="dropdown-item" href="#">Assign</a>
+                                                        </div>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td>
+                                                        <div class="custom-control custom-checkbox">
+                                                            <input type="checkbox" class="custom-control-input">
+                                                            <label class="custom-control-label"></label>
+                                                        </div>
+                                                    </td>
+                                                    <td>419</td>
+                                                    <td>Hayes Fitzpatrick</td>
+                                                    <td>(756) 216-2498</td>
+                                                    <td>Customer Relations</td>
+                                                    <td>Lavasoft</td>
+                                                    <td>755-4189 Auctor, Avenue</td>
+                                                    <td>Frankfort</td>
+                                                    <td>Jun 18, 2019</td>
+                                                    <td><button class="btn btn-sm dropdown-toggle more-horizontal"
+                                                            type="button" data-toggle="dropdown" aria-haspopup="true"
+                                                            aria-expanded="false">
+                                                            <span class="text-muted sr-only">Action</span>
+                                                        </button>
+                                                        <div class="dropdown-menu dropdown-menu-right">
+                                                            <a class="dropdown-item" href="#">Edit</a>
+                                                            <a class="dropdown-item" href="#">Remove</a>
+                                                            <a class="dropdown-item" href="#">Assign</a>
+                                                        </div>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td>
+                                                        <div class="custom-control custom-checkbox">
+                                                            <input type="checkbox" class="custom-control-input">
+                                                            <label class="custom-control-label"></label>
+                                                        </div>
+                                                    </td>
+                                                    <td>203</td>
+                                                    <td>Barbara Charles</td>
+                                                    <td>(487) 840-1443</td>
+                                                    <td>Research and Development</td>
+                                                    <td>Microsoft</td>
+                                                    <td>217-2734 Rhoncus Street</td>
+                                                    <td>Fogliano Redipuglia</td>
+                                                    <td>Jul 17, 2020</td>
+                                                    <td><button class="btn btn-sm dropdown-toggle more-horizontal"
+                                                            type="button" data-toggle="dropdown" aria-haspopup="true"
+                                                            aria-expanded="false">
+                                                            <span class="text-muted sr-only">Action</span>
+                                                        </button>
+                                                        <div class="dropdown-menu dropdown-menu-right">
+                                                            <a class="dropdown-item" href="#">Edit</a>
+                                                            <a class="dropdown-item" href="#">Remove</a>
+                                                            <a class="dropdown-item" href="#">Assign</a>
+                                                        </div>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td>
+                                                        <div class="custom-control custom-checkbox">
+                                                            <input type="checkbox" class="custom-control-input">
+                                                            <label class="custom-control-label"></label>
+                                                        </div>
+                                                    </td>
+                                                    <td>443</td>
+                                                    <td>Kenyon Glover</td>
+                                                    <td>(593) 822-4946</td>
+                                                    <td>Sales and Marketing</td>
+                                                    <td>Adobe</td>
+                                                    <td>3615 Blandit St.</td>
+                                                    <td>San Bernardo</td>
+                                                    <td>Dec 11, 2020</td>
+                                                    <td><button class="btn btn-sm dropdown-toggle more-horizontal"
+                                                            type="button" data-toggle="dropdown" aria-haspopup="true"
+                                                            aria-expanded="false">
+                                                            <span class="text-muted sr-only">Action</span>
+                                                        </button>
+                                                        <div class="dropdown-menu dropdown-menu-right">
+                                                            <a class="dropdown-item" href="#">Edit</a>
+                                                            <a class="dropdown-item" href="#">Remove</a>
+                                                            <a class="dropdown-item" href="#">Assign</a>
+                                                        </div>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td>
+                                                        <div class="custom-control custom-checkbox">
+                                                            <input type="checkbox" class="custom-control-input">
+                                                            <label class="custom-control-label"></label>
+                                                        </div>
+                                                    </td>
+                                                    <td>346</td>
+                                                    <td>Evan Figueroa</td>
+                                                    <td>(803) 974-4759</td>
+                                                    <td>Payroll</td>
+                                                    <td>Yahoo</td>
+                                                    <td>P.O. Box 801, 9864 Lobortis Ave</td>
+                                                    <td>Santa Bárbara</td>
+                                                    <td>Jun 4, 2020</td>
+                                                    <td><button class="btn btn-sm dropdown-toggle more-horizontal"
+                                                            type="button" data-toggle="dropdown" aria-haspopup="true"
+                                                            aria-expanded="false">
+                                                            <span class="text-muted sr-only">Action</span>
+                                                        </button>
+                                                        <div class="dropdown-menu dropdown-menu-right">
+                                                            <a class="dropdown-item" href="#">Edit</a>
+                                                            <a class="dropdown-item" href="#">Remove</a>
+                                                            <a class="dropdown-item" href="#">Assign</a>
+                                                        </div>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td>
+                                                        <div class="custom-control custom-checkbox">
+                                                            <input type="checkbox" class="custom-control-input">
+                                                            <label class="custom-control-label"></label>
+                                                        </div>
+                                                    </td>
+                                                    <td>237</td>
+                                                    <td>Xavier Riley</td>
+                                                    <td>(135) 789-4714</td>
+                                                    <td>Sales and Marketing</td>
+                                                    <td>Macromedia</td>
+                                                    <td>Ap #317-3617 Nulla Av.</td>
+                                                    <td>Castor</td>
+                                                    <td>Apr 23, 2021</td>
+                                                    <td><button class="btn btn-sm dropdown-toggle more-horizontal"
+                                                            type="button" data-toggle="dropdown" aria-haspopup="true"
+                                                            aria-expanded="false">
+                                                            <span class="text-muted sr-only">Action</span>
+                                                        </button>
+                                                        <div class="dropdown-menu dropdown-menu-right">
+                                                            <a class="dropdown-item" href="#">Edit</a>
+                                                            <a class="dropdown-item" href="#">Remove</a>
+                                                            <a class="dropdown-item" href="#">Assign</a>
+                                                        </div>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td>
+                                                        <div class="custom-control custom-checkbox">
+                                                            <input type="checkbox" class="custom-control-input">
+                                                            <label class="custom-control-label"></label>
+                                                        </div>
+                                                    </td>
+                                                    <td>497</td>
+                                                    <td>Ray Hess</td>
+                                                    <td>(297) 183-1287</td>
+                                                    <td>Payroll</td>
+                                                    <td>Borland</td>
+                                                    <td>9049 Duis St.</td>
+                                                    <td>Basingstoke</td>
+                                                    <td>Dec 2, 2019</td>
+                                                    <td><button class="btn btn-sm dropdown-toggle more-horizontal"
+                                                            type="button" data-toggle="dropdown" aria-haspopup="true"
+                                                            aria-expanded="false">
+                                                            <span class="text-muted sr-only">Action</span>
+                                                        </button>
+                                                        <div class="dropdown-menu dropdown-menu-right">
+                                                            <a class="dropdown-item" href="#">Edit</a>
+                                                            <a class="dropdown-item" href="#">Remove</a>
+                                                            <a class="dropdown-item" href="#">Assign</a>
+                                                        </div>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td>
+                                                        <div class="custom-control custom-checkbox">
+                                                            <input type="checkbox" class="custom-control-input">
+                                                            <label class="custom-control-label"></label>
+                                                        </div>
+                                                    </td>
+                                                    <td>368</td>
+                                                    <td>Renee Wolf</td>
+                                                    <td>(734) 594-1676</td>
+                                                    <td>Asset Management</td>
+                                                    <td>Lycos</td>
+                                                    <td>Ap #939-7635 Quisque Road</td>
+                                                    <td>Squillace</td>
+                                                    <td>Oct 2, 2020</td>
+                                                    <td><button class="btn btn-sm dropdown-toggle more-horizontal"
+                                                            type="button" data-toggle="dropdown" aria-haspopup="true"
+                                                            aria-expanded="false">
+                                                            <span class="text-muted sr-only">Action</span>
+                                                        </button>
+                                                        <div class="dropdown-menu dropdown-menu-right">
+                                                            <a class="dropdown-item" href="#">Edit</a>
+                                                            <a class="dropdown-item" href="#">Remove</a>
+                                                            <a class="dropdown-item" href="#">Assign</a>
+                                                        </div>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td>
+                                                        <div class="custom-control custom-checkbox">
+                                                            <input type="checkbox" class="custom-control-input">
+                                                            <label class="custom-control-label"></label>
+                                                        </div>
+                                                    </td>
+                                                    <td>228</td>
+                                                    <td>Caldwell White</td>
+                                                    <td>(763) 192-7853</td>
+                                                    <td>Payroll</td>
+                                                    <td>Yahoo</td>
+                                                    <td>146 Integer Street</td>
+                                                    <td>Newark</td>
+                                                    <td>Mar 9, 2020</td>
+                                                    <td><button class="btn btn-sm dropdown-toggle more-horizontal"
+                                                            type="button" data-toggle="dropdown" aria-haspopup="true"
+                                                            aria-expanded="false">
+                                                            <span class="text-muted sr-only">Action</span>
+                                                        </button>
+                                                        <div class="dropdown-menu dropdown-menu-right">
+                                                            <a class="dropdown-item" href="#">Edit</a>
+                                                            <a class="dropdown-item" href="#">Remove</a>
+                                                            <a class="dropdown-item" href="#">Assign</a>
+                                                        </div>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td>
+                                                        <div class="custom-control custom-checkbox">
+                                                            <input type="checkbox" class="custom-control-input">
+                                                            <label class="custom-control-label"></label>
+                                                        </div>
+                                                    </td>
+                                                    <td>247</td>
+                                                    <td>Lance Bush</td>
+                                                    <td>(197) 616-3571</td>
+                                                    <td>Finances</td>
+                                                    <td>Lavasoft</td>
+                                                    <td>P.O. Box 377, 2374 Pellentesque. Road</td>
+                                                    <td>Kapuskasing</td>
+                                                    <td>May 11, 2019</td>
+                                                    <td><button class="btn btn-sm dropdown-toggle more-horizontal"
+                                                            type="button" data-toggle="dropdown" aria-haspopup="true"
+                                                            aria-expanded="false">
+                                                            <span class="text-muted sr-only">Action</span>
+                                                        </button>
+                                                        <div class="dropdown-menu dropdown-menu-right">
+                                                            <a class="dropdown-item" href="#">Edit</a>
+                                                            <a class="dropdown-item" href="#">Remove</a>
+                                                            <a class="dropdown-item" href="#">Assign</a>
+                                                        </div>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td>
+                                                        <div class="custom-control custom-checkbox">
+                                                            <input type="checkbox" class="custom-control-input">
+                                                            <label class="custom-control-label"></label>
+                                                        </div>
+                                                    </td>
+                                                    <td>427</td>
+                                                    <td>Clark Dennis</td>
+                                                    <td>(239) 172-7907</td>
+                                                    <td>Human Resources</td>
+                                                    <td>Finale</td>
+                                                    <td>Ap #978-3375 Adipiscing Av.</td>
+                                                    <td>High Level</td>
+                                                    <td>Sep 16, 2020</td>
+                                                    <td><button class="btn btn-sm dropdown-toggle more-horizontal"
+                                                            type="button" data-toggle="dropdown" aria-haspopup="true"
+                                                            aria-expanded="false">
+                                                            <span class="text-muted sr-only">Action</span>
+                                                        </button>
+                                                        <div class="dropdown-menu dropdown-menu-right">
+                                                            <a class="dropdown-item" href="#">Edit</a>
+                                                            <a class="dropdown-item" href="#">Remove</a>
+                                                            <a class="dropdown-item" href="#">Assign</a>
+                                                        </div>
+                                                    </td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div> <!-- simple table -->
+                        </div> <!-- end section -->
+
+                        <div class="row my-4">
+                            <div class="col-12">
+                                <h2 class="mb-2 page-title">
+                                    <i class="fe fe-heart mr-2"></i>Centro de Información Médica
+                                </h2>
+                                <p class="card-text">Portal especializado para el acceso y gestión del historial médico
+                                    completo.
+                                    El personal médico autorizado puede consultar diagnósticos, tratamientos, resultados
+                                    de laboratorio
+                                    y realizar el seguimiento integral de la evolución de cada paciente en el sistema
+                                    PrediSalud.
+                                </p>
+                            </div>
+                        </div>
+
+                        <!-- Medical History Section -->
+                        <div class="row my-4">
+                            <div class="col-md-12">
+                                <div class="card shadow">
+                                    <div class="card-header">
+                                        <h5 class="mb-0">
+                                            <i class="fe fe-activity mr-2"></i>Historial Médico Completo
+                                        </h5>
+                                        <p class="card-text small text-muted mb-0">Acceso detallado al historial médico
+                                            de pacientes, consultas, diagnósticos y tratamientos</p>
+                                    </div>
+                                    <div class="card-body">
+                                        <!-- Patient Search Filter -->
+                                        <div class="row mb-4">
+                                            <div class="col-md-4">
+                                                <div class="form-group">
+                                                    <label for="patientFilter">Buscar Paciente</label>
+                                                    <input type="text" class="form-control" id="patientFilter"
+                                                        placeholder="Nombre o ID del paciente">
+                                                </div>
+                                            </div>
+                                            <div class="col-md-3">
+                                                <div class="form-group">
+                                                    <label for="dateFilter">Fecha</label>
+                                                    <input type="date" class="form-control" id="dateFilter">
+                                                </div>
+                                            </div>
+                                            <div class="col-md-3">
+                                                <div class="form-group">
+                                                    <label for="statusFilter">Grupo de Riesgo</label>
+                                                    <select class="form-control" id="statusFilter">
+                                                        <option value="">Todos</option>
+                                                        <option value="alto">Alto Riesgo</option>
+                                                        <option value="medio">Riesgo Medio</option>
+                                                        <option value="bajo">Bajo Riesgo</option>
+                                                    </select>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-2">
+                                                <div class="form-group">
+                                                    <label>&nbsp;</label>
+                                                    <button class="btn btn-primary btn-block">
+                                                        <i class="fe fe-search"></i> Buscar
+                                                    </button>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <!-- Medical History Table -->
+                                        <table class="table table-bordered table-hover datatables"
+                                            id="medicalHistoryTable">
+                                            <thead class="thead-dark">
+                                                <tr>
+                                                    <th>ID Paciente</th>
+                                                    <th>Nombre Completo</th>
+                                                    <th>Fecha Consulta</th>
+                                                    <th>Diagnóstico</th>
+                                                    <th>Grupo de Riesgo</th>
+                                                    <th>Médico Tratante</th>
+                                                    <th>Estado</th>
+                                                    <th>Acciones</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <tr>
+                                                    <td><strong>#PAC001</strong></td>
+                                                    <td>
+                                                        <div class="d-flex align-items-center">
+                                                            <div>
+                                                                <strong>María García López</strong>
+                                                                <br><small class="text-muted">F, 45 años</small>
+                                                            </div>
+                                                        </div>
+                                                    </td>
+                                                    <td>15/03/2024</td>
+                                                    <td>
+                                                        <span class="badge badge-warning">Diabetes Tipo 2</span>
+                                                        <br><small class="text-muted">Hipertensión arterial</small>
+                                                    </td>
+                                                    <td><span class="badge badge-danger">Alto Riesgo</span></td>
+                                                    <td>Dr. Juan Martínez</td>
+                                                    <td><span class="badge badge-success">En Tratamiento</span></td>
+                                                    <td>
+                                                        <div class="btn-group">
+                                                            <button class="btn btn-sm btn-outline-primary"
+                                                                data-toggle="tooltip" title="Ver Historial">
+                                                                <i class="fe fe-eye"></i>
+                                                            </button>
+                                                            <button class="btn btn-sm btn-outline-info"
+                                                                data-toggle="tooltip" title="Resultados Lab">
+                                                                <i class="fe fe-activity"></i>
+                                                            </button>
+                                                            <button class="btn btn-sm btn-outline-success"
+                                                                data-toggle="tooltip" title="Editar">
+                                                                <i class="fe fe-edit"></i>
+                                                            </button>
+                                                        </div>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td><strong>#PAC002</strong></td>
+                                                    <td>
+                                                        <div class="d-flex align-items-center">
+                                                            <div>
+                                                                <strong>Carlos Rodríguez Pérez</strong>
+                                                                <br><small class="text-muted">M, 52 años</small>
+                                                            </div>
+                                                        </div>
+                                                    </td>
+                                                    <td>14/03/2024</td>
+                                                    <td>
+                                                        <span class="badge badge-info">Hipertensión</span>
+                                                        <br><small class="text-muted">Control rutinario</small>
+                                                    </td>
+                                                    <td><span class="badge badge-warning">Riesgo Medio</span></td>
+                                                    <td>Dra. Ana Sánchez</td>
+                                                    <td><span class="badge badge-success">Controlado</span></td>
+                                                    <td>
+                                                        <div class="btn-group">
+                                                            <button class="btn btn-sm btn-outline-primary"
+                                                                data-toggle="tooltip" title="Ver Historial">
+                                                                <i class="fe fe-eye"></i>
+                                                            </button>
+                                                            <button class="btn btn-sm btn-outline-info"
+                                                                data-toggle="tooltip" title="Resultados Lab">
+                                                                <i class="fe fe-activity"></i>
+                                                            </button>
+                                                            <button class="btn btn-sm btn-outline-success"
+                                                                data-toggle="tooltip" title="Editar">
+                                                                <i class="fe fe-edit"></i>
+                                                            </button>
+                                                        </div>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td><strong>#PAC003</strong></td>
+                                                    <td>
+                                                        <div class="d-flex align-items-center">
+                                                            <div>
+                                                                <strong>Ana Martín Fernández</strong>
+                                                                <br><small class="text-muted">F, 28 años</small>
+                                                            </div>
+                                                        </div>
+                                                    </td>
+                                                    <td>13/03/2024</td>
+                                                    <td>
+                                                        <span class="badge badge-success">Chequeo General</span>
+                                                        <br><small class="text-muted">Prevención</small>
+                                                    </td>
+                                                    <td><span class="badge badge-success">Bajo Riesgo</span></td>
+                                                    <td>Dr. Luis Torres</td>
+                                                    <td><span class="badge badge-primary">Saludable</span></td>
+                                                    <td>
+                                                        <div class="btn-group">
+                                                            <button class="btn btn-sm btn-outline-primary"
+                                                                data-toggle="tooltip" title="Ver Historial">
+                                                                <i class="fe fe-eye"></i>
+                                                            </button>
+                                                            <button class="btn btn-sm btn-outline-info"
+                                                                data-toggle="tooltip" title="Resultados Lab">
+                                                                <i class="fe fe-activity"></i>
+                                                            </button>
+                                                            <button class="btn btn-sm btn-outline-success"
+                                                                data-toggle="tooltip" title="Editar">
+                                                                <i class="fe fe-edit"></i>
+                                                            </button>
+                                                        </div>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td><strong>#PAC004</strong></td>
+                                                    <td>
+                                                        <div class="d-flex align-items-center">
+                                                            <div>
+                                                                <strong>Pedro López Gómez</strong>
+                                                                <br><small class="text-muted">M, 61 años</small>
+                                                            </div>
+                                                        </div>
+                                                    </td>
+                                                    <td>12/03/2024</td>
+                                                    <td>
+                                                        <span class="badge badge-danger">Cardiopatía</span>
+                                                        <br><small class="text-muted">Diabetes, Obesidad</small>
+                                                    </td>
+                                                    <td><span class="badge badge-danger">Alto Riesgo</span></td>
+                                                    <td>Dr. Roberto Silva</td>
+                                                    <td><span class="badge badge-warning">Seguimiento</span></td>
+                                                    <td>
+                                                        <div class="btn-group">
+                                                            <button class="btn btn-sm btn-outline-primary"
+                                                                data-toggle="tooltip" title="Ver Historial">
+                                                                <i class="fe fe-eye"></i>
+                                                            </button>
+                                                            <button class="btn btn-sm btn-outline-info"
+                                                                data-toggle="tooltip" title="Resultados Lab">
+                                                                <i class="fe fe-activity"></i>
+                                                            </button>
+                                                            <button class="btn btn-sm btn-outline-success"
+                                                                data-toggle="tooltip" title="Editar">
+                                                                <i class="fe fe-edit"></i>
+                                                            </button>
+                                                        </div>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td><strong>#PAC005</strong></td>
+                                                    <td>
+                                                        <div class="d-flex align-items-center">
+                                                            <div>
+                                                                <strong>Laura Jiménez Ruiz</strong>
+                                                                <br><small class="text-muted">F, 38 años</small>
+                                                            </div>
+                                                        </div>
+                                                    </td>
+                                                    <td>11/03/2024</td>
+                                                    <td>
+                                                        <span class="badge badge-warning">Asma Bronquial</span>
+                                                        <br><small class="text-muted">Alergias estacionales</small>
+                                                    </td>
+                                                    <td><span class="badge badge-warning">Riesgo Medio</span></td>
+                                                    <td>Dra. Carmen Vega</td>
+                                                    <td><span class="badge badge-success">Estable</span></td>
+                                                    <td>
+                                                        <div class="btn-group">
+                                                            <button class="btn btn-sm btn-outline-primary"
+                                                                data-toggle="tooltip" title="Ver Historial">
+                                                                <i class="fe fe-eye"></i>
+                                                            </button>
+                                                            <button class="btn btn-sm btn-outline-info"
+                                                                data-toggle="tooltip" title="Resultados Lab">
+                                                                <i class="fe fe-activity"></i>
+                                                            </button>
+                                                            <button class="btn btn-sm btn-outline-success"
+                                                                data-toggle="tooltip" title="Editar">
+                                                                <i class="fe fe-edit"></i>
+                                                            </button>
+                                                        </div>
+                                                    </td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Laboratory Results Section -->
+                        <div class="row my-4">
+                            <div class="col-md-12">
+                                <div class="card shadow">
+                                    <div class="card-header bg-light">
+                                        <h5 class="mb-0">
+                                            <i class="fe fe-clipboard mr-2"></i>Resultados de Laboratorio Recientes
+                                        </h5>
+                                        <p class="card-text small text-muted mb-0">Seguimiento de pruebas médicas y
+                                            resultados de laboratorio</p>
+                                    </div>
+                                    <div class="card-body">
+                                        <table class="table table-striped table-hover datatables" id="labResultsTable">
+                                            <thead>
+                                                <tr>
+                                                    <th>Paciente</th>
+                                                    <th>Tipo de Prueba</th>
+                                                    <th>Fecha</th>
+                                                    <th>Resultado</th>
+                                                    <th>Valores de Referencia</th>
+                                                    <th>Estado</th>
+                                                    <th>Acciones</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <tr>
+                                                    <td><strong>María García L.</strong></td>
+                                                    <td>Glucosa en Sangre</td>
+                                                    <td>15/03/2024</td>
+                                                    <td><strong class="text-danger">180 mg/dL</strong></td>
+                                                    <td>70-100 mg/dL</td>
+                                                    <td><span class="badge badge-danger">Elevado</span></td>
+                                                    <td>
+                                                        <button class="btn btn-sm btn-outline-primary">
+                                                            <i class="fe fe-download"></i> PDF
+                                                        </button>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td><strong>Carlos Rodríguez P.</strong></td>
+                                                    <td>Presión Arterial</td>
+                                                    <td>14/03/2024</td>
+                                                    <td><strong class="text-warning">140/90 mmHg</strong></td>
+                                                    <td>&lt;120/80 mmHg</td>
+                                                    <td><span class="badge badge-warning">Borderline</span></td>
+                                                    <td>
+                                                        <button class="btn btn-sm btn-outline-primary">
+                                                            <i class="fe fe-download"></i> PDF
+                                                        </button>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td><strong>Ana Martín F.</strong></td>
+                                                    <td>Hemograma Completo</td>
+                                                    <td>13/03/2024</td>
+                                                    <td><strong class="text-success">Normal</strong></td>
+                                                    <td>Valores normales</td>
+                                                    <td><span class="badge badge-success">Normal</span></td>
+                                                    <td>
+                                                        <button class="btn btn-sm btn-outline-primary">
+                                                            <i class="fe fe-download"></i> PDF
+                                                        </button>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td><strong>Pedro López G.</strong></td>
+                                                    <td>Electrocardiograma</td>
+                                                    <td>12/03/2024</td>
+                                                    <td><strong class="text-danger">Arritmia detectada</strong></td>
+                                                    <td>Ritmo sinusal normal</td>
+                                                    <td><span class="badge badge-danger">Crítico</span></td>
+                                                    <td>
+                                                        <button class="btn btn-sm btn-outline-primary">
+                                                            <i class="fe fe-download"></i> PDF
+                                                        </button>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td><strong>Laura Jiménez R.</strong></td>
+                                                    <td>Espirometría</td>
+                                                    <td>11/03/2024</td>
+                                                    <td><strong class="text-warning">Obstrucción leve</strong></td>
+                                                    <td>FEV1 &gt;80%</td>
+                                                    <td><span class="badge badge-warning">Moderado</span></td>
+                                                    <td>
+                                                        <button class="btn btn-sm btn-outline-primary">
+                                                            <i class="fe fe-download"></i> PDF
+                                                        </button>
+                                                    </td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div> <!-- .col-12 -->
+                </div> <!-- .row -->
+            </div> <!-- .container-fluid -->
+            <div class="modal fade modal-notif modal-slide" tabindex="-1" role="dialog"
+                aria-labelledby="defaultModalLabel" aria-hidden="true">
+                <div class="modal-dialog modal-sm" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="defaultModalLabel">Notifications</h5>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                        <div class="modal-body">
+                            <div class="list-group list-group-flush my-n3">
+                                <div class="list-group-item bg-transparent">
+                                    <div class="row align-items-center">
+                                        <div class="col-auto">
+                                            <span class="fe fe-box fe-24"></span>
+                                        </div>
+                                        <div class="col">
+                                            <small><strong>Package has uploaded successfull</strong></small>
+                                            <div class="my-0 text-muted small">Package is zipped and uploaded</div>
+                                            <small class="badge badge-pill badge-light text-muted">1m ago</small>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="list-group-item bg-transparent">
+                                    <div class="row align-items-center">
+                                        <div class="col-auto">
+                                            <span class="fe fe-download fe-24"></span>
+                                        </div>
+                                        <div class="col">
+                                            <small><strong>Widgets are updated successfull</strong></small>
+                                            <div class="my-0 text-muted small">Just create new layout Index, form, table
+                                            </div>
+                                            <small class="badge badge-pill badge-light text-muted">2m ago</small>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="list-group-item bg-transparent">
+                                    <div class="row align-items-center">
+                                        <div class="col-auto">
+                                            <span class="fe fe-inbox fe-24"></span>
+                                        </div>
+                                        <div class="col">
+                                            <small><strong>Notifications have been sent</strong></small>
+                                            <div class="my-0 text-muted small">Fusce dapibus, tellus ac cursus commodo
+                                            </div>
+                                            <small class="badge badge-pill badge-light text-muted">30m ago</small>
+                                        </div>
+                                    </div> <!-- / .row -->
+                                </div>
+                                <div class="list-group-item bg-transparent">
+                                    <div class="row align-items-center">
+                                        <div class="col-auto">
+                                            <span class="fe fe-link fe-24"></span>
+                                        </div>
+                                        <div class="col">
+                                            <small><strong>Link was attached to menu</strong></small>
+                                            <div class="my-0 text-muted small">New layout has been attached to the menu
+                                            </div>
+                                            <small class="badge badge-pill badge-light text-muted">1h ago</small>
+                                        </div>
+                                    </div>
+                                </div> <!-- / .row -->
+                            </div> <!-- / .list-group -->
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary btn-block" data-dismiss="modal">Clear
+                                All</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="modal fade modal-shortcut modal-slide" tabindex="-1" role="dialog"
+                aria-labelledby="defaultModalLabel" aria-hidden="true">
+                <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="defaultModalLabel">Shortcuts</h5>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                        <div class="modal-body px-5">
+                            <div class="row align-items-center">
+                                <div class="col-6 text-center">
+                                    <div class="squircle bg-success justify-content-center">
+                                        <i class="fe fe-cpu fe-32 align-self-center text-white"></i>
+                                    </div>
+                                    <p>Control area</p>
+                                </div>
+                                <div class="col-6 text-center">
+                                    <div class="squircle bg-primary justify-content-center">
+                                        <i class="fe fe-activity fe-32 align-self-center text-white"></i>
+                                    </div>
+                                    <p>Activity</p>
+                                </div>
+                            </div>
+                            <div class="row align-items-center">
+                                <div class="col-6 text-center">
+                                    <div class="squircle bg-primary justify-content-center">
+                                        <i class="fe fe-droplet fe-32 align-self-center text-white"></i>
+                                    </div>
+                                    <p>Droplet</p>
+                                </div>
+                                <div class="col-6 text-center">
+                                    <div class="squircle bg-primary justify-content-center">
+                                        <i class="fe fe-upload-cloud fe-32 align-self-center text-white"></i>
+                                    </div>
+                                    <p>Upload</p>
+                                </div>
+                            </div>
+                            <div class="row align-items-center">
+                                <div class="col-6 text-center">
+                                    <div class="squircle bg-primary justify-content-center">
+                                        <i class="fe fe-users fe-32 align-self-center text-white"></i>
+                                    </div>
+                                    <p>Users</p>
+                                </div>
+                                <div class="col-6 text-center">
+                                    <div class="squircle bg-primary justify-content-center">
+                                        <i class="fe fe-settings fe-32 align-self-center text-white"></i>
+                                    </div>
+                                    <p>Settings</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main> <!-- main -->
+    </div> <!-- .wrapper -->
+    <script src="plugins/jquery/jquery.js"></script>
+    <script src="js/popper.min.js"></script>
+    <script src="js/moment.min.js"></script>
+    <script src="plugins/bootstrap/js/bootstrap.min.js"></script>
+    <script src="js/simplebar.min.js"></script>
+    <script src='js/daterangepicker.js'></script>
+    <script src='js/jquery.stickOnScroll.js'></script>
+    <script src="js/tinycolor-min.js"></script>
+    <script src="js/config.js"></script>
+    <script src="js/d3.min.js"></script>
+    <script src="js/topojson.min.js"></script>
+    <script src="js/datamaps.all.min.js"></script>
+    <script src="js/datamaps-zoomto.js"></script>
+    <script src="js/datamaps.custom.js"></script>
+    <script src="js/Chart.min.js"></script>
+    <script>
+        // Initialize main data table
+        $('#dataTable-1').DataTable(
+            {
+                autoWidth: true,
+                "lengthMenu": [
+                    [16, 32, 64, -1],
+                    [16, 32, 64, "All"]
+                ]
+            });
+
+        // Initialize Medical History Table
+        $('#medicalHistoryTable').DataTable({
+            autoWidth: true,
+            responsive: true,
+            "lengthMenu": [
+                [10, 25, 50, -1],
+                [10, 25, 50, "Todos"]
+            ],
+            "language": {
+                "search": "Buscar:",
+                "lengthMenu": "Mostrar _MENU_ registros por página",
+                "zeroRecords": "No se encontraron registros",
+                "info": "Mostrando página _PAGE_ de _PAGES_",
+                "infoEmpty": "No hay registros disponibles",
+                "infoFiltered": "(filtrado de _MAX_ registros totales)",
+                "paginate": {
+                    "first": "Primero",
+                    "last": "Último",
+                    "next": "Siguiente",
+                    "previous": "Anterior"
+                }
+            },
+            "order": [[2, "desc"]], // Order by date (newest first)
+            "columnDefs": [
+                { "orderable": false, "targets": 7 } // Disable sorting on Actions column
+            ]
+        });
+
+        // Initialize Laboratory Results Table
+        $('#labResultsTable').DataTable({
+            autoWidth: true,
+            responsive: true,
+            "lengthMenu": [
+                [10, 25, 50, -1],
+                [10, 25, 50, "Todos"]
+            ],
+            "language": {
+                "search": "Buscar:",
+                "lengthMenu": "Mostrar _MENU_ registros por página",
+                "zeroRecords": "No se encontraron registros",
+                "info": "Mostrando página _PAGE_ de _PAGES_",
+                "infoEmpty": "No hay registros disponibles",
+                "infoFiltered": "(filtrado de _MAX_ registros totales)",
+                "paginate": {
+                    "first": "Primero",
+                    "last": "Último",
+                    "next": "Siguiente",
+                    "previous": "Anterior"
+                }
+            },
+            "order": [[2, "desc"]], // Order by date (newest first)
+            "columnDefs": [
+                { "orderable": false, "targets": 6 } // Disable sorting on Actions column
+            ]
+        });
+
+        // Initialize tooltips
+        $('[data-toggle="tooltip"]').tooltip();
+
+        // Custom search functionality for medical history
+        $('#patientFilter, #dateFilter, #statusFilter').on('change keyup', function () {
+            var patientFilter = $('#patientFilter').val();
+            var dateFilter = $('#dateFilter').val();
+            var statusFilter = $('#statusFilter').val();
+
+            var table = $('#medicalHistoryTable').DataTable();
+
+            // Clear existing search
+            table.columns().search('');
+
+            // Apply filters
+            if (patientFilter) {
+                table.columns(1).search(patientFilter); // Search in patient name column
+            }
+
+            if (dateFilter) {
+                table.columns(2).search(dateFilter); // Search in date column
+            }
+
+            if (statusFilter) {
+                table.columns(4).search(statusFilter); // Search in risk group column
+            }
+
+            table.draw();
+        });
+    </script>
+    <script src="js/apps.js"></script>
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-56159088-1"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+
+        function gtag() {
+            dataLayer.push(arguments);
+        }
+        gtag('js', new Date());
+        gtag('config', 'UA-56159088-1');
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,732 @@
+{
+  "SIGNOS_VITALES": {
+    "row_count": 20,
+    "columns": [
+      {
+        "COLUMN_NAME": "ID_SIGNO",
+        "DATA_TYPE": "TEXT",
+        "IS_NULLABLE": "NO"
+      },
+      {
+        "COLUMN_NAME": "ID_PACIENTE",
+        "DATA_TYPE": "TEXT",
+        "IS_NULLABLE": "YES"
+      },
+      {
+        "COLUMN_NAME": "ID_CONSULTA",
+        "DATA_TYPE": "TEXT",
+        "IS_NULLABLE": "YES"
+      },
+      {
+        "COLUMN_NAME": "TIPO_SIGNO",
+        "DATA_TYPE": "TEXT",
+        "IS_NULLABLE": "NO"
+      },
+      {
+        "COLUMN_NAME": "VALOR",
+        "DATA_TYPE": "NUMBER",
+        "IS_NULLABLE": "YES"
+      },
+      {
+        "COLUMN_NAME": "UNIDAD",
+        "DATA_TYPE": "TEXT",
+        "IS_NULLABLE": "YES"
+      },
+      {
+        "COLUMN_NAME": "FECHA_MEDICION",
+        "DATA_TYPE": "TIMESTAMP_NTZ",
+        "IS_NULLABLE": "YES"
+      },
+      {
+        "COLUMN_NAME": "NOTAS",
+        "DATA_TYPE": "TEXT",
+        "IS_NULLABLE": "YES"
+      }
+    ]
+  },
+  "HISTORIAL_MEDICO": {
+    "row_count": 20,
+    "columns": [
+      {
+        "COLUMN_NAME": "ID_HISTORIAL",
+        "DATA_TYPE": "TEXT",
+        "IS_NULLABLE": "NO"
+      },
+      {
+        "COLUMN_NAME": "ID_PACIENTE",
+        "DATA_TYPE": "TEXT",
+        "IS_NULLABLE": "YES"
+      },
+      {
+        "COLUMN_NAME": "TIPO_REGISTRO",
+        "DATA_TYPE": "TEXT",
+        "IS_NULLABLE": "NO"
+      },
+      {
+        "COLUMN_NAME": "DESCRIPCION",
+        "DATA_TYPE": "TEXT",
+        "IS_NULLABLE": "YES"
+      },
+      {
+        "COLUMN_NAME": "FECHA_REGISTRO",
+        "DATA_TYPE": "TIMESTAMP_NTZ",
+        "IS_NULLABLE": "YES"
+      },
+      {
+        "COLUMN_NAME": "ID_USUARIO",
+        "DATA_TYPE": "TEXT",
+        "IS_NULLABLE": "YES"
+      },
+      {
+        "COLUMN_NAME": "IMPORTANTE",
+        "DATA_TYPE": "BOOLEAN",
+        "IS_NULLABLE": "YES"
+      }
+    ]
+  },
+  "RESULTADOS_LABORATORIO": {
+    "row_count": 15,
+    "columns": [
+      {
+        "COLUMN_NAME": "ID_RESULTADO",
+        "DATA_TYPE": "TEXT",
+        "IS_NULLABLE": "NO"
+      },
+      {
+        "COLUMN_NAME": "ID_PACIENTE",
+        "DATA_TYPE": "TEXT",
+        "IS_NULLABLE": "YES"
+      },
+      {
+        "COLUMN_NAME": "TIPO_EXAMEN",
+        "DATA_TYPE": "TEXT",
+        "IS_NULLABLE": "NO"
+      },
+      {
+        "COLUMN_NAME": "RESULTADO",
+        "DATA_TYPE": "TEXT",
+        "IS_NULLABLE": "YES"
+      },
+      {
+        "COLUMN_NAME": "VALOR_NUMERICO",
+        "DATA_TYPE": "NUMBER",
+        "IS_NULLABLE": "YES"
+      },
+      {
+        "COLUMN_NAME": "UNIDAD_MEDIDA",
+        "DATA_TYPE": "TEXT",
+        "IS_NULLABLE": "YES"
+      },
+      {
+        "COLUMN_NAME": "VALOR_REFERENCIA",
+        "DATA_TYPE": "TEXT",
+        "IS_NULLABLE": "YES"
+      },
+      {
+        "COLUMN_NAME": "FECHA_EXAMEN",
+        "DATA_TYPE": "DATE",
+        "IS_NULLABLE": "YES"
+      },
+      {
+        "COLUMN_NAME": "FECHA_RESULTADO",
+        "DATA_TYPE": "TIMESTAMP_NTZ",
+        "IS_NULLABLE": "YES"
+      },
+      {
+        "COLUMN_NAME": "INTERPRETACION",
+        "DATA_TYPE": "TEXT",
+        "IS_NULLABLE": "YES"
+      }
+    ]
+  },
+  "PACIENTES": {
+    "row_count": 12,
+    "columns": [
+      {
+        "COLUMN_NAME": "ID_PACIENTE",
+        "DATA_TYPE": "TEXT",
+        "IS_NULLABLE": "NO"
+      },
+      {
+        "COLUMN_NAME": "NOMBRE",
+        "DATA_TYPE": "TEXT",
+        "IS_NULLABLE": "NO"
+      },
+      {
+        "COLUMN_NAME": "APELLIDO",
+        "DATA_TYPE": "TEXT",
+        "IS_NULLABLE": "NO"
+      },
+      {
+        "COLUMN_NAME": "FECHA_NACIMIENTO",
+        "DATA_TYPE": "DATE",
+        "IS_NULLABLE": "YES"
+      },
+      {
+        "COLUMN_NAME": "GENERO",
+        "DATA_TYPE": "TEXT",
+        "IS_NULLABLE": "YES"
+      },
+      {
+        "COLUMN_NAME": "TELEFONO",
+        "DATA_TYPE": "TEXT",
+        "IS_NULLABLE": "YES"
+      },
+      {
+        "COLUMN_NAME": "EMAIL",
+        "DATA_TYPE": "TEXT",
+        "IS_NULLABLE": "YES"
+      },
+      {
+        "COLUMN_NAME": "DIRECCION",
+        "DATA_TYPE": "TEXT",
+        "IS_NULLABLE": "YES"
+      },
+      {
+        "COLUMN_NAME": "FECHA_REGISTRO",
+        "DATA_TYPE": "TIMESTAMP_NTZ",
+        "IS_NULLABLE": "YES"
+      },
+      {
+        "COLUMN_NAME": "ACTIVO",
+        "DATA_TYPE": "BOOLEAN",
+        "IS_NULLABLE": "YES"
+      },
+      {
+        "COLUMN_NAME": "CIUDAD",
+        "DATA_TYPE": "TEXT",
+        "IS_NULLABLE": "YES"
+      },
+      {
+        "COLUMN_NAME": "CODIGO_POSTAL",
+        "DATA_TYPE": "TEXT",
+        "IS_NULLABLE": "YES"
+      },
+      {
+        "COLUMN_NAME": "GRUPO_SANGUINEO",
+        "DATA_TYPE": "TEXT",
+        "IS_NULLABLE": "YES"
+      },
+      {
+        "COLUMN_NAME": "ALERGIAS",
+        "DATA_TYPE": "TEXT",
+        "IS_NULLABLE": "YES"
+      },
+      {
+        "COLUMN_NAME": "MEDICAMENTOS",
+        "DATA_TYPE": "TEXT",
+        "IS_NULLABLE": "YES"
+      },
+      {
+        "COLUMN_NAME": "ANTECEDENTES",
+        "DATA_TYPE": "TEXT",
+        "IS_NULLABLE": "YES"
+      },
+      {
+        "COLUMN_NAME": "CONTACTO_EMERGENCIA_NOMBRE",
+        "DATA_TYPE": "TEXT",
+        "IS_NULLABLE": "YES"
+      },
+      {
+        "COLUMN_NAME": "CONTACTO_EMERGENCIA_RELACION",
+        "DATA_TYPE": "TEXT",
+        "IS_NULLABLE": "YES"
+      },
+      {
+        "COLUMN_NAME": "CONTACTO_EMERGENCIA_TELEFONO",
+        "DATA_TYPE": "TEXT",
+        "IS_NULLABLE": "YES"
+      },
+      {
+        "COLUMN_NAME": "CONSENTIMIENTO_DATOS",
+        "DATA_TYPE": "BOOLEAN",
+        "IS_NULLABLE": "YES"
+      },
+      {
+        "COLUMN_NAME": "CONSENTIMIENTO_EMERGENCIA",
+        "DATA_TYPE": "BOOLEAN",
+        "IS_NULLABLE": "YES"
+      },
+      {
+        "COLUMN_NAME": "CONSENTIMIENTO_INVESTIGACION",
+        "DATA_TYPE": "BOOLEAN",
+        "IS_NULLABLE": "YES"
+      },
+      {
+        "COLUMN_NAME": "VERIFICACION_BLOCKCHAIN",
+        "DATA_TYPE": "BOOLEAN",
+        "IS_NULLABLE": "YES"
+      },
+      {
+        "COLUMN_NAME": "DNI",
+        "DATA_TYPE": "TEXT",
+        "IS_NULLABLE": "YES"
+      },
+      {
+        "COLUMN_NAME": "APELLIDOS",
+        "DATA_TYPE": "TEXT",
+        "IS_NULLABLE": "YES"
+      },
+      {
+        "COLUMN_NAME": "EDAD",
+        "DATA_TYPE": "NUMBER",
+        "IS_NULLABLE": "YES"
+      },
+      {
+        "COLUMN_NAME": "DOMICILIO_COMPLETO",
+        "DATA_TYPE": "TEXT",
+        "IS_NULLABLE": "YES"
+      },
+      {
+        "COLUMN_NAME": "MUNICIPIO",
+        "DATA_TYPE": "TEXT",
+        "IS_NULLABLE": "YES"
+      },
+      {
+        "COLUMN_NAME": "INSTITUCION",
+        "DATA_TYPE": "TEXT",
+        "IS_NULLABLE": "YES"
+      },
+      {
+        "COLUMN_NAME": "CLAVE_PACIENTE",
+        "DATA_TYPE": "TEXT",
+        "IS_NULLABLE": "YES"
+      },
+      {
+        "COLUMN_NAME": "HISTORIAL_HOSPITALIZACIONES",
+        "DATA_TYPE": "TEXT",
+        "IS_NULLABLE": "YES"
+      },
+      {
+        "COLUMN_NAME": "HISTORIAL_CIRUGIAS",
+        "DATA_TYPE": "TEXT",
+        "IS_NULLABLE": "YES"
+      },
+      {
+        "COLUMN_NAME": "ANTECEDENTES_FAMILIARES",
+        "DATA_TYPE": "TEXT",
+        "IS_NULLABLE": "YES"
+      },
+      {
+        "COLUMN_NAME": "ANTECEDENTES_PERSONALES",
+        "DATA_TYPE": "TEXT",
+        "IS_NULLABLE": "YES"
+      },
+      {
+        "COLUMN_NAME": "FECHA_CONSULTA",
+        "DATA_TYPE": "DATE",
+        "IS_NULLABLE": "YES"
+      },
+      {
+        "COLUMN_NAME": "HORA_CONSULTA",
+        "DATA_TYPE": "TEXT",
+        "IS_NULLABLE": "YES"
+      },
+      {
+        "COLUMN_NAME": "SIGNOS_VITALES_TEMPERATURA",
+        "DATA_TYPE": "FLOAT",
+        "IS_NULLABLE": "YES"
+      },
+      {
+        "COLUMN_NAME": "SIGNOS_VITALES_FRECUENCIA_CARDIACA",
+        "DATA_TYPE": "NUMBER",
+        "IS_NULLABLE": "YES"
+      },
+      {
+        "COLUMN_NAME": "SIGNOS_VITALES_GLUCOSA",
+        "DATA_TYPE": "NUMBER",
+        "IS_NULLABLE": "YES"
+      },
+      {
+        "COLUMN_NAME": "SINTOMAS",
+        "DATA_TYPE": "TEXT",
+        "IS_NULLABLE": "YES"
+      },
+      {
+        "COLUMN_NAME": "TIEMPO_EVOLUCION_SINTOMAS",
+        "DATA_TYPE": "TEXT",
+        "IS_NULLABLE": "YES"
+      },
+      {
+        "COLUMN_NAME": "DIAGNOSTICO_CIE10",
+        "DATA_TYPE": "TEXT",
+        "IS_NULLABLE": "YES"
+      },
+      {
+        "COLUMN_NAME": "DIAGNOSTICO_BASE",
+        "DATA_TYPE": "TEXT",
+        "IS_NULLABLE": "YES"
+      },
+      {
+        "COLUMN_NAME": "TRATAMIENTO",
+        "DATA_TYPE": "TEXT",
+        "IS_NULLABLE": "YES"
+      },
+      {
+        "COLUMN_NAME": "RESULTADO_LABORATORIO",
+        "DATA_TYPE": "TEXT",
+        "IS_NULLABLE": "YES"
+      },
+      {
+        "COLUMN_NAME": "PRONOSTICO",
+        "DATA_TYPE": "TEXT",
+        "IS_NULLABLE": "YES"
+      },
+      {
+        "COLUMN_NAME": "CLASIFICACION_RIESGO",
+        "DATA_TYPE": "TEXT",
+        "IS_NULLABLE": "YES"
+      },
+      {
+        "COLUMN_NAME": "NOTAS_EVOLUCION",
+        "DATA_TYPE": "TEXT",
+        "IS_NULLABLE": "YES"
+      }
+    ]
+  },
+  "DIAGNOSTICOS_CONSULTA": {
+    "row_count": 10,
+    "columns": [
+      {
+        "COLUMN_NAME": "ID_DIAGNOSTICO",
+        "DATA_TYPE": "TEXT",
+        "IS_NULLABLE": "NO"
+      },
+      {
+        "COLUMN_NAME": "ID_CONSULTA",
+        "DATA_TYPE": "TEXT",
+        "IS_NULLABLE": "YES"
+      },
+      {
+        "COLUMN_NAME": "ID_ENFERMEDAD",
+        "DATA_TYPE": "TEXT",
+        "IS_NULLABLE": "YES"
+      },
+      {
+        "COLUMN_NAME": "DIAGNOSTICO",
+        "DATA_TYPE": "TEXT",
+        "IS_NULLABLE": "YES"
+      },
+      {
+        "COLUMN_NAME": "CONFIANZA",
+        "DATA_TYPE": "NUMBER",
+        "IS_NULLABLE": "YES"
+      },
+      {
+        "COLUMN_NAME": "FECHA_DIAGNOSTICO",
+        "DATA_TYPE": "TIMESTAMP_NTZ",
+        "IS_NULLABLE": "YES"
+      }
+    ]
+  },
+  "CONSULTAS": {
+    "row_count": 10,
+    "columns": [
+      {
+        "COLUMN_NAME": "ID_CONSULTA",
+        "DATA_TYPE": "TEXT",
+        "IS_NULLABLE": "NO"
+      },
+      {
+        "COLUMN_NAME": "ID_PACIENTE",
+        "DATA_TYPE": "TEXT",
+        "IS_NULLABLE": "YES"
+      },
+      {
+        "COLUMN_NAME": "ID_USUARIO",
+        "DATA_TYPE": "TEXT",
+        "IS_NULLABLE": "YES"
+      },
+      {
+        "COLUMN_NAME": "FECHA_CONSULTA",
+        "DATA_TYPE": "TIMESTAMP_NTZ",
+        "IS_NULLABLE": "NO"
+      },
+      {
+        "COLUMN_NAME": "MOTIVO_CONSULTA",
+        "DATA_TYPE": "TEXT",
+        "IS_NULLABLE": "YES"
+      },
+      {
+        "COLUMN_NAME": "SINTOMAS",
+        "DATA_TYPE": "TEXT",
+        "IS_NULLABLE": "YES"
+      },
+      {
+        "COLUMN_NAME": "ESTADO_CONSULTA",
+        "DATA_TYPE": "TEXT",
+        "IS_NULLABLE": "YES"
+      },
+      {
+        "COLUMN_NAME": "NOTAS",
+        "DATA_TYPE": "TEXT",
+        "IS_NULLABLE": "YES"
+      },
+      {
+        "COLUMN_NAME": "FECHA_CREACION",
+        "DATA_TYPE": "TIMESTAMP_NTZ",
+        "IS_NULLABLE": "YES"
+      }
+    ]
+  },
+  "TRATAMIENTOS_CONSULTA": {
+    "row_count": 10,
+    "columns": [
+      {
+        "COLUMN_NAME": "ID_TRATAMIENTO",
+        "DATA_TYPE": "TEXT",
+        "IS_NULLABLE": "NO"
+      },
+      {
+        "COLUMN_NAME": "ID_CONSULTA",
+        "DATA_TYPE": "TEXT",
+        "IS_NULLABLE": "YES"
+      },
+      {
+        "COLUMN_NAME": "ID_MEDICAMENTO",
+        "DATA_TYPE": "TEXT",
+        "IS_NULLABLE": "YES"
+      },
+      {
+        "COLUMN_NAME": "DOSIS",
+        "DATA_TYPE": "TEXT",
+        "IS_NULLABLE": "YES"
+      },
+      {
+        "COLUMN_NAME": "FRECUENCIA",
+        "DATA_TYPE": "TEXT",
+        "IS_NULLABLE": "YES"
+      },
+      {
+        "COLUMN_NAME": "DURACION_DIAS",
+        "DATA_TYPE": "NUMBER",
+        "IS_NULLABLE": "YES"
+      },
+      {
+        "COLUMN_NAME": "INSTRUCCIONES",
+        "DATA_TYPE": "TEXT",
+        "IS_NULLABLE": "YES"
+      },
+      {
+        "COLUMN_NAME": "FECHA_PRESCRIPCION",
+        "DATA_TYPE": "TIMESTAMP_NTZ",
+        "IS_NULLABLE": "YES"
+      },
+      {
+        "COLUMN_NAME": "ACTIVO",
+        "DATA_TYPE": "BOOLEAN",
+        "IS_NULLABLE": "YES"
+      }
+    ]
+  },
+  "FACTORES_RIESGO": {
+    "row_count": 10,
+    "columns": [
+      {
+        "COLUMN_NAME": "ID_FACTOR",
+        "DATA_TYPE": "TEXT",
+        "IS_NULLABLE": "NO"
+      },
+      {
+        "COLUMN_NAME": "ID_PACIENTE",
+        "DATA_TYPE": "TEXT",
+        "IS_NULLABLE": "YES"
+      },
+      {
+        "COLUMN_NAME": "TIPO_FACTOR",
+        "DATA_TYPE": "TEXT",
+        "IS_NULLABLE": "NO"
+      },
+      {
+        "COLUMN_NAME": "DESCRIPCION",
+        "DATA_TYPE": "TEXT",
+        "IS_NULLABLE": "YES"
+      },
+      {
+        "COLUMN_NAME": "GRAVEDAD",
+        "DATA_TYPE": "TEXT",
+        "IS_NULLABLE": "YES"
+      },
+      {
+        "COLUMN_NAME": "FECHA_DETECCION",
+        "DATA_TYPE": "DATE",
+        "IS_NULLABLE": "YES"
+      },
+      {
+        "COLUMN_NAME": "ACTIVO",
+        "DATA_TYPE": "BOOLEAN",
+        "IS_NULLABLE": "YES"
+      }
+    ]
+  },
+  "SEGUIMIENTO": {
+    "row_count": 10,
+    "columns": [
+      {
+        "COLUMN_NAME": "ID_SEGUIMIENTO",
+        "DATA_TYPE": "TEXT",
+        "IS_NULLABLE": "NO"
+      },
+      {
+        "COLUMN_NAME": "ID_PACIENTE",
+        "DATA_TYPE": "TEXT",
+        "IS_NULLABLE": "YES"
+      },
+      {
+        "COLUMN_NAME": "ID_CONSULTA",
+        "DATA_TYPE": "TEXT",
+        "IS_NULLABLE": "YES"
+      },
+      {
+        "COLUMN_NAME": "TIPO_SEGUIMIENTO",
+        "DATA_TYPE": "TEXT",
+        "IS_NULLABLE": "NO"
+      },
+      {
+        "COLUMN_NAME": "DESCRIPCION",
+        "DATA_TYPE": "TEXT",
+        "IS_NULLABLE": "YES"
+      },
+      {
+        "COLUMN_NAME": "FECHA_SEGUIMIENTO",
+        "DATA_TYPE": "DATE",
+        "IS_NULLABLE": "YES"
+      },
+      {
+        "COLUMN_NAME": "ESTADO_SEGUIMIENTO",
+        "DATA_TYPE": "TEXT",
+        "IS_NULLABLE": "YES"
+      },
+      {
+        "COLUMN_NAME": "NOTAS",
+        "DATA_TYPE": "TEXT",
+        "IS_NULLABLE": "YES"
+      },
+      {
+        "COLUMN_NAME": "FECHA_CREACION",
+        "DATA_TYPE": "TIMESTAMP_NTZ",
+        "IS_NULLABLE": "YES"
+      }
+    ]
+  },
+  "USUARIOS": {
+    "row_count": 5,
+    "columns": [
+      {
+        "COLUMN_NAME": "ID_USUARIO",
+        "DATA_TYPE": "TEXT",
+        "IS_NULLABLE": "NO"
+      },
+      {
+        "COLUMN_NAME": "NOMBRE_USUARIO",
+        "DATA_TYPE": "TEXT",
+        "IS_NULLABLE": "NO"
+      },
+      {
+        "COLUMN_NAME": "EMAIL",
+        "DATA_TYPE": "TEXT",
+        "IS_NULLABLE": "NO"
+      },
+      {
+        "COLUMN_NAME": "PASSWORD_HASH",
+        "DATA_TYPE": "TEXT",
+        "IS_NULLABLE": "NO"
+      },
+      {
+        "COLUMN_NAME": "ROL",
+        "DATA_TYPE": "TEXT",
+        "IS_NULLABLE": "YES"
+      },
+      {
+        "COLUMN_NAME": "FECHA_CREACION",
+        "DATA_TYPE": "TIMESTAMP_NTZ",
+        "IS_NULLABLE": "YES"
+      },
+      {
+        "COLUMN_NAME": "ACTIVO",
+        "DATA_TYPE": "BOOLEAN",
+        "IS_NULLABLE": "YES"
+      }
+    ]
+  },
+  "ENFERMEDADES": {
+    "row_count": 5,
+    "columns": [
+      {
+        "COLUMN_NAME": "ID_ENFERMEDAD",
+        "DATA_TYPE": "TEXT",
+        "IS_NULLABLE": "NO"
+      },
+      {
+        "COLUMN_NAME": "NOMBRE_ENFERMEDAD",
+        "DATA_TYPE": "TEXT",
+        "IS_NULLABLE": "NO"
+      },
+      {
+        "COLUMN_NAME": "DESCRIPCION",
+        "DATA_TYPE": "TEXT",
+        "IS_NULLABLE": "YES"
+      },
+      {
+        "COLUMN_NAME": "CATEGORIA",
+        "DATA_TYPE": "TEXT",
+        "IS_NULLABLE": "YES"
+      },
+      {
+        "COLUMN_NAME": "SINTOMAS",
+        "DATA_TYPE": "TEXT",
+        "IS_NULLABLE": "YES"
+      },
+      {
+        "COLUMN_NAME": "TRATAMIENTO_RECOMENDADO",
+        "DATA_TYPE": "TEXT",
+        "IS_NULLABLE": "YES"
+      },
+      {
+        "COLUMN_NAME": "ACTIVO",
+        "DATA_TYPE": "BOOLEAN",
+        "IS_NULLABLE": "YES"
+      }
+    ]
+  },
+  "MEDICAMENTOS": {
+    "row_count": 5,
+    "columns": [
+      {
+        "COLUMN_NAME": "ID_MEDICAMENTO",
+        "DATA_TYPE": "TEXT",
+        "IS_NULLABLE": "NO"
+      },
+      {
+        "COLUMN_NAME": "NOMBRE_MEDICAMENTO",
+        "DATA_TYPE": "TEXT",
+        "IS_NULLABLE": "NO"
+      },
+      {
+        "COLUMN_NAME": "PRINCIPIO_ACTIVO",
+        "DATA_TYPE": "TEXT",
+        "IS_NULLABLE": "YES"
+      },
+      {
+        "COLUMN_NAME": "DOSIS_RECOMENDADA",
+        "DATA_TYPE": "TEXT",
+        "IS_NULLABLE": "YES"
+      },
+      {
+        "COLUMN_NAME": "PRESENTACION",
+        "DATA_TYPE": "TEXT",
+        "IS_NULLABLE": "YES"
+      },
+      {
+        "COLUMN_NAME": "FABRICANTE",
+        "DATA_TYPE": "TEXT",
+        "IS_NULLABLE": "YES"
+      },
+      {
+        "COLUMN_NAME": "ACTIVO",
+        "DATA_TYPE": "BOOLEAN",
+        "IS_NULLABLE": "YES"
+      }
+    ]
+  }
+}

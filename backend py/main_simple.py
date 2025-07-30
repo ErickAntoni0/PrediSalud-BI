@@ -18,6 +18,7 @@ import snowflake.connector
 from web3 import Web3
 import json
 
+
 # Cargar variables de entorno
 load_dotenv()
 
@@ -35,6 +36,12 @@ app.add_middleware(
 # Servir archivos estáticos
 app.mount("/PrediSalud", StaticFiles(directory="PrediSalud"), name="predisalud")
 
+# Servir archivos CSS, JS e imágenes directamente desde templates
+app.mount("/css", StaticFiles(directory="PrediSalud/templates/css"), name="css")
+app.mount("/js", StaticFiles(directory="PrediSalud/templates/js"), name="js")
+app.mount("/images", StaticFiles(directory="PrediSalud/templates/images"), name="images")
+app.mount("/plugins", StaticFiles(directory="PrediSalud/templates/plugins"), name="plugins")
+
 # Configuración JWT
 SECRET_KEY = os.getenv("SECRET_KEY", "tu_clave_secreta_aqui")
 ALGORITHM = "HS256"
@@ -50,9 +57,28 @@ SNOWFLAKE_CONFIG = {
     'schema': os.getenv('SNOWFLAKE_SCHEMA')
 }
 
-# Configuración Web3
+# Configuración Web3 - Usando la misma configuración que Hardhat
 ETHEREUM_RPC_URL = os.getenv('ETHEREUM_RPC_URL', 'http://127.0.0.1:8545')
-w3 = Web3(Web3.HTTPProvider(ETHEREUM_RPC_URL))
+SEPOLIA_URL = os.getenv('SEPOLIA_URL', ETHEREUM_RPC_URL)  # Usar variable de entorno como Hardhat
+PRIVATE_KEY = os.getenv('PRIVATE_KEY')
+
+print(f"🔗 Configurando Web3 con URL: {SEPOLIA_URL}")
+
+# Inicializar Web3
+w3 = Web3(Web3.HTTPProvider(SEPOLIA_URL))
+
+# Cargar direcciones de contratos
+try:
+    with open('blockchain/contract-addresses-sepolia.json', 'r') as f:
+        contract_addresses = json.load(f)
+        print(f"✅ Contratos cargados: {list(contract_addresses.keys())}")
+except FileNotFoundError:
+    print("⚠️ Archivo de contratos no encontrado, usando direcciones por defecto")
+    contract_addresses = {
+        "MedicalRecords": "0x0000000000000000000000000000000000000000",
+        "PatientConsent": "0x0000000000000000000000000000000000000000", 
+        "MedicalAudit": "0x0000000000000000000000000000000000000000"
+    }
 
 # Modelos Pydantic
 class UserRegister(BaseModel):
@@ -185,6 +211,12 @@ def verify_user(username: str, password: str):
 # Endpoints
 @app.get("/")
 def root():
+    """Página de inicio del sistema"""
+    return FileResponse("PrediSalud/templates/index.html")
+
+@app.get("/api/status")
+def api_status():
+    """Status de la API (el JSON que antes estaba en /)"""
     return {
         "message": "Sistema Médico BI API",
         "version": "1.0.0",
@@ -208,9 +240,168 @@ def serve_dashboard():
 def serve_dashboard_html():
     return FileResponse("PrediSalud/templates/dashboard_mejorado.html")
 
+@app.get("/dashboard2.html")
+def serve_dashboard2():
+    """Servir dashboard principal del sistema médico"""
+    return FileResponse("PrediSalud/templates/dashboard2.html")
+
 @app.get("/registro")
 def serve_registro():
     return FileResponse("PrediSalud/templates/registro.html")
+
+@app.post("/api/auth/logout")
+def logout_user():
+    """Endpoint de logout - solo confirma el logout del lado del servidor"""
+    return {
+        "status": "success",
+        "message": "Sesión cerrada exitosamente"
+    }
+
+# Endpoints adicionales para las páginas del dashboard
+@app.get("/index.html")
+def serve_index():
+    return FileResponse("PrediSalud/templates/index.html")
+
+@app.get("/dashboard-analytics.html")
+def serve_dashboard_analytics():
+    return FileResponse("PrediSalud/templates/dashboard-analytics.html")
+
+@app.get("/table-databases.html")
+def serve_table_databases():
+    return FileResponse("PrediSalud/templates/table-databases.html")
+
+@app.get("/registro.html")
+def serve_registro_html():
+    return FileResponse("PrediSalud/templates/registro.html")
+
+@app.get("/about.html")
+def serve_about():
+    return FileResponse("PrediSalud/templates/about.html")
+
+@app.get("/contact.html")
+def serve_contact():
+    return FileResponse("PrediSalud/templates/contact.html")
+
+@app.get("/service.html")
+def serve_service():
+    return FileResponse("PrediSalud/templates/service.html")
+
+@app.get("/appoinment.html")
+def serve_appointment():
+    return FileResponse("PrediSalud/templates/appoinment.html")
+
+@app.get("/department.html")
+def serve_department():
+    return FileResponse("PrediSalud/templates/department.html")
+
+@app.get("/doctor.html")
+def serve_doctor():
+    return FileResponse("PrediSalud/templates/doctor.html")
+
+@app.get("/calendar.html")
+def serve_calendar():
+    # Si no existe calendar.html, redirigir a agenda médica disponible
+    return FileResponse("PrediSalud/templates/appoinment.html")
+
+@app.get("/registro_pacientes.html")
+def serve_registro_pacientes():
+    return FileResponse("PrediSalud/templates/registro_pacientes.html")
+
+@app.get("/dashboard_mejorado.html")
+def serve_dashboard_mejorado():
+    return FileResponse("PrediSalud/templates/dashboard_mejorado.html")
+
+# Páginas de análisis y grupos de riesgo
+@app.get("/grupos_riesgo_professional.html")
+def serve_grupos_riesgo_professional():
+    return FileResponse("PrediSalud/templates/grupos_riesgo_professional.html")
+
+@app.get("/grupos_riesgo_glassmorphism.html")
+def serve_grupos_riesgo_glassmorphism():
+    return FileResponse("PrediSalud/templates/grupos_riesgo_glassmorphism.html")
+
+@app.get("/analisis_tratamientos.html")
+def serve_analisis_tratamientos():
+    return FileResponse("PrediSalud/templates/analisis_tratamientos.html")
+
+@app.get("/blockchain_records.html")
+def serve_blockchain_records():
+    return FileResponse("PrediSalud/templates/blockchain_records.html")
+
+@app.get("/dashboard_principal.html")
+def serve_dashboard_principal():
+    return FileResponse("PrediSalud/templates/dashboard_principal.html")
+
+@app.get("/dashboard_sigma.html")
+def serve_dashboard_sigma():
+    return FileResponse("PrediSalud/templates/dashboard_sigma.html")
+
+# Redirecciones para páginas que no existen a páginas relevantes
+@app.get("/form_elements.html")
+def serve_form_elements():
+    # Redirigir a registro de pacientes
+    return FileResponse("PrediSalud/templates/registro_pacientes.html")
+
+@app.get("/table_basic.html")
+def serve_table_basic():
+    # Redirigir a tabla de bases de datos
+    return FileResponse("PrediSalud/templates/table-databases.html")
+
+@app.get("/chart-inline.html")
+def serve_chart_inline():
+    # Redirigir a dashboard de análisis
+    return FileResponse("PrediSalud/templates/dashboard-analytics.html")
+
+@app.get("/datamaps.html")
+def serve_datamaps():
+    # Redirigir a análisis de grupos de riesgo
+    return FileResponse("PrediSalud/templates/grupos_riesgo_professional.html")
+
+# Endpoints genéricos para páginas en desarrollo
+@app.get("/form_advanced.html")
+def serve_form_advanced():
+    return FileResponse("PrediSalud/templates/dashboard-analytics.html")
+
+@app.get("/form_validation.html")
+def serve_form_validation():
+    return FileResponse("PrediSalud/templates/grupos_riesgo_professional.html")
+
+@app.get("/form_wizard.html")
+def serve_form_wizard():
+    return FileResponse("PrediSalud/templates/dashboard-analytics.html")
+
+@app.get("/table_advanced.html")
+def serve_table_advanced():
+    return FileResponse("PrediSalud/templates/table-databases.html")
+
+@app.get("/table_datatables.html")
+def serve_table_datatables():
+    return FileResponse("PrediSalud/templates/table-databases.html")
+
+@app.get("/chart-chartjs.html")
+def serve_chart_chartjs():
+    return FileResponse("PrediSalud/templates/dashboard-analytics.html")
+
+@app.get("/chart-apexcharts.html")
+def serve_chart_apexcharts():
+    return FileResponse("PrediSalud/templates/dashboard-analytics.html")
+
+# Endpoint genérico para páginas HTML no definidas (al final)
+from fastapi import Request
+from fastapi.responses import HTMLResponse
+import os
+
+@app.get("/{page_name}.html")
+def serve_generic_html_page(page_name: str):
+    """Endpoint genérico para páginas HTML no definidas"""
+    file_path = f"PrediSalud/templates/{page_name}.html"
+    
+    # Verificar si el archivo existe
+    if os.path.exists(file_path):
+        return FileResponse(file_path)
+    else:
+        # Si no existe, redirigir al index
+        return FileResponse("PrediSalud/templates/index.html")
 
 @app.get("/api/health")
 def health_check():
@@ -340,15 +531,35 @@ def get_blockchain_status():
     """Obtener estado de la conexión blockchain"""
     try:
         is_connected = w3.is_connected()
-        return {
-            "status": "connected" if is_connected else "disconnected",
-            "network_id": w3.eth.chain_id if is_connected else None,
-            "latest_block": w3.eth.block_number if is_connected else None
-        }
+        
+        if is_connected:
+            chain_id = w3.eth.chain_id
+            network_name = "sepolia" if chain_id == 11155111 else f"chain_{chain_id}"
+            
+            return {
+                "status": "connected",
+                "network_id": chain_id,
+                "network_name": network_name,
+                "latest_block": w3.eth.block_number,
+                "contracts": contract_addresses,
+                "rpc_url": SEPOLIA_URL,
+                "message": f"✅ Conectado a {network_name}"
+            }
+        else:
+            return {
+                "status": "disconnected",
+                "network_id": None,
+                "network_name": "unknown",
+                "latest_block": None,
+                "contracts": {},
+                "rpc_url": SEPOLIA_URL,
+                "message": "❌ No conectado a blockchain"
+            }
     except Exception as e:
         return {
             "status": "error",
-            "error": str(e)
+            "error": str(e),
+            "message": f"❌ Error: {str(e)}"
         }
 
 @app.post("/api/pacientes/registrar")

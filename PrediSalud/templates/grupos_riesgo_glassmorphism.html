@@ -1,0 +1,633 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PrediSalud - Grupos de Riesgo</title>
+    <link rel="icon" type="image/png" href="images/emblema.png">
+
+    <!-- Fuentes -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <style>
+        :root {
+            /* Gradientes médicos */
+            --primary-gradient: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            --secondary-gradient: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+            --success-gradient: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+            --warning-gradient: linear-gradient(135deg, #43e97b 0%, #38f9d7 100%);
+            --danger-gradient: linear-gradient(135deg, #fa709a 0%, #fee140 100%);
+
+            /* Glassmorphism colors */
+            --glass-bg: rgba(255, 255, 255, 0.25);
+            --glass-border: rgba(255, 255, 255, 0.18);
+            --glass-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
+
+            /* Colores de estado */
+            --status-success: #00d4aa;
+            --status-warning: #ffb800;
+            --status-danger: #ff6b6b;
+            --status-info: #4dabf7;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 50%, #f093fb 100%);
+            min-height: 100vh;
+            overflow-x: hidden;
+        }
+
+        /* Particles Background */
+        .particles {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+        }
+
+        .particle {
+            position: absolute;
+            width: 2px;
+            height: 2px;
+            background: rgba(255, 255, 255, 0.5);
+            border-radius: 50%;
+            animation: float 6s ease-in-out infinite;
+        }
+
+        @keyframes float {
+
+            0%,
+            100% {
+                transform: translateY(0px);
+            }
+
+            50% {
+                transform: translateY(-20px);
+            }
+        }
+
+        /* Header Glass */
+        .glass-header {
+            background: var(--glass-bg);
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid var(--glass-border);
+            padding: 1rem 2rem;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .header-content {
+            max-width: 1400px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            color: white;
+        }
+
+        .logo-icon {
+            width: 50px;
+            height: 50px;
+            background: var(--primary-gradient);
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            box-shadow: var(--glass-shadow);
+        }
+
+        .logo-text {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: white;
+            text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+        }
+
+        .nav-glass {
+            display: flex;
+            gap: 1rem;
+        }
+
+        .nav-item {
+            background: var(--glass-bg);
+            backdrop-filter: blur(10px);
+            border: 1px solid var(--glass-border);
+            border-radius: 12px;
+            padding: 0.75rem 1.5rem;
+            color: white;
+            text-decoration: none;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            box-shadow: var(--glass-shadow);
+        }
+
+        .nav-item:hover {
+            background: rgba(255, 255, 255, 0.35);
+            transform: translateY(-2px);
+        }
+
+        /* Main Container */
+        .main-glass {
+            max-width: 1400px;
+            margin: 2rem auto;
+            padding: 0 2rem;
+        }
+
+        /* Glass Cards */
+        .glass-card {
+            background: var(--glass-bg);
+            backdrop-filter: blur(15px);
+            border: 1px solid var(--glass-border);
+            border-radius: 20px;
+            padding: 2rem;
+            margin-bottom: 2rem;
+            box-shadow: var(--glass-shadow);
+            transition: all 0.3s ease;
+        }
+
+        .glass-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 45px 0 rgba(31, 38, 135, 0.5);
+        }
+
+        /* Patient Header Card */
+        .patient-header {
+            background: linear-gradient(135deg, rgba(255, 255, 255, 0.3) 0%, rgba(255, 255, 255, 0.1) 100%);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+        }
+
+        .patient-info {
+            display: flex;
+            align-items: center;
+            gap: 2rem;
+            color: white;
+        }
+
+        .patient-avatar {
+            width: 100px;
+            height: 100px;
+            border-radius: 20px;
+            object-fit: cover;
+            border: 3px solid rgba(255, 255, 255, 0.3);
+            box-shadow: var(--glass-shadow);
+        }
+
+        .patient-details h2 {
+            font-size: 2rem;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+            text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+        }
+
+        .patient-id {
+            font-family: 'Courier New', monospace;
+            opacity: 0.8;
+            margin-bottom: 1rem;
+        }
+
+        /* Risk Badge Neon */
+        .risk-badge-neon {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.75rem 1.5rem;
+            border-radius: 50px;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            animation: neonGlow 2s ease-in-out infinite alternate;
+        }
+
+        .risk-high-neon {
+            background: linear-gradient(135deg, #ff6b6b, #ee5a52);
+            color: white;
+            box-shadow: 0 0 20px rgba(255, 107, 107, 0.6);
+        }
+
+        @keyframes neonGlow {
+            from {
+                box-shadow: 0 0 20px rgba(255, 107, 107, 0.6);
+            }
+
+            to {
+                box-shadow: 0 0 30px rgba(255, 107, 107, 0.9), 0 0 40px rgba(255, 107, 107, 0.5);
+            }
+        }
+
+        /* Section Titles */
+        .section-title {
+            color: white;
+            font-size: 1.5rem;
+            font-weight: 600;
+            margin-bottom: 1.5rem;
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+        }
+
+        .section-icon {
+            width: 40px;
+            height: 40px;
+            background: var(--primary-gradient);
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: var(--glass-shadow);
+        }
+
+        /* Info Grid Glass */
+        .info-grid-glass {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 1.5rem;
+        }
+
+        .info-card-glass {
+            background: linear-gradient(135deg, rgba(255, 255, 255, 0.2) 0%, rgba(255, 255, 255, 0.05) 100%);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            border-radius: 15px;
+            padding: 1.5rem;
+            transition: all 0.3s ease;
+            backdrop-filter: blur(10px);
+        }
+
+        .info-card-glass:hover {
+            background: linear-gradient(135deg, rgba(255, 255, 255, 0.3) 0%, rgba(255, 255, 255, 0.1) 100%);
+            transform: scale(1.02);
+        }
+
+        .info-label-glass {
+            color: rgba(255, 255, 255, 0.8);
+            font-size: 0.875rem;
+            font-weight: 500;
+            margin-bottom: 0.5rem;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .info-value-glass {
+            color: white;
+            font-size: 1.1rem;
+            font-weight: 600;
+            text-shadow: 0 1px 2px rgba(0, 0, 0, 0.3);
+        }
+
+        /* Medical Table Glass */
+        .table-glass {
+            background: linear-gradient(135deg, rgba(255, 255, 255, 0.15) 0%, rgba(255, 255, 255, 0.05) 100%);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            border-radius: 15px;
+            overflow: hidden;
+            backdrop-filter: blur(15px);
+        }
+
+        .table-glass table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        .table-glass th {
+            background: linear-gradient(135deg, rgba(255, 255, 255, 0.25) 0%, rgba(255, 255, 255, 0.1) 100%);
+            color: white;
+            padding: 1rem;
+            text-align: left;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            font-size: 0.875rem;
+        }
+
+        .table-glass td {
+            padding: 1rem;
+            color: rgba(255, 255, 255, 0.9);
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .table-glass tr:hover {
+            background: rgba(255, 255, 255, 0.1);
+        }
+
+        /* Status Badges */
+        .status-badge {
+            padding: 0.25rem 0.75rem;
+            border-radius: 20px;
+            font-size: 0.75rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .status-elevated {
+            background: linear-gradient(135deg, #ffb800, #ff8c00);
+            color: white;
+            box-shadow: 0 0 10px rgba(255, 184, 0, 0.4);
+        }
+
+        .status-high {
+            background: linear-gradient(135deg, #ff6b6b, #ee5a52);
+            color: white;
+            box-shadow: 0 0 10px rgba(255, 107, 107, 0.4);
+        }
+
+        /* Notes Glass */
+        .notes-glass {
+            background: linear-gradient(135deg, rgba(255, 255, 255, 0.2) 0%, rgba(255, 255, 255, 0.08) 100%);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            border-radius: 15px;
+            padding: 2rem;
+            border-left: 4px solid #ffb800;
+        }
+
+        .notes-text {
+            color: rgba(255, 255, 255, 0.9);
+            line-height: 1.8;
+            font-size: 1rem;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .header-content {
+                flex-direction: column;
+                gap: 1rem;
+            }
+
+            .patient-info {
+                flex-direction: column;
+                text-align: center;
+            }
+
+            .nav-glass {
+                flex-wrap: wrap;
+            }
+
+            .main-glass {
+                padding: 0 1rem;
+            }
+
+            .info-grid-glass {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        /* Loading Animation */
+        .loading-pulse {
+            animation: pulse 2s ease-in-out infinite;
+        }
+
+        @keyframes pulse {
+            0% {
+                opacity: 1;
+            }
+
+            50% {
+                opacity: 0.7;
+            }
+
+            100% {
+                opacity: 1;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Particles Background -->
+    <div class="particles"></div>
+
+    <!-- Header -->
+    <header class="glass-header">
+        <div class="header-content">
+            <div class="logo">
+                <div class="logo-icon">
+                    <i class="fas fa-heartbeat"></i>
+                </div>
+                <div class="logo-text">PrediSalud</div>
+            </div>
+
+            <nav class="nav-glass">
+                <a href="#" class="nav-item">
+                    <i class="fas fa-tachometer-alt"></i> Dashboard
+                </a>
+                <a href="#" class="nav-item">
+                    <i class="fas fa-users"></i> Pacientes
+                </a>
+                <a href="#" class="nav-item">
+                    <i class="fas fa-calendar"></i> Citas
+                </a>
+                <a href="#" class="nav-item">
+                    <i class="fas fa-chart-line"></i> Reportes
+                </a>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="main-glass">
+        <!-- Patient Header -->
+        <div class="glass-card patient-header">
+            <div class="patient-info">
+                <img src="https://lh3.googleusercontent.com/aida-public/AB6AXuDqEtgM3CAqQ-d_J9nvjXPDAwFxo9wy78BMM1WCfU3vfX4CmKYRD4hQmn4sc3z95Xs9bmjIs4-_2zs_m-JQfUbay1rx__sF53OWOSdWH34wtlCeB-uSs632FKL3_GUMHpo0h50yq6aKpc6B9LGaD3-n02jPgsZuUj0VjSw4_sTLQWG5AdyiTIgeMoj_wONsiow1gKQpO5vEoe3FwAnj-I3ObrTz-JyDrk_nKnBiHjJYj6vXjHby_IwhhPDiRxjpYRgwKGu2-2h1szM"
+                    alt="Sofia Rodriguez" class="patient-avatar">
+
+                <div class="patient-details">
+                    <h2>Sofia Rodriguez</h2>
+                    <div class="patient-id">ID: PAC_001234567</div>
+                    <div class="risk-badge-neon risk-high-neon">
+                        <i class="fas fa-exclamation-triangle"></i>
+                        Riesgo Alto
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Personal Info -->
+        <div class="glass-card">
+            <h3 class="section-title">
+                <div class="section-icon">
+                    <i class="fas fa-user"></i>
+                </div>
+                Información Personal
+            </h3>
+            <div class="info-grid-glass">
+                <div class="info-card-glass">
+                    <div class="info-label-glass">Nombre Completo</div>
+                    <div class="info-value-glass">Sofia Rodriguez</div>
+                </div>
+                <div class="info-card-glass">
+                    <div class="info-label-glass">Fecha de Nacimiento</div>
+                    <div class="info-value-glass">15 de marzo de 1994</div>
+                </div>
+                <div class="info-card-glass">
+                    <div class="info-label-glass">Género</div>
+                    <div class="info-value-glass">Femenino</div>
+                </div>
+                <div class="info-card-glass">
+                    <div class="info-label-glass">Edad</div>
+                    <div class="info-value-glass">30 años</div>
+                </div>
+                <div class="info-card-glass">
+                    <div class="info-label-glass">Teléfono</div>
+                    <div class="info-value-glass">555-123-4567</div>
+                </div>
+                <div class="info-card-glass">
+                    <div class="info-label-glass">Email</div>
+                    <div class="info-value-glass">sofia.rodriguez@email.com</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Medical History -->
+        <div class="glass-card">
+            <h3 class="section-title">
+                <div class="section-icon">
+                    <i class="fas fa-file-medical"></i>
+                </div>
+                Historial Médico
+            </h3>
+            <div class="info-grid-glass">
+                <div class="info-card-glass">
+                    <div class="info-label-glass">Alergias</div>
+                    <div class="info-value-glass">Penicilina, Látex</div>
+                </div>
+                <div class="info-card-glass">
+                    <div class="info-label-glass">Condiciones Crónicas</div>
+                    <div class="info-value-glass">Asma, Diabetes tipo 2</div>
+                </div>
+                <div class="info-card-glass">
+                    <div class="info-label-glass">Medicamentos</div>
+                    <div class="info-value-glass">Metformina, Albuterol</div>
+                </div>
+                <div class="info-card-glass">
+                    <div class="info-label-glass">Antecedentes Familiares</div>
+                    <div class="info-value-glass">Diabetes, Hipertensión</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Lab Results -->
+        <div class="glass-card">
+            <h3 class="section-title">
+                <div class="section-icon">
+                    <i class="fas fa-flask"></i>
+                </div>
+                Resultados de Laboratorio
+            </h3>
+            <div class="table-glass">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Prueba</th>
+                            <th>Fecha</th>
+                            <th>Resultado</th>
+                            <th>Unidades</th>
+                            <th>Referencia</th>
+                            <th>Estado</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><strong>Glucosa en Sangre</strong></td>
+                            <td>2024-07-20</td>
+                            <td><strong>150</strong></td>
+                            <td>mg/dL</td>
+                            <td>70-100</td>
+                            <td><span class="status-badge status-high">Alto</span></td>
+                        </tr>
+                        <tr>
+                            <td><strong>Colesterol Total</strong></td>
+                            <td>2024-07-20</td>
+                            <td><strong>220</strong></td>
+                            <td>mg/dL</td>
+                            <td>&lt;200</td>
+                            <td><span class="status-badge status-elevated">Elevado</span></td>
+                        </tr>
+                        <tr>
+                            <td><strong>Hemoglobina A1c</strong></td>
+                            <td>2024-07-20</td>
+                            <td><strong>7.5</strong></td>
+                            <td>%</td>
+                            <td>&lt;5.7</td>
+                            <td><span class="status-badge status-high">Muy Alto</span></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <!-- Doctor Notes -->
+        <div class="glass-card">
+            <h3 class="section-title">
+                <div class="section-icon">
+                    <i class="fas fa-stethoscope"></i>
+                </div>
+                Notas del Médico
+            </h3>
+            <div class="notes-glass">
+                <p class="notes-text">
+                    <strong>Evaluación:</strong> Paciente con diabetes tipo 2 mal controlada. Niveles de glucosa
+                    consistentemente elevados. HbA1c en 7.5% indica control inadecuado durante los últimos 2-3 meses.
+                </p>
+                <br>
+                <p class="notes-text">
+                    <strong>Plan:</strong> Ajuste inmediato de medicación, dieta estricta, ejercicio supervisado.
+                    Control cada 2 semanas. Monitoreo domiciliario diario.
+                </p>
+            </div>
+        </div>
+    </main>
+
+    <script>
+        // Create particles
+        function createParticles() {
+            const particlesContainer = document.querySelector('.particles');
+            const particleCount = 50;
+
+            for (let i = 0; i < particleCount; i++) {
+                const particle = document.createElement('div');
+                particle.className = 'particle';
+                particle.style.left = Math.random() * 100 + '%';
+                particle.style.top = Math.random() * 100 + '%';
+                particle.style.animationDelay = Math.random() * 6 + 's';
+                particle.style.animationDuration = (Math.random() * 3 + 3) + 's';
+                particlesContainer.appendChild(particle);
+            }
+        }
+
+        // Initialize particles
+        createParticles();
+
+        // Add loading animation
+        document.addEventListener('DOMContentLoaded', function () {
+            const cards = document.querySelectorAll('.glass-card');
+            cards.forEach((card, index) => {
+                card.classList.add('loading-pulse');
+                setTimeout(() => {
+                    card.classList.remove('loading-pulse');
+                }, (index + 1) * 200);
+            });
+        });
+    </script>
+</body>
+
+</html>

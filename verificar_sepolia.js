@@ -11,7 +11,7 @@ async function main() {
     
     // Verificar balance
     const [signer] = await ethers.getSigners();
-    const balance = await signer.getBalance();
+    const balance = await provider.getBalance(signer.address);
     console.log("💰 Balance:", ethers.formatEther(balance), "ETH");
     
     if (balance < ethers.parseEther("0.01")) {
@@ -57,11 +57,11 @@ async function main() {
     };
     
     fs.writeFileSync(
-      "blockchain/contract-addresses-sepolia.json",
+      "contract-addresses-sepolia.json",
       JSON.stringify(addresses, null, 2)
     );
     
-    console.log("\n📋 Direcciones guardadas en: blockchain/contract-addresses-sepolia.json");
+    console.log("\n📋 Direcciones guardadas en: contract-addresses-sepolia.json");
     console.log("\n🔗 Verificar en Etherscan:");
     console.log(`MedicalRecords: https://sepolia.etherscan.io/address/${medicalRecordsAddress}`);
     console.log(`PatientConsent: https://sepolia.etherscan.io/address/${patientConsentAddress}`);

@@ -490,22 +490,13 @@
 
                     console.log('Login exitoso, redirigiendo a dashboard...');
 
-                    // Redirigir después de 1 segundo
+                    // Redirigir después de 1 segundo directamente a dashboard2.html
                     setTimeout(() => {
-                        console.log('Intentando redirección...');
-                        // Intentar múltiples rutas
-                        const dashboardUrls = ['/dashboard', '/dashboard.html', '/PrediSalud/templates/dashboard2.html'];
-                        let currentIndex = 0;
+                        console.log('Redirigiendo a dashboard2.html...');
 
-                        function tryRedirect() {
-                            if (currentIndex < dashboardUrls.length) {
-                                console.log(`Intentando: ${dashboardUrls[currentIndex]}`);
-                                window.location.href = dashboardUrls[currentIndex];
-                                currentIndex++;
-                            }
-                        }
-
-                        tryRedirect();
+                        // Redirigir directamente (el endpoint ya está funcionando)
+                        console.log('✅ Redirigiendo a dashboard2.html...');
+                        window.location.href = '/dashboard2.html';
                     }, 1000);
                 } else {
                     showMessage('loginMessage', `❌ Error: ${result.detail}`, 'error');
@@ -552,6 +543,29 @@
                 console.log('Modo oscuro inicializado');
             }
         });
+    </script>
+
+    <!-- Script para evitar errores de MetaMask -->
+    <script>
+        // Suprimir errores de extensiones de wallet
+        window.addEventListener('error', function (e) {
+            if (e.message && (e.message.includes('walletChannelId') || e.message.includes('wallet'))) {
+                e.preventDefault();
+                console.log('🔇 Error de wallet suprimido:', e.message);
+                return false;
+            }
+        });
+
+        // Detectar si estamos en el puerto correcto
+        if (window.location.port && window.location.port !== '8001') {
+            console.warn('⚠️ Puerto incorrecto detectado:', window.location.port);
+            console.log('👉 Deberías usar: http://localhost:8001/login');
+
+            // Opcional: redirigir automáticamente al puerto correcto
+            if (confirm('¿Redirigir al puerto correcto (8001)?')) {
+                window.location.href = 'http://localhost:8001/login';
+            }
+        }
     </script>
 </body>
 

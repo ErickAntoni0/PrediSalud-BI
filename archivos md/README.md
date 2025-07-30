@@ -198,9 +198,26 @@ El proyecto incluye contratos inteligentes para:
 - **Análisis**: Pandas, SQL
 - **Documentación**: Swagger/OpenAPI
 
+## 📚 Documentación Detallada
+
+> **📖 [Ver Índice Completo de Documentación](./INDICE_DOCUMENTACION.md)** - Navegación completa por toda la documentación del proyecto
+
+### 🏥 Flujos de Trabajo Médico
+
+- **[📋 Guía Rápida - Registro de Pacientes](./README_REGISTRO_PACIENTES_GUIA_RAPIDA.md)** - Guía concisa y práctica para doctores sobre cómo registrar pacientes nuevos en el sistema.
+- **[📊 Flujo Completo - Registro de Pacientes](./REGISTRO_PACIENTES_FLUJO_COMPLETO.md)** - Documentación técnica detallada paso a paso del proceso de registro, incluyendo todas las interacciones con frontend, backend, Snowflake y blockchain.
+
+### 📋 Documentación Adicional
+
+- `DOCUMENTACION_PROYECTO.md` - Documentación general del proyecto
+- `CRONOGRAMA_DETALLADO.md` - Cronograma de desarrollo
+- `OBJETIVOS_ESPECIFICOS.md` - Objetivos y metas del sistema
+- `COMANDOS_UTILES.md` - Comandos frecuentemente utilizados
+
 ## 📝 Notas
 
 - Asegúrate de tener acceso a Snowflake con las credenciales correctas
 - El sistema incluye autenticación JWT para seguridad
 - Los datos médicos están protegidos por roles de usuario
 - El proyecto mantiene la misma estructura pero adaptado para el sector médico
+- **Para detalles específicos del registro de pacientes, consulta la documentación de flujo completo arriba**

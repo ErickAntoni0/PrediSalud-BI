@@ -1,0 +1,272 @@
+<html>
+
+<head>
+    <link rel="preconnect" href="https://fonts.gstatic.com/" crossorigin="" />
+    <link rel="stylesheet" as="style" onload="this.rel='stylesheet'"
+        href="https://fonts.googleapis.com/css2?display=swap&amp;family=Inter%3Awght%40400%3B500%3B700%3B900&amp;family=Noto+Sans%3Awght%40400%3B500%3B700%3B900" />
+
+    <title>Stitch Design</title>
+    <link rel="icon" type="image/x-icon" href="data:image/x-icon;base64," />
+
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+</head>
+
+<body>
+    <div class="relative flex size-full min-h-screen flex-col bg-[#f8f9fc] group/design-root overflow-x-hidden"
+        style='font-family: Inter, "Noto Sans", sans-serif;'>
+        <div class="layout-container flex h-full grow flex-col">
+            <header
+                class="flex items-center justify-between whitespace-nowrap border-b border-solid border-b-[#e7eaf3] px-10 py-3">
+                <div class="flex items-center gap-4 text-[#0d111b]">
+                    <div class="size-4">
+                        <svg viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path fill-rule="evenodd" clip-rule="evenodd"
+                                d="M24 4H6V17.3333V30.6667H24V44H42V30.6667V17.3333H24V4Z" fill="currentColor"></path>
+                        </svg>
+                    </div>
+                    <h2 class="text-[#0d111b] text-lg font-bold leading-tight tracking-[-0.015em]">SaludPrimero</h2>
+                </div>
+                <div class="flex flex-1 justify-end gap-8">
+                    <div class="flex items-center gap-9">
+                        <a class="text-[#0d111b] text-sm font-medium leading-normal" href="#">Inicio</a>
+                        <a class="text-[#0d111b] text-sm font-medium leading-normal" href="#">Pacientes</a>
+                        <a class="text-[#0d111b] text-sm font-medium leading-normal" href="#">Citas</a>
+                        <a class="text-[#0d111b] text-sm font-medium leading-normal" href="#">Informes</a>
+                    </div>
+                    <button
+                        class="flex max-w-[480px] cursor-pointer items-center justify-center overflow-hidden rounded-xl h-10 bg-[#e7eaf3] text-[#0d111b] gap-2 text-sm font-bold leading-normal tracking-[0.015em] min-w-0 px-2.5">
+                        <div class="text-[#0d111b]" data-icon="Bell" data-size="20px" data-weight="regular">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="20px" height="20px" fill="currentColor"
+                                viewBox="0 0 256 256">
+                                <path
+                                    d="M221.8,175.94C216.25,166.38,208,139.33,208,104a80,80,0,1,0-160,0c0,35.34-8.26,62.38-13.81,71.94A16,16,0,0,0,48,200H88.81a40,40,0,0,0,78.38,0H208a16,16,0,0,0,13.8-24.06ZM128,216a24,24,0,0,1-22.62-16h45.24A24,24,0,0,1,128,216ZM48,184c7.7-13.24,16-43.92,16-80a64,64,0,1,1,128,0c0,36.05,8.28,66.73,16,80Z">
+                                </path>
+                            </svg>
+                        </div>
+                    </button>
+                    <div class="bg-center bg-no-repeat aspect-square bg-cover rounded-full size-10"
+                        style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuDDq6sKthjfXnBL0sjt3Ca39IIUf8LTqS0m8Weug4ZvtzVDfpynrD6i4slr0zUz0VaDY0SVsJCqwRU4TgVtCZ23Swi1FsKdxQT_iYeMfbF3U4DdCg6p07_2V0DT_WgeDubyJTdd11AavLonA8SW41SBnpC8QPztBFgBMzqb1q_1uAAagNjLNW6mVy5WcQ3m8rYwPkh8OGMYaJmWG-2HBfGIveOtyp7wEAXqRkgjpfVlW1uPmkjSsfNAyYua28l5aTzsMnsJwjLW_1w");'>
+                    </div>
+                </div>
+            </header>
+            <div class="px-40 flex flex-1 justify-center py-5">
+                <div class="layout-content-container flex flex-col max-w-[960px] flex-1">
+                    <div class="flex flex-wrap gap-2 p-4">
+                        <a class="text-[#4c5f9a] text-base font-medium leading-normal" href="#">Pacientes</a>
+                        <span class="text-[#4c5f9a] text-base font-medium leading-normal">/</span>
+                        <span class="text-[#0d111b] text-base font-medium leading-normal">Detalles del Paciente</span>
+                    </div>
+                    <div class="flex flex-wrap justify-between gap-3 p-4">
+                        <div class="flex min-w-72 flex-col gap-3">
+                            <p class="text-[#0d111b] tracking-light text-[32px] font-bold leading-tight">Detalles del
+                                Paciente</p>
+                            <p class="text-[#4c5f9a] text-sm font-normal leading-normal">Información completa del
+                                paciente y su historial médico.</p>
+                        </div>
+                    </div>
+                    <div class="flex p-4 @container">
+                        <div
+                            class="flex w-full flex-col gap-4 @[520px]:flex-row @[520px]:justify-between @[520px]:items-center">
+                            <div class="flex gap-4">
+                                <div class="bg-center bg-no-repeat aspect-square bg-cover rounded-full min-h-32 w-32"
+                                    style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuDqEtgM3CAqQ-d_J9nvjXPDAwFxo9wy78BMM1WCfU3vfX4CmKYRD4hQmn4sc3z95Xs9bmjIs4-_2zs_m-JQfUbay1rx__sF53OWOSdWH34wtlCeB-uSs632FKL3_GUMHpo0h50yq6aKpc6B9LGaD3-n02jPgsZuUj0VjSw4_sTLQWG5AdyiTIgeMoj_wONsiow1gKQpO5vEoe3FwAnj-I3ObrTz-JyDrk_nKnBiHjJYj6vXjHby_IwhhPDiRxjpYRgwKGu2-2h1szM");'>
+                                </div>
+                                <div class="flex flex-col justify-center">
+                                    <p class="text-[#0d111b] text-[22px] font-bold leading-tight tracking-[-0.015em]">
+                                        Sofia Rodriguez</p>
+                                    <p class="text-[#4c5f9a] text-base font-normal leading-normal">ID del Paciente:
+                                        1234567</p>
+                                    <p class="text-[#4c5f9a] text-base font-normal leading-normal">Grupo de Riesgo: Alto
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <h2 class="text-[#0d111b] text-[22px] font-bold leading-tight tracking-[-0.015em] px-4 pb-3 pt-5">
+                        Información Personal</h2>
+                    <div class="p-4 grid grid-cols-2">
+                        <div class="flex flex-col gap-1 border-t border-solid border-t-[#cfd5e7] py-4 pr-2">
+                            <p class="text-[#4c5f9a] text-sm font-normal leading-normal">Nombre Completo</p>
+                            <p class="text-[#0d111b] text-sm font-normal leading-normal">Sofia Rodriguez</p>
+                        </div>
+                        <div class="flex flex-col gap-1 border-t border-solid border-t-[#cfd5e7] py-4 pl-2">
+                            <p class="text-[#4c5f9a] text-sm font-normal leading-normal">Fecha de Nacimiento</p>
+                            <p class="text-[#0d111b] text-sm font-normal leading-normal">15 de marzo de 1994</p>
+                        </div>
+                        <div class="flex flex-col gap-1 border-t border-solid border-t-[#cfd5e7] py-4 pr-2">
+                            <p class="text-[#4c5f9a] text-sm font-normal leading-normal">Género</p>
+                            <p class="text-[#0d111b] text-sm font-normal leading-normal">Femenino</p>
+                        </div>
+                        <div class="flex flex-col gap-1 border-t border-solid border-t-[#cfd5e7] py-4 pl-2">
+                            <p class="text-[#4c5f9a] text-sm font-normal leading-normal">Dirección</p>
+                            <p class="text-[#0d111b] text-sm font-normal leading-normal">Calle Principal 123, Ciudad,
+                                Estado</p>
+                        </div>
+                        <div class="flex flex-col gap-1 border-t border-solid border-t-[#cfd5e7] py-4 pr-2">
+                            <p class="text-[#4c5f9a] text-sm font-normal leading-normal">Número de Teléfono</p>
+                            <p class="text-[#0d111b] text-sm font-normal leading-normal">555-123-4567</p>
+                        </div>
+                        <div class="flex flex-col gap-1 border-t border-solid border-t-[#cfd5e7] py-4 pl-2">
+                            <p class="text-[#4c5f9a] text-sm font-normal leading-normal">Correo Electrónico</p>
+                            <p class="text-[#0d111b] text-sm font-normal leading-normal">sofia.rodriguez@email.com</p>
+                        </div>
+                        <div class="flex flex-col gap-1 border-t border-solid border-t-[#cfd5e7] py-4 pr-2">
+                            <p class="text-[#4c5f9a] text-sm font-normal leading-normal">Ocupación</p>
+                            <p class="text-[#0d111b] text-sm font-normal leading-normal">Profesora</p>
+                        </div>
+                        <div class="flex flex-col gap-1 border-t border-solid border-t-[#cfd5e7] py-4 pl-2">
+                            <p class="text-[#4c5f9a] text-sm font-normal leading-normal">Aseguradora</p>
+                            <p class="text-[#0d111b] text-sm font-normal leading-normal">SaludSegura</p>
+                        </div>
+                    </div>
+                    <h2 class="text-[#0d111b] text-[22px] font-bold leading-tight tracking-[-0.015em] px-4 pb-3 pt-5">
+                        Historial Médico</h2>
+                    <div class="p-4 grid grid-cols-[20%_1fr] gap-x-6">
+                        <div class="col-span-2 grid grid-cols-subgrid border-t border-t-[#cfd5e7] py-5">
+                            <p class="text-[#4c5f9a] text-sm font-normal leading-normal">Alergias</p>
+                            <p class="text-[#0d111b] text-sm font-normal leading-normal">Penicilina, Látex</p>
+                        </div>
+                        <div class="col-span-2 grid grid-cols-subgrid border-t border-t-[#cfd5e7] py-5">
+                            <p class="text-[#4c5f9a] text-sm font-normal leading-normal">Condiciones Crónicas</p>
+                            <p class="text-[#0d111b] text-sm font-normal leading-normal">Asma, Diabetes tipo 2</p>
+                        </div>
+                        <div class="col-span-2 grid grid-cols-subgrid border-t border-t-[#cfd5e7] py-5">
+                            <p class="text-[#4c5f9a] text-sm font-normal leading-normal">Medicamentos</p>
+                            <p class="text-[#0d111b] text-sm font-normal leading-normal">Metformina, Albuterol</p>
+                        </div>
+                    </div>
+                    <h2 class="text-[#0d111b] text-[22px] font-bold leading-tight tracking-[-0.015em] px-4 pb-3 pt-5">
+                        Resultados de Pruebas</h2>
+                    <div class="px-4 py-3 @container">
+                        <div class="flex overflow-hidden rounded-xl border border-[#cfd5e7] bg-[#f8f9fc]">
+                            <table class="flex-1">
+                                <thead>
+                                    <tr class="bg-[#f8f9fc]">
+                                        <th
+                                            class="table-1a69b8a5-fe44-41c3-9128-a804797a8af7-column-120 px-4 py-3 text-left text-[#0d111b] w-[400px] text-sm font-medium leading-normal">
+                                            Prueba</th>
+                                        <th
+                                            class="table-1a69b8a5-fe44-41c3-9128-a804797a8af7-column-240 px-4 py-3 text-left text-[#0d111b] w-[400px] text-sm font-medium leading-normal">
+                                            Fecha</th>
+                                        <th
+                                            class="table-1a69b8a5-fe44-41c3-9128-a804797a8af7-column-360 px-4 py-3 text-left text-[#0d111b] w-[400px] text-sm font-medium leading-normal">
+                                            Resultado
+                                        </th>
+                                        <th
+                                            class="table-1a69b8a5-fe44-41c3-9128-a804797a8af7-column-480 px-4 py-3 text-left text-[#0d111b] w-[400px] text-sm font-medium leading-normal">
+                                            Unidades
+                                        </th>
+                                        <th
+                                            class="table-1a69b8a5-fe44-41c3-9128-a804797a8af7-column-600 px-4 py-3 text-left text-[#0d111b] w-[400px] text-sm font-medium leading-normal">
+                                            Rango de Referencia
+                                        </th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr class="border-t border-t-[#cfd5e7]">
+                                        <td
+                                            class="table-1a69b8a5-fe44-41c3-9128-a804797a8af7-column-120 h-[72px] px-4 py-2 w-[400px] text-[#0d111b] text-sm font-normal leading-normal">
+                                            Glucosa en Sangre
+                                        </td>
+                                        <td
+                                            class="table-1a69b8a5-fe44-41c3-9128-a804797a8af7-column-240 h-[72px] px-4 py-2 w-[400px] text-[#4c5f9a] text-sm font-normal leading-normal">
+                                            2024-07-20
+                                        </td>
+                                        <td
+                                            class="table-1a69b8a5-fe44-41c3-9128-a804797a8af7-column-360 h-[72px] px-4 py-2 w-[400px] text-[#4c5f9a] text-sm font-normal leading-normal">
+                                            150</td>
+                                        <td
+                                            class="table-1a69b8a5-fe44-41c3-9128-a804797a8af7-column-480 h-[72px] px-4 py-2 w-[400px] text-[#4c5f9a] text-sm font-normal leading-normal">
+                                            mg/dL</td>
+                                        <td
+                                            class="table-1a69b8a5-fe44-41c3-9128-a804797a8af7-column-600 h-[72px] px-4 py-2 w-[400px] text-[#4c5f9a] text-sm font-normal leading-normal">
+                                            70-100</td>
+                                    </tr>
+                                    <tr class="border-t border-t-[#cfd5e7]">
+                                        <td
+                                            class="table-1a69b8a5-fe44-41c3-9128-a804797a8af7-column-120 h-[72px] px-4 py-2 w-[400px] text-[#0d111b] text-sm font-normal leading-normal">
+                                            Colesterol Total
+                                        </td>
+                                        <td
+                                            class="table-1a69b8a5-fe44-41c3-9128-a804797a8af7-column-240 h-[72px] px-4 py-2 w-[400px] text-[#4c5f9a] text-sm font-normal leading-normal">
+                                            2024-07-20
+                                        </td>
+                                        <td
+                                            class="table-1a69b8a5-fe44-41c3-9128-a804797a8af7-column-360 h-[72px] px-4 py-2 w-[400px] text-[#4c5f9a] text-sm font-normal leading-normal">
+                                            220</td>
+                                        <td
+                                            class="table-1a69b8a5-fe44-41c3-9128-a804797a8af7-column-480 h-[72px] px-4 py-2 w-[400px] text-[#4c5f9a] text-sm font-normal leading-normal">
+                                            mg/dL</td>
+                                        <td
+                                            class="table-1a69b8a5-fe44-41c3-9128-a804797a8af7-column-600 h-[72px] px-4 py-2 w-[400px] text-[#4c5f9a] text-sm font-normal leading-normal">
+                                            &lt;200</td>
+                                    </tr>
+                                    <tr class="border-t border-t-[#cfd5e7]">
+                                        <td
+                                            class="table-1a69b8a5-fe44-41c3-9128-a804797a8af7-column-120 h-[72px] px-4 py-2 w-[400px] text-[#0d111b] text-sm font-normal leading-normal">
+                                            Hemoglobina A1c
+                                        </td>
+                                        <td
+                                            class="table-1a69b8a5-fe44-41c3-9128-a804797a8af7-column-240 h-[72px] px-4 py-2 w-[400px] text-[#4c5f9a] text-sm font-normal leading-normal">
+                                            2024-07-20
+                                        </td>
+                                        <td
+                                            class="table-1a69b8a5-fe44-41c3-9128-a804797a8af7-column-360 h-[72px] px-4 py-2 w-[400px] text-[#4c5f9a] text-sm font-normal leading-normal">
+                                            7.5</td>
+                                        <td
+                                            class="table-1a69b8a5-fe44-41c3-9128-a804797a8af7-column-480 h-[72px] px-4 py-2 w-[400px] text-[#4c5f9a] text-sm font-normal leading-normal">
+                                            %</td>
+                                        <td
+                                            class="table-1a69b8a5-fe44-41c3-9128-a804797a8af7-column-600 h-[72px] px-4 py-2 w-[400px] text-[#4c5f9a] text-sm font-normal leading-normal">
+                                            &lt;5.7</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                        <style>
+                            @container(max-width:120px) {
+                                .table-1a69b8a5-fe44-41c3-9128-a804797a8af7-column-120 {
+                                    display: none;
+                                }
+                            }
+
+                            @container(max-width:240px) {
+                                .table-1a69b8a5-fe44-41c3-9128-a804797a8af7-column-240 {
+                                    display: none;
+                                }
+                            }
+
+                            @container(max-width:360px) {
+                                .table-1a69b8a5-fe44-41c3-9128-a804797a8af7-column-360 {
+                                    display: none;
+                                }
+                            }
+
+                            @container(max-width:480px) {
+                                .table-1a69b8a5-fe44-41c3-9128-a804797a8af7-column-480 {
+                                    display: none;
+                                }
+                            }
+
+                            @container(max-width:600px) {
+                                .table-1a69b8a5-fe44-41c3-9128-a804797a8af7-column-600 {
+                                    display: none;
+                                }
+                            }
+                        </style>
+                    </div>
+                    <h2 class="text-[#0d111b] text-[22px] font-bold leading-tight tracking-[-0.015em] px-4 pb-3 pt-5">
+                        Notas del Médico</h2>
+                    <p class="text-[#0d111b] text-base font-normal leading-normal pb-3 pt-1 px-4">
+                        Paciente con diabetes tipo 2 mal controlada. Niveles de glucosa en sangre consistentemente
+                        elevados. Se recomienda ajustar la medicación y seguimiento más frecuente.
+                        Riesgo cardiovascular elevado debido a colesterol alto. Se sugiere dieta baja en grasas y
+                        ejercicio regular.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>

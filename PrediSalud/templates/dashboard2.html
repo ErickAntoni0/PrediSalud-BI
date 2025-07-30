@@ -162,7 +162,7 @@
                                 </a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link pl-3" href="./ui-typograpy.html"><span
+                                <a class="nav-link pl-3" href="./table-databases.html"><span
                                         class="ml-1 item-text">Historial Médico</span></a>
                             </li>
                             <li class="nav-item">
@@ -455,6 +455,10 @@
                     <a href="#" class="btn mb-2 btn-info btn-lg btn-block btn-ripple" data-aos="fade-up"
                         data-aos-delay="300">
                         <i class="fas fa-file-medical fa-sm mx-2"></i><span class="small">Nuevo Reporte</span>
+                    </a>
+                    <a href="#" onclick="logoutUser()" class="btn mb-2 btn-danger btn-lg btn-block btn-ripple"
+                        data-aos="fade-up" data-aos-delay="400">
+                        <i class="fas fa-sign-out-alt fa-sm mx-2"></i><span class="small">Cerrar Sesión</span>
                     </a>
                 </div>
             </nav>
@@ -1241,6 +1245,60 @@
         }
         gtag('js', new Date());
         gtag('config', 'UA-56159088-1');
+    </script>
+
+    <!-- Script de Logout -->
+    <script>
+        const API_BASE_URL = 'http://localhost:8001';
+
+        async function logoutUser() {
+            try {
+                // Obtener token del localStorage
+                const token = localStorage.getItem('authToken');
+
+                if (token) {
+                    // Llamar al endpoint de logout
+                    await fetch(`${API_BASE_URL}/api/auth/logout`, {
+                        method: 'POST',
+                        headers: {
+                            'Authorization': `Bearer ${token}`,
+                            'Content-Type': 'application/json'
+                        }
+                    });
+                }
+
+                // Limpiar localStorage
+                localStorage.removeItem('authToken');
+                localStorage.removeItem('userInfo');
+
+                // Mostrar mensaje de confirmación
+                alert('Sesión cerrada exitosamente');
+
+                // Redirigir al index
+                window.location.href = '/';
+
+            } catch (error) {
+                console.error('Error cerrando sesión:', error);
+
+                // Limpiar localStorage aunque haya error
+                localStorage.removeItem('authToken');
+                localStorage.removeItem('userInfo');
+
+                // Redirigir al index de todas formas
+                window.location.href = '/';
+            }
+        }
+
+        // Verificar autenticación al cargar la página
+        document.addEventListener('DOMContentLoaded', function () {
+            const token = localStorage.getItem('authToken');
+
+            if (!token) {
+                // Si no hay token, redirigir al index
+                alert('Sesión expirada. Redirigiendo al inicio...');
+                window.location.href = '/';
+            }
+        });
     </script>
 </body>
 
