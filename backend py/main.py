@@ -46,7 +46,7 @@ conn_params = {
     'password': os.getenv('SNOWFLAKE_PASSWORD', 'Seekanddestr0y'),
     'account': os.getenv('SNOWFLAKE_ACCOUNT', 'pyijpva-yu24282'),
     'warehouse': os.getenv('SNOWFLAKE_WAREHOUSE', 'COMPUTE_WH'),
-    'database': os.getenv('SNOWFLAKE_DATABASE', 'MEGAMARKET'),
+    'database': os.getenv('SNOWFLAKE_DATABASE', 'PREDISALUD'),
     'schema': os.getenv('SNOWFLAKE_SCHEMA', 'PUBLIC')
 }
 
@@ -138,8 +138,8 @@ def register_user(user: UserRegister):
         cur = conn.cursor()
         
         # Verificar si el usuario ya existe
-        cur.execute("SELECT COUNT(*) FROM USUARIOS WHERE NOMBRE_USUARIO = %s OR EMAIL = %s", 
-                   (user.username, user.email))
+        cur.execute("SELECT COUNT(*) FROM USUARIOS WHERE NOMBRE_USUARIO = %(username)s OR EMAIL = %(email)s", 
+                   {'username': user.username, 'email': user.email})
         if cur.fetchone()[0] > 0:
             raise HTTPException(status_code=400, detail="Usuario o email ya existe")
         
@@ -149,8 +149,14 @@ def register_user(user: UserRegister):
         
         cur.execute("""
             INSERT INTO USUARIOS (ID_USUARIO, NOMBRE_USUARIO, EMAIL, PASSWORD_HASH, ROL)
-            VALUES (%s, %s, %s, %s, %s)
-        """, (user_id, user.username, user.email, password_hash, user.rol))
+            VALUES (%(user_id)s, %(username)s, %(email)s, %(password_hash)s, %(rol)s)
+        """, {
+            'user_id': user_id, 
+            'username': user.username, 
+            'email': user.email, 
+            'password_hash': password_hash, 
+            'rol': user.rol
+        })
         
         conn.commit()
         cur.close()
@@ -172,8 +178,8 @@ def login_user(user: UserLogin):
         cur.execute("""
             SELECT ID_USUARIO, NOMBRE_USUARIO, PASSWORD_HASH, ROL 
             FROM USUARIOS 
-            WHERE NOMBRE_USUARIO = %s AND ACTIVO = TRUE
-        """, (user.username,))
+            WHERE NOMBRE_USUARIO = %(username)s AND ACTIVO = TRUE
+        """, {'username': user.username})
         
         result = cur.fetchone()
         if not result:
@@ -255,7 +261,7 @@ def create_paciente(paciente: PacienteCreate, current_user: str = Depends(verify
         cur.execute("""
             INSERT INTO PACIENTES (ID_PACIENTE, NOMBRE, APELLIDO, FECHA_NACIMIENTO, 
                                  GENERO, TELEFONO, EMAIL, DIRECCION)
-            VALUES (%s, %s, %s, %s, %s, %s, %s, %s)
+            VALUES (?, ?, ?, ?, ?, ?, ?, ?)
         """, (paciente_id, paciente.nombre, paciente.apellido, paciente.fecha_nacimiento,
               paciente.genero, paciente.telefono, paciente.email, paciente.direccion))
         
@@ -316,7 +322,7 @@ def create_consulta(consulta: ConsultaCreate, current_user: str = Depends(verify
         cur.execute("""
             INSERT INTO CONSULTAS (ID_CONSULTA, ID_PACIENTE, ID_USUARIO, FECHA_CONSULTA,
                                  MOTIVO_CONSULTA, SINTOMAS)
-            VALUES (%s, %s, %s, %s, %s, %s)
+            VALUES (?, ?, ?, ?, ?, ?)
         """, (consulta_id, consulta.id_paciente, current_user, consulta.fecha_consulta,
               consulta.motivo_consulta, consulta.sintomas))
         

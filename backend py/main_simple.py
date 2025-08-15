@@ -33,14 +33,17 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
-# Servir archivos estáticos
-app.mount("/PrediSalud", StaticFiles(directory="PrediSalud"), name="predisalud")
+# Montar archivos estáticos
+app.mount("/PrediSalud", StaticFiles(directory="../PrediSalud"), name="predisalud")
 
 # Servir archivos CSS, JS e imágenes directamente desde templates
-app.mount("/css", StaticFiles(directory="PrediSalud/templates/css"), name="css")
-app.mount("/js", StaticFiles(directory="PrediSalud/templates/js"), name="js")
-app.mount("/images", StaticFiles(directory="PrediSalud/templates/images"), name="images")
-app.mount("/plugins", StaticFiles(directory="PrediSalud/templates/plugins"), name="plugins")
+app.mount("/css", StaticFiles(directory="../PrediSalud/templates/css"), name="css")
+app.mount("/js", StaticFiles(directory="../PrediSalud/templates/js"), name="js")
+app.mount("/images", StaticFiles(directory="../PrediSalud/templates/images"), name="images")
+app.mount("/plugins", StaticFiles(directory="../PrediSalud/templates/plugins"), name="plugins")
+
+# Montar archivos estáticos adicionales para compatibilidad
+app.mount("/assets", StaticFiles(directory="../PrediSalud/templates/images"), name="assets")
 
 # Configuración JWT
 SECRET_KEY = os.getenv("SECRET_KEY", "tu_clave_secreta_aqui")
@@ -69,7 +72,7 @@ w3 = Web3(Web3.HTTPProvider(SEPOLIA_URL))
 
 # Cargar direcciones de contratos
 try:
-    with open('blockchain/contract-addresses-sepolia.json', 'r') as f:
+    with open('../blockchain/contract-addresses-sepolia.json', 'r') as f:
         contract_addresses = json.load(f)
         print(f"✅ Contratos cargados: {list(contract_addresses.keys())}")
 except FileNotFoundError:
@@ -212,7 +215,7 @@ def verify_user(username: str, password: str):
 @app.get("/")
 def root():
     """Página de inicio del sistema"""
-    return FileResponse("PrediSalud/templates/index.html")
+    return FileResponse("../PrediSalud/templates/index.html")
 
 @app.get("/api/status")
 def api_status():
@@ -226,28 +229,32 @@ def api_status():
 
 @app.get("/login")
 def serve_login():
-    return FileResponse("PrediSalud/templates/login_integrated.html")
+    return FileResponse("../PrediSalud/templates/login.html")
+
+@app.get("/login.html")
+def serve_login_html():
+    return FileResponse("../PrediSalud/templates/login.html")
 
 @app.get("/login-new")
 def serve_login_new():
-    return FileResponse("PrediSalud/templates/login_integrated.html")
+    return FileResponse("../PrediSalud/templates/login.html")
 
 @app.get("/dashboard")
 def serve_dashboard():
-    return FileResponse("PrediSalud/templates/dashboard_mejorado.html")
+    return FileResponse("../PrediSalud/templates/dashboard_mejorado.html")
 
 @app.get("/dashboard.html")
 def serve_dashboard_html():
-    return FileResponse("PrediSalud/templates/dashboard_mejorado.html")
+    return FileResponse("../PrediSalud/templates/dashboard_mejorado.html")
 
 @app.get("/dashboard2.html")
 def serve_dashboard2():
     """Servir dashboard principal del sistema médico"""
-    return FileResponse("PrediSalud/templates/dashboard2.html")
+    return FileResponse("../PrediSalud/templates/dashboard2.html")
 
 @app.get("/registro")
 def serve_registro():
-    return FileResponse("PrediSalud/templates/registro.html")
+    return FileResponse("../PrediSalud/templates/registro.html")
 
 @app.post("/api/auth/logout")
 def logout_user():
@@ -260,131 +267,131 @@ def logout_user():
 # Endpoints adicionales para las páginas del dashboard
 @app.get("/index.html")
 def serve_index():
-    return FileResponse("PrediSalud/templates/index.html")
+    return FileResponse("../PrediSalud/templates/index.html")
 
 @app.get("/dashboard-analytics.html")
 def serve_dashboard_analytics():
-    return FileResponse("PrediSalud/templates/dashboard-analytics.html")
+    return FileResponse("../PrediSalud/templates/dashboard-analytics.html")
 
 @app.get("/table-databases.html")
 def serve_table_databases():
-    return FileResponse("PrediSalud/templates/table-databases.html")
+    return FileResponse("../PrediSalud/templates/table-databases.html")
 
 @app.get("/registro.html")
 def serve_registro_html():
-    return FileResponse("PrediSalud/templates/registro.html")
+    return FileResponse("../PrediSalud/templates/registro.html")
 
 @app.get("/about.html")
 def serve_about():
-    return FileResponse("PrediSalud/templates/about.html")
+    return FileResponse("../PrediSalud/templates/about.html")
 
 @app.get("/contact.html")
 def serve_contact():
-    return FileResponse("PrediSalud/templates/contact.html")
+    return FileResponse("../PrediSalud/templates/contact.html")
 
 @app.get("/service.html")
 def serve_service():
-    return FileResponse("PrediSalud/templates/service.html")
+    return FileResponse("../PrediSalud/templates/service.html")
 
 @app.get("/appoinment.html")
 def serve_appointment():
-    return FileResponse("PrediSalud/templates/appoinment.html")
+    return FileResponse("../PrediSalud/templates/appoinment.html")
 
 @app.get("/department.html")
 def serve_department():
-    return FileResponse("PrediSalud/templates/department.html")
+    return FileResponse("../PrediSalud/templates/department.html")
 
 @app.get("/doctor.html")
 def serve_doctor():
-    return FileResponse("PrediSalud/templates/doctor.html")
+    return FileResponse("../PrediSalud/templates/doctor.html")
 
 @app.get("/calendar.html")
 def serve_calendar():
     # Si no existe calendar.html, redirigir a agenda médica disponible
-    return FileResponse("PrediSalud/templates/appoinment.html")
+    return FileResponse("../PrediSalud/templates/appoinment.html")
 
 @app.get("/registro_pacientes.html")
 def serve_registro_pacientes():
-    return FileResponse("PrediSalud/templates/registro_pacientes.html")
+    return FileResponse("../PrediSalud/templates/registro_pacientes.html")
 
 @app.get("/dashboard_mejorado.html")
 def serve_dashboard_mejorado():
-    return FileResponse("PrediSalud/templates/dashboard_mejorado.html")
+    return FileResponse("../PrediSalud/templates/dashboard_mejorado.html")
 
 # Páginas de análisis y grupos de riesgo
 @app.get("/grupos_riesgo_professional.html")
 def serve_grupos_riesgo_professional():
-    return FileResponse("PrediSalud/templates/grupos_riesgo_professional.html")
+    return FileResponse("../PrediSalud/templates/grupos_riesgo_professional.html")
 
 @app.get("/grupos_riesgo_glassmorphism.html")
 def serve_grupos_riesgo_glassmorphism():
-    return FileResponse("PrediSalud/templates/grupos_riesgo_glassmorphism.html")
+    return FileResponse("../PrediSalud/templates/grupos_riesgo_glassmorphism.html")
 
 @app.get("/analisis_tratamientos.html")
 def serve_analisis_tratamientos():
-    return FileResponse("PrediSalud/templates/analisis_tratamientos.html")
+    return FileResponse("../PrediSalud/templates/analisis_tratamientos.html")
 
 @app.get("/blockchain_records.html")
 def serve_blockchain_records():
-    return FileResponse("PrediSalud/templates/blockchain_records.html")
+    return FileResponse("../PrediSalud/templates/blockchain_records.html")
 
 @app.get("/dashboard_principal.html")
 def serve_dashboard_principal():
-    return FileResponse("PrediSalud/templates/dashboard_principal.html")
+    return FileResponse("../PrediSalud/templates/dashboard_principal.html")
 
 @app.get("/dashboard_sigma.html")
 def serve_dashboard_sigma():
-    return FileResponse("PrediSalud/templates/dashboard_sigma.html")
+    return FileResponse("../PrediSalud/templates/dashboard_sigma.html")
 
 # Redirecciones para páginas que no existen a páginas relevantes
 @app.get("/form_elements.html")
 def serve_form_elements():
     # Redirigir a registro de pacientes
-    return FileResponse("PrediSalud/templates/registro_pacientes.html")
+    return FileResponse("../PrediSalud/templates/registro_pacientes.html")
 
 @app.get("/table_basic.html")
 def serve_table_basic():
     # Redirigir a tabla de bases de datos
-    return FileResponse("PrediSalud/templates/table-databases.html")
+    return FileResponse("../PrediSalud/templates/table-databases.html")
 
 @app.get("/chart-inline.html")
 def serve_chart_inline():
     # Redirigir a dashboard de análisis
-    return FileResponse("PrediSalud/templates/dashboard-analytics.html")
+    return FileResponse("../PrediSalud/templates/dashboard-analytics.html")
 
 @app.get("/datamaps.html")
 def serve_datamaps():
     # Redirigir a análisis de grupos de riesgo
-    return FileResponse("PrediSalud/templates/grupos_riesgo_professional.html")
+    return FileResponse("../PrediSalud/templates/grupos_riesgo_professional.html")
 
 # Endpoints genéricos para páginas en desarrollo
 @app.get("/form_advanced.html")
 def serve_form_advanced():
-    return FileResponse("PrediSalud/templates/dashboard-analytics.html")
+    return FileResponse("../PrediSalud/templates/dashboard-analytics.html")
 
 @app.get("/form_validation.html")
 def serve_form_validation():
-    return FileResponse("PrediSalud/templates/grupos_riesgo_professional.html")
+    return FileResponse("../PrediSalud/templates/grupos_riesgo_professional.html")
 
 @app.get("/form_wizard.html")
 def serve_form_wizard():
-    return FileResponse("PrediSalud/templates/dashboard-analytics.html")
+    return FileResponse("../PrediSalud/templates/dashboard-analytics.html")
 
 @app.get("/table_advanced.html")
 def serve_table_advanced():
-    return FileResponse("PrediSalud/templates/table-databases.html")
+    return FileResponse("../PrediSalud/templates/table-databases.html")
 
 @app.get("/table_datatables.html")
 def serve_table_datatables():
-    return FileResponse("PrediSalud/templates/table-databases.html")
+    return FileResponse("../PrediSalud/templates/table-databases.html")
 
 @app.get("/chart-chartjs.html")
 def serve_chart_chartjs():
-    return FileResponse("PrediSalud/templates/dashboard-analytics.html")
+    return FileResponse("../PrediSalud/templates/dashboard-analytics.html")
 
 @app.get("/chart-apexcharts.html")
 def serve_chart_apexcharts():
-    return FileResponse("PrediSalud/templates/dashboard-analytics.html")
+    return FileResponse("../PrediSalud/templates/dashboard-analytics.html")
 
 # Endpoint genérico para páginas HTML no definidas (al final)
 from fastapi import Request
@@ -401,7 +408,7 @@ def serve_generic_html_page(page_name: str):
         return FileResponse(file_path)
     else:
         # Si no existe, redirigir al index
-        return FileResponse("PrediSalud/templates/index.html")
+        return FileResponse("../PrediSalud/templates/index.html")
 
 @app.get("/api/health")
 def health_check():

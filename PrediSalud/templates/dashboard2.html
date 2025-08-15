@@ -1251,53 +1251,18 @@
     <script>
         const API_BASE_URL = 'http://localhost:8001';
 
-        async function logoutUser() {
-            try {
-                // Obtener token del localStorage
-                const token = localStorage.getItem('authToken');
-
-                if (token) {
-                    // Llamar al endpoint de logout
-                    await fetch(`${API_BASE_URL}/api/auth/logout`, {
-                        method: 'POST',
-                        headers: {
-                            'Authorization': `Bearer ${token}`,
-                            'Content-Type': 'application/json'
-                        }
-                    });
-                }
-
-                // Limpiar localStorage
-                localStorage.removeItem('authToken');
-                localStorage.removeItem('userInfo');
-
-                // Mostrar mensaje de confirmación
-                alert('Sesión cerrada exitosamente');
-
-                // Redirigir al index
-                window.location.href = '/';
-
-            } catch (error) {
-                console.error('Error cerrando sesión:', error);
-
-                // Limpiar localStorage aunque haya error
-                localStorage.removeItem('authToken');
-                localStorage.removeItem('userInfo');
-
-                // Redirigir al index de todas formas
-                window.location.href = '/';
-            }
+        function logoutUser() {
+            // Función simplificada sin autenticación
+            alert('Redirigiendo al inicio...');
+            window.location.href = '/';
         }
 
-        // Verificar autenticación al cargar la página
-        document.addEventListener('DOMContentLoaded', function () {
-            const token = localStorage.getItem('authToken');
+        // NOTA: Dashboard sin verificación de autenticación
+        console.log('Dashboard cargado sin verificación de autenticación');
 
-            if (!token) {
-                // Si no hay token, redirigir al index
-                alert('Sesión expirada. Redirigiendo al inicio...');
-                window.location.href = '/';
-            }
+        // Función para mostrar mensaje de bienvenida
+        document.addEventListener('DOMContentLoaded', function () {
+            console.log('Dashboard PrediSalud cargado correctamente');
         });
     </script>
 </body>

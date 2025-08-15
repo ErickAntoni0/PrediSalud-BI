@@ -1,0 +1,479 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <!-- Favicon -->
+    <link rel="icon" type="image/png" sizes="32x32" href="images/emblema.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="images/emblema.png">
+    <link rel="shortcut icon" href="images/emblema.png">
+    <link rel="apple-touch-icon" href="images/emblema.png">
+    <title>DASHBOARD TEST | PrediSalud</title>
+    <!-- Simple bar CSS -->
+    <link rel="stylesheet" href="css/simplebar.css">
+    <!-- AOS CSS -->
+    <link rel="stylesheet" href="https://unpkg.com/aos@2.3.1/dist/aos.css">
+    <!-- Custom Animations CSS -->
+    <link rel="stylesheet" href="css/custom-animations.css">
+    <!-- Fonts CSS -->
+    <link
+        href="https://fonts.googleapis.com/css2?family=Overpass:ital,wght@0,100;0,200;0,300;0,400;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,600;1,700;1,800;1,900&display=swap"
+        rel="stylesheet">
+    <!-- Icons CSS -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="css/feather.css">
+    <link rel="stylesheet" href="css/select2.css">
+    <link rel="stylesheet" href="css/dropzone.css">
+    <link rel="stylesheet" href="css/uppy.min.css">
+    <link rel="stylesheet" href="css/jquery.steps.css">
+    <link rel="stylesheet" href="css/jquery.timepicker.css">
+    <link rel="stylesheet" href="css/quill.snow.css">
+    <!-- Date Range Picker CSS -->
+    <link rel="stylesheet" href="css/daterangepicker.css">
+    <!-- App CSS -->
+    <link rel="stylesheet" href="css/app-light.css" id="lightTheme" enabled>
+    <link rel="stylesheet" href="css/app-dark.css" id="darkTheme">
+</head>
+
+<body class="vertical  dark  ">
+    <div class="wrapper">
+        <nav class="topnav navbar navbar-light">
+            <button type="button" class="navbar-toggler text-muted mt-2 p-0 mr-3 collapseSidebar">
+                <i class="fa-solid fa-bars"></i>
+            </button>
+            <form class="form-inline mr-auto searchform text-muted">
+                <input class="form-control mr-sm-2 bg-transparent border-0 pl-4 text-muted" type="search"
+                    placeholder="Buscar..." aria-label="Search">
+            </form>
+            <ul class="nav">
+                <li class="nav-item">
+                    <a class="nav-link text-muted my-2" href="./index.html" title="Inicio">
+                        <i class="fas fa-home fa-lg"></i>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link text-muted my-2" href="#" id="modeSwitcher" data-mode="dark">
+                        <i class="fas fa-sun fa-lg"></i>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link text-muted my-2" href="./#" data-toggle="modal" data-target=".modal-shortcut">
+                        <i class="fas fa-th fa-lg"></i>
+                    </a>
+                </li>
+                <li class="nav-item nav-notif">
+                    <a class="nav-link text-muted my-2" href="./#" data-toggle="modal" data-target=".modal-notif">
+                        <i class="fas fa-bell fa-lg"></i>
+                        <span class="dot dot-md bg-success"></span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link text-muted my-2" href="./calendar.html" title="Agenda">
+                        <i class="fas fa-calendar fa-lg"></i>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link text-muted my-2" href="./#" title="Pacientes">
+                        <i class="fas fa-users fa-lg"></i>
+                        <span class="badge badge-pill badge-danger badge-sm">12</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link text-muted my-2" href="./#" title="Reportes">
+                        <i class="fas fa-file-alt fa-lg"></i>
+                    </a>
+                </li>
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle text-muted pr-0" href="#" id="navbarDropdownMenuLink"
+                        role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        <span class="avatar avatar-sm mt-2">
+                            <img src="https://images.unsplash.com/photo-1642667226859-a2d0f9e74a21?q=80&w=687&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
+                                alt="..." class="avatar-img rounded-circle">
+                        </span>
+                    </a>
+                    <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdownMenuLink">
+                        <a class="dropdown-item" href="#">Perfil</a>
+                        <a class="dropdown-item" href="#">Ajustes | Configuracion </a>
+                        <a class="dropdown-item" href="#">Actividades</a>
+                        <div class="dropdown-divider"></div>
+                        <a class="dropdown-item" href="#" onclick="logoutUser()">Cerrar Sesión</a>
+                    </div>
+                </li>
+            </ul>
+        </nav>
+        <div class="vertical">
+            <div class="sidebar-left">
+                <div class="sidebar-content">
+                    <div class="sidebar-header">
+                        <div class="sidebar-brand">
+                            <a href="./index.html">
+                                <img src="images/emblema.png" alt="PrediSalud" class="sidebar-brand-icon">
+                                <span class="sidebar-brand-text">PrediSalud</span>
+                            </a>
+                        </div>
+                        <div class="sidebar-toggler not-mobile">
+                            <a href="#" class="sidebar-link">
+                                <i class="fa-solid fa-chevron-left"></i>
+                            </a>
+                        </div>
+                    </div>
+                    <div class="sidebar-menu">
+                        <ul class="menu">
+                            <li class="sidebar-title">Navegación</li>
+                            <li class="sidebar-item">
+                                <a href="./index.html" class="sidebar-link">
+                                    <i class="sidebar-icon fas fa-home"></i>
+                                    <span class="sidebar-link-text">Inicio</span>
+                                </a>
+                            </li>
+                            <li class="sidebar-item active">
+                                <a href="./dashboard2.html" class="sidebar-link">
+                                    <i class="sidebar-icon fas fa-tachometer-alt"></i>
+                                    <span class="sidebar-link-text">Dashboard</span>
+                                </a>
+                            </li>
+                            <li class="sidebar-item">
+                                <a href="./registro_pacientes.html" class="sidebar-link">
+                                    <i class="sidebar-icon fas fa-user-plus"></i>
+                                    <span class="sidebar-link-text">Registro Pacientes</span>
+                                </a>
+                            </li>
+                            <li class="sidebar-item">
+                                <a href="./analisis_tratamientos.html" class="sidebar-link">
+                                    <i class="sidebar-icon fas fa-chart-line"></i>
+                                    <span class="sidebar-link-text">Análisis Tratamientos</span>
+                                </a>
+                            </li>
+                            <li class="sidebar-item">
+                                <a href="./blockchain_records.html" class="sidebar-link">
+                                    <i class="sidebar-icon fas fa-link"></i>
+                                    <span class="sidebar-link-text">Blockchain Records</span>
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div class="content">
+                <div class="container-fluid">
+                    <div class="row">
+                        <div class="col-12">
+                            <div class="page-title-box">
+                                <div class="page-title-right">
+                                    <ol class="breadcrumb m-0">
+                                        <li class="breadcrumb-item"><a href="./index.html">Inicio</a></li>
+                                        <li class="breadcrumb-item active">Dashboard</li>
+                                    </ol>
+                                </div>
+                                <h4 class="page-title">Dashboard Médico - Modo Testing</h4>
+                                <p class="text-muted">Esta es una versión de testing sin verificación de autenticación</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Contenido del Dashboard -->
+                    <div class="row">
+                        <div class="col-xl-3 col-md-6">
+                            <div class="card" data-aos="fade-up" data-aos-delay="100">
+                                <div class="card-body">
+                                    <div class="row">
+                                        <div class="col">
+                                            <h5 class="card-title text-uppercase text-muted mb-0 text-white">Total Pacientes</h5>
+                                            <span class="h2 font-weight-bold mb-0 text-white">1,247</span>
+                                        </div>
+                                        <div class="col-auto">
+                                            <div class="icon icon-shape bg-gradient-primary text-white rounded-circle shadow">
+                                                <i class="fas fa-users"></i>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <p class="mt-3 mb-0 text-muted text-sm">
+                                        <span class="text-success mr-2">
+                                            <i class="fas fa-arrow-up"></i> 3.48%
+                                        </span>
+                                        <span class="text-nowrap text-light">Desde el mes pasado</span>
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-xl-3 col-md-6">
+                            <div class="card" data-aos="fade-up" data-aos-delay="200">
+                                <div class="card-body">
+                                    <div class="row">
+                                        <div class="col">
+                                            <h5 class="card-title text-uppercase text-muted mb-0 text-white">Consultas Hoy</h5>
+                                            <span class="h2 font-weight-bold mb-0 text-white">89</span>
+                                        </div>
+                                        <div class="col-auto">
+                                            <div class="icon icon-shape bg-gradient-success text-white rounded-circle shadow">
+                                                <i class="fas fa-stethoscope"></i>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <p class="mt-3 mb-0 text-muted text-sm">
+                                        <span class="text-success mr-2">
+                                            <i class="fas fa-arrow-up"></i> 12.5%
+                                        </span>
+                                        <span class="text-nowrap text-light">Comparado con ayer</span>
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-xl-3 col-md-6">
+                            <div class="card" data-aos="fade-up" data-aos-delay="300">
+                                <div class="card-body">
+                                    <div class="row">
+                                        <div class="col">
+                                            <h5 class="card-title text-uppercase text-muted mb-0 text-white">Tratamientos Activos</h5>
+                                            <span class="h2 font-weight-bold mb-0 text-white">156</span>
+                                        </div>
+                                        <div class="col-auto">
+                                            <div class="icon icon-shape bg-gradient-info text-white rounded-circle shadow">
+                                                <i class="fas fa-pills"></i>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <p class="mt-3 mb-0 text-muted text-sm">
+                                        <span class="text-warning mr-2">
+                                            <i class="fas fa-arrow-down"></i> 2.1%
+                                        </span>
+                                        <span class="text-nowrap text-light">Desde la semana pasada</span>
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-xl-3 col-md-6">
+                            <div class="card" data-aos="fade-up" data-aos-delay="400">
+                                <div class="card-body">
+                                    <div class="row">
+                                        <div class="col">
+                                            <h5 class="card-title text-uppercase text-muted mb-0 text-white">Ingresos Mensuales</h5>
+                                            <span class="h2 font-weight-bold mb-0 text-white">$45,678</span>
+                                        </div>
+                                        <div class="col-auto">
+                                            <div class="icon icon-shape bg-gradient-warning text-white rounded-circle shadow">
+                                                <i class="fas fa-dollar-sign"></i>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <p class="mt-3 mb-0 text-muted text-sm">
+                                        <span class="text-success mr-2">
+                                            <i class="fas fa-arrow-up"></i> 8.2%
+                                        </span>
+                                        <span class="text-nowrap text-light">Comparado con el mes anterior</span>
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Gráficos y Estadísticas -->
+                    <div class="row">
+                        <div class="col-xl-8">
+                            <div class="card" data-aos="fade-up" data-aos-delay="500">
+                                <div class="card-header">
+                                    <h4 class="card-title">Tendencia de Pacientes</h4>
+                                    <p class="text-muted">Últimos 12 meses</p>
+                                </div>
+                                <div class="card-body">
+                                    <div class="chart-container" style="position: relative; height:300px;">
+                                        <canvas id="patientsChart"></canvas>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-xl-4">
+                            <div class="card" data-aos="fade-up" data-aos-delay="600">
+                                <div class="card-header">
+                                    <h4 class="card-title">Distribución por Edad</h4>
+                                </div>
+                                <div class="card-body">
+                                    <div class="chart-container" style="position: relative; height:300px;">
+                                        <canvas id="ageChart"></canvas>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Información Adicional -->
+                    <div class="row">
+                        <div class="col-12">
+                            <div class="card" data-aos="fade-up" data-aos-delay="700">
+                                <div class="card-header">
+                                    <h4 class="card-title">Información del Sistema</h4>
+                                </div>
+                                <div class="card-body">
+                                    <div class="alert alert-info">
+                                        <h5><i class="fas fa-info-circle"></i> Modo Testing Activado</h5>
+                                        <p>Esta versión del dashboard está funcionando en modo testing sin verificación de autenticación. 
+                                        Para usar la versión completa con autenticación, ve a <a href="./dashboard2.html">dashboard2.html</a></p>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-6">
+                                            <h6>Estado del Sistema:</h6>
+                                            <ul class="list-unstyled">
+                                                <li><i class="fas fa-check-circle text-success"></i> Frontend funcionando</li>
+                                                <li><i class="fas fa-check-circle text-success"></i> CSS y JS cargados</li>
+                                                <li><i class="fas fa-check-circle text-success"></i> Dashboard responsive</li>
+                                                <li><i class="fas fa-check-circle text-success"></i> Modo testing activo</li>
+                                            </ul>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <h6>Próximos Pasos:</h6>
+                                            <ul class="list-unstyled">
+                                                <li><i class="fas fa-arrow-right text-primary"></i> Configurar autenticación</li>
+                                                <li><i class="fas fa-arrow-right text-primary"></i> Conectar con backend</li>
+                                                <li><i class="fas fa-arrow-right text-primary"></i> Integrar datos reales</li>
+                                                <li><i class="fas fa-arrow-right text-primary"></i> Activar modo producción</li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Scripts -->
+    <script src="js/jquery.min.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+    <script src="js/Chart.min.js"></script>
+    <script src="js/apexcharts.min.js"></script>
+    <script src="js/apexcharts.custom.js"></script>
+    <script src="js/simplebar.min.js"></script>
+    <script src="js/feather.min.js"></script>
+    <script src="js/select2.min.js"></script>
+    <script src="js/dropzone.min.js"></script>
+    <script src="js/uppy.min.js"></script>
+    <script src="js/jquery.steps.min.js"></script>
+    <script src="js/jquery.timepicker.js"></script>
+    <script src="js/quill.min.js"></script>
+    <script src="js/daterangepicker.js"></script>
+    <script src="js/moment.min.js"></script>
+
+    <!-- Script de Logout -->
+    <script>
+        const API_BASE_URL = 'http://localhost:8001';
+
+        async function logoutUser() {
+            try {
+                // Obtener token del localStorage
+                const token = localStorage.getItem('authToken');
+
+                if (token) {
+                    // Llamar al endpoint de logout
+                    await fetch(`${API_BASE_URL}/api/auth/logout`, {
+                        method: 'POST',
+                        headers: {
+                            'Authorization': `Bearer ${token}`,
+                            'Content-Type': 'application/json'
+                        }
+                    });
+                }
+
+                // Limpiar localStorage
+                localStorage.removeItem('authToken');
+                localStorage.removeItem('userInfo');
+
+                // Mostrar mensaje de confirmación
+                alert('Sesión cerrada exitosamente');
+
+                // Redirigir al index
+                window.location.href = '/';
+
+            } catch (error) {
+                console.error('Error cerrando sesión:', error);
+
+                // Limpiar localStorage aunque haya error
+                localStorage.removeItem('authToken');
+                localStorage.removeItem('userInfo');
+
+                // Redirigir al index de todas formas
+                window.location.href = '/';
+            }
+        }
+
+        // NOTA: Esta versión NO verifica autenticación para facilitar testing
+        console.log('Dashboard en modo testing - Sin verificación de autenticación');
+    </script>
+
+    <!-- Scripts de Gráficos -->
+    <script>
+        // Gráfico de tendencia de pacientes
+        const patientsCtx = document.getElementById('patientsChart').getContext('2d');
+        new Chart(patientsCtx, {
+            type: 'line',
+            data: {
+                labels: ['Ene', 'Feb', 'Mar', 'Abr', 'May', 'Jun', 'Jul', 'Ago', 'Sep', 'Oct', 'Nov', 'Dic'],
+                datasets: [{
+                    label: 'Pacientes Registrados',
+                    data: [1200, 1250, 1300, 1280, 1350, 1400, 1380, 1420, 1450, 1480, 1500, 1247],
+                    borderColor: 'rgb(75, 192, 192)',
+                    backgroundColor: 'rgba(75, 192, 192, 0.2)',
+                    tension: 0.1
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                scales: {
+                    y: {
+                        beginAtZero: true
+                    }
+                }
+            }
+        });
+
+        // Gráfico de distribución por edad
+        const ageCtx = document.getElementById('ageChart').getContext('2d');
+        new Chart(ageCtx, {
+            type: 'doughnut',
+            data: {
+                labels: ['0-18', '19-30', '31-50', '51-70', '70+'],
+                datasets: [{
+                    data: [15, 25, 35, 20, 5],
+                    backgroundColor: [
+                        '#FF6384',
+                        '#36A2EB',
+                        '#FFCE56',
+                        '#4BC0C0',
+                        '#9966FF'
+                    ]
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: {
+                    legend: {
+                        position: 'bottom'
+                    }
+                }
+            }
+        });
+    </script>
+
+    <!-- AOS Script -->
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <!-- Custom Animations JS -->
+    <script src="js/custom-animations.js"></script>
+    <script src="js/app.js"></script>
+
+    <!-- Inicializar AOS -->
+    <script>
+        AOS.init({
+            duration: 800,
+            easing: 'ease-in-out',
+            once: true
+        });
+    </script>
+</body>
+
+</html>

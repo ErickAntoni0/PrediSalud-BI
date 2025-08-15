@@ -282,11 +282,11 @@
                     <a href="#" class="icon"><i class="fa-brands fa-facebook-f"></i></a>
                     <a href="#" class="icon"><i class="fa-brands fa-linkedin-in"></i></a>
                 </div>
-                <span>Utliza tu contraseña de tu correo electronico</span>
-                <input type="email" id="email" placeholder="Email">
+                <span>Ingresa tu nombre de usuario o email</span>
+                <input type="text" id="email" placeholder="Usuario o Email">
                 <input type="password" id="password" placeholder="Password">
                 <a href="#">¿Olvidaste tu contraseña?</a>
-                <button class="btn" type="submit">Iniciar Sesión</button>
+                <button class="btn" type="submit" onclick="window.location.href='index.html'">Iniciar Sesión</button>
                 <div id="loginMessage"></div>
             </form>
         </div>
@@ -324,19 +324,30 @@
             const email = document.getElementById('email').value;
             const password = document.getElementById('password').value;
 
-            const response = await fetch('/api/login', {
-                method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({ email, password })
-            });
-            const result = await response.json();
+            try {
+                const response = await fetch('http://localhost:8001/api/auth/login', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ username: email, password: password })
+                });
 
-            if (result.success) {
-                document.getElementById('loginMessage').textContent = 'Login exitoso!';
-                //Redirige a la pagina principal o actualiza la interfaz
-                window.location.href = '/';
-            } else {
-                document.getElementById('loginMessage').textContent = result.message;
+                const result = await response.json();
+
+                if (result.status === 'success') {
+                    document.getElementById('loginMessage').textContent = '¡Login exitoso!';
+                    document.getElementById('loginMessage').style.color = 'green';
+                    // Redirige al dashboard después de 1 segundo
+                    setTimeout(() => {
+                        window.location.href = 'dashboard2.html';
+                    }, 1000);
+                } else {
+                    document.getElementById('loginMessage').textContent = result.detail || 'Error en el login';
+                    document.getElementById('loginMessage').style.color = 'red';
+                }
+            } catch (error) {
+                document.getElementById('loginMessage').textContent = 'Error de conexión. Verifica que el backend esté corriendo.';
+                document.getElementById('loginMessage').style.color = 'red';
+                console.error('Error:', error);
             }
         });
     </script>

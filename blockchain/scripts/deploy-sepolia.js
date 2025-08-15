@@ -34,7 +34,7 @@ async function main() {
   };
 
   fs.writeFileSync(
-    "blockchain/contract-addresses-sepolia.json",
+    "contract-addresses-sepolia.json",
     JSON.stringify(addresses, null, 2)
   );
 
