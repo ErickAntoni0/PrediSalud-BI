@@ -22,7 +22,7 @@
 - 🌐 **Web3** para interacción con contratos inteligentes
 
 - Landing Page
-![Index](PrediSalud/templates/images/logo)
+![Index](/templates/images/logo)
 
 ### 🚀 Características Principales
 
