@@ -21,6 +21,9 @@
 - 📊 **Business Intelligence** con Metabase
 - 🌐 **Web3** para interacción con contratos inteligentes
 
+- Landing Page
+![Index](PrediSalud/templates/images/logo)
+
 ### 🚀 Características Principales
 
 | Característica                | Descripción                                           |
