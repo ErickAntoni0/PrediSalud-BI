@@ -21,8 +21,6 @@
 - 📊 **Business Intelligence** con Metabase
 - 🌐 **Web3** para interacción con contratos inteligentes
 
-- Landing Page
-![Index](templates/images/logo)
 
 ### 🚀 Características Principales
 
